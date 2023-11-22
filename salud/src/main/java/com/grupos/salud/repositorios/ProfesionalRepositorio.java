@@ -19,4 +19,6 @@ public interface ProfesionalRepositorio extends JpaRepository<Profesional, Long>
     List<Profesional> findByPrecioConsultaLessThanEqual(Integer precioConsulta);
 
     Optional<Profesional> findById(Long id);
+
+    void deleteById(Long id);
 }
