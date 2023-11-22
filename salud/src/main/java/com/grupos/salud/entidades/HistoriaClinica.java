@@ -22,11 +22,8 @@ public class HistoriaClinica implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fecha;
     
-    @ManyToOne
-    private Profesional profesional;
     
-    @OneToOne
-    private Paciente paciente;
+
 
     public HistoriaClinica() {
     }
@@ -47,21 +44,6 @@ public class HistoriaClinica implements Serializable {
         this.fecha = fecha;
     }
 
-    public Profesional getProfesional() {
-        return profesional;
-    }
-
-    public void setProfesional(Profesional profesional) {
-        this.profesional = profesional;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
     
     
 }
