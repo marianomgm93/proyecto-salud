@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProfesionalRepositorio extends JpaRepository<Profesional, Long> {
+public interface ProfesionalRepositorio extends JpaRepository<Profesional, String> {
 
     List<Profesional> findByEspecialidad(String especialidad);
 
@@ -20,7 +20,7 @@ public interface ProfesionalRepositorio extends JpaRepository<Profesional, Long>
 
     List<Profesional> findByPrecioConsultaLessThanEqual(Integer precioConsulta);
 
-    Optional<Profesional> findById(Long id);
+    Optional<Profesional> findById(String id);
 
-    void deleteById(Long id);
+    void deleteById(String id);
 }
