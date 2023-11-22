@@ -45,5 +45,4 @@ public class HistoriaClinica implements Serializable {
     }
 
     
-    
 }
