@@ -1,6 +1,5 @@
 package com.grupos.salud.servicios;
 
-
 import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.PacienteRepositorio;
@@ -48,6 +47,11 @@ public class PacienteServicio {
             paciente.setObraSocial(nuevaObraSocial);
             pacienteRepositorio.save(paciente);
         }
+    }
+    
+    public List<Paciente> buscarPorObraSocial(String obraSocial){
+        List<Paciente> pacientes = pacienteRepositorio.BuscarPorObraSocial(obraSocial);
+        return pacientes;
     }
     
     private void validar(String datosContacto,String obraSocial) throws MiException{
