@@ -53,7 +53,11 @@ public class Paciente {
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
     }*/
+<<<<<<< HEAD
     
     
+=======
+>>>>>>> 4f351c62980fa7eb4ba8db608991cae33ceca42e
     
+
 }
