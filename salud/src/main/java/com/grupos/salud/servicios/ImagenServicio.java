@@ -62,4 +62,17 @@ public class ImagenServicio {
         }
         return null;
     }
+    
+    @Transactional
+    public void eliminar(String idImagen) throws MiException{
+        try {
+            if (idImagen != null) {
+                imagenRepositorio.deleteById(idImagen);
+            } else {
+                throw new MiException("El id de la imagen no puede ser nulo");
+            }
+        } catch (Exception e) {
+            throw new MiException("Error al eliminar la imagen: " + e.getMessage());
+        }
+    }
 }
