@@ -11,11 +11,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.grupos.salud.repositorios.ImagenRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 @Service
 public class ImagenServicio {
 
     @Autowired
     private ImagenRepositorio imagenRepositorio;
+
 
     @Transactional
     public Imagen guardar(MultipartFile archivo) throws MiException{
@@ -74,5 +79,18 @@ public class ImagenServicio {
         } catch (Exception e) {
             throw new MiException("Error al eliminar la imagen: " + e.getMessage());
         }
+    }
+}
+
+    public Imagen guardarImagen(Imagen imagen){
+        return imagenRepositorio.save(imagen);
+    }
+
+    public Imagen obtenerImagen(String id){
+        return imagenRepositorio.findById(id).orElse(null);
+    }
+
+    public void eliminarImagen(String id){
+        imagenRepositorio.deleteById(id);
     }
 }
