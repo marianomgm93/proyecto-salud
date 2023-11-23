@@ -9,5 +9,8 @@ package com.grupos.salud.enumeraciones;
  * @author Hammerforce
  */
 public enum Rol {
-    
+    USER,
+    PROFESIONAL,
+    ADMIN;
 }
+
