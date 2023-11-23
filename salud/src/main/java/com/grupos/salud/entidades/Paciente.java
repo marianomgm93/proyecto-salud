@@ -16,8 +16,8 @@ public class Paciente {
     private String datosContacto;
     private String obraSocial;
     
-    /*@OneToOne
-    private Imagen imagen;*/
+    @OneToOne
+    private Imagen imagen;
 
     public Paciente() {
     }
@@ -46,18 +46,12 @@ public class Paciente {
         this.obraSocial = obraSocial;
     }
 
-    /*public Imagen getImagen() {
+    public Imagen getImagen() {
         return imagen;
     }
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
-    }*/
-<<<<<<< HEAD
-    
-    
-=======
->>>>>>> 4f351c62980fa7eb4ba8db608991cae33ceca42e
-    
+    }
 
 }
