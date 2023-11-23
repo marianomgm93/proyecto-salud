@@ -1,5 +1,6 @@
 package com.grupos.salud.repositorios;
 
+
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.enumeraciones.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
