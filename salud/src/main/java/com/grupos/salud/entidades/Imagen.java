@@ -10,7 +10,7 @@ import javax.persistence.Lob;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-class Imagen {
+public class Imagen {
     
     @Id
     @GeneratedValue(generator = "uuid")
