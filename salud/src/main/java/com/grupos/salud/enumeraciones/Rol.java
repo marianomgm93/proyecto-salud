@@ -1,8 +1,7 @@
 package com.grupos.salud.enumeraciones;
 
 public enum Rol {
-    
-    ADMIN,
-    USER;
-    
+    USER,
+    PROFESIONAL,
+    ADMIN;
 }

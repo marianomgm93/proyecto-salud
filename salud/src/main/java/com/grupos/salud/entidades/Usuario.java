@@ -1,6 +1,7 @@
 package com.grupos.salud.entidades;
 
 import com.grupos.salud.enumeraciones.Rol;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,15 +10,15 @@ import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-
     private String nombreUsuario;
-    private String contraseña;
+    private String password;
+    private boolean estado;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
@@ -33,15 +34,21 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
 
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -49,14 +56,6 @@ public class Usuario {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getPassword() {
-        return contraseña;
-    }
-
-    public void setPassword(String password) {
-        this.contraseña = password;
     }
 
     public Rol getRol() {
