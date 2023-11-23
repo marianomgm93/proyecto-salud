@@ -2,6 +2,7 @@ package com.grupos.salud.servicios;
 
 import com.grupos.salud.entidades.Imagen;
 import com.grupos.salud.excepciones.MiException;
+
 import com.grupos.salud.repositorios.ImagenRepositorio;
 
 import java.util.Optional;
@@ -11,16 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.grupos.salud.repositorios.ImagenRepositorio;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 @Service
 public class ImagenServicio {
 
     @Autowired
     private ImagenRepositorio imagenRepositorio;
-
 
     @Transactional
     public Imagen guardar(MultipartFile archivo) throws MiException{
@@ -39,6 +35,7 @@ public class ImagenServicio {
             }
         }
         return null;
+
     }
 
     @Transactional
@@ -84,13 +81,6 @@ public class ImagenServicio {
 
     public Imagen guardarImagen(Imagen imagen){
         return imagenRepositorio.save(imagen);
-    }
 
-    public Imagen obtenerImagen(String id){
-        return imagenRepositorio.findById(id).orElse(null);
-    }
-
-    public void eliminarImagen(String id){
-        imagenRepositorio.deleteById(id);
     }
 }
