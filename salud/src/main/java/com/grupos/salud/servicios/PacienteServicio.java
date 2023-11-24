@@ -27,7 +27,7 @@ public class PacienteServicio {
         Paciente paciente = new Paciente();
         paciente.setDatosContacto(datosContacto);
         paciente.setObraSocial(obraSocial);
-        paciente.setEstado("activo");
+        paciente.setEstado(true);
         Imagen imagen = imagenServicio.guardar(archivo);
 
         paciente.setImagen(imagen);
@@ -73,7 +73,7 @@ public class PacienteServicio {
          Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
          if(respuesta.isPresent()){
              Paciente paciente = respuesta.get();
-             paciente.setEstado("desactivado");
+             paciente.setEstado(false);
              pacienteRepositorio.save(paciente);
          }
     }
