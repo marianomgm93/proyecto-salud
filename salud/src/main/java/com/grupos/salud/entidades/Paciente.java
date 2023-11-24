@@ -29,6 +29,7 @@ public class Paciente {
         this.estado = estado;
     }
 
+
     public Paciente() {
     }
 
@@ -56,13 +57,16 @@ public class Paciente {
         this.obraSocial = obraSocial;
     }
 
+
     public Imagen getImagen() {
+
         return imagen;
     }
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
     }
+
     
 
 }

@@ -73,6 +73,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (usuario != null) {
             usuario.setNombreUsuario(nuevoNombre);
             usuario.setPassword(nuevaPassword);
+
             usuario.setEmail(email);
             usuario.setRol(rol);
             usuarioRepositorio.save(usuario);
@@ -115,7 +116,6 @@ public class UsuarioServicio implements UserDetailsService {
     
     //VALIDACIONES
     private void validarRegistro(String nombre, String password, String password2,String email) throws MiException {
-
         if (nombre.isEmpty() || nombre == null) {
             throw new MiException("el nombre no puede ser nulo o estar vacío");
         }
@@ -127,6 +127,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (!password.equals(password2)) {
             throw new MiException("Las contraseñas ingresadas deben ser iguales");
         }
+
         
         if (email.isEmpty() || email == null ) {
             throw new MiException("El email no puede estar vacío,o ser nulo");
@@ -143,7 +144,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (email.isEmpty() || email == null ) {
             throw new MiException("El email no puede estar vacío,o ser nulo");
         }
-        
+
         if (password.isEmpty() || password == null || password.length() <= 5) {
             throw new MiException("La contraseña no puede estar vacía, y debe tener más de 5 dígitos");
         }
@@ -152,7 +153,9 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiException("Las contraseñas ingresadas deben ser iguales");
         }
          if (rol == null) {
+
             throw new MiException("El rol no puede ser nulo o estar vacío");
+
         }
 
     }
@@ -165,10 +168,5 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
 }
-    
-
-    
-
-    
-    
+   
 
