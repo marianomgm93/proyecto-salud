@@ -14,12 +14,18 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/")
 public class PortalControlador {
-    
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
     @GetMapping("/")
-    public String index() {
+    public String index(@RequestParam(required = false) String error, ModelMap modelo) {
+
+        if (error != null) {
+//            modelo.put("showModal", true);
+            modelo.put("error", "Usuario o Contraseña invalidos!");
+        }
+
         return "index.html";
     }
 
@@ -29,8 +35,8 @@ public class PortalControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombreUsuario,@RequestParam String email, @RequestParam String password, String password2, ModelMap modelo, MultipartFile archivo) {
-        
+    public String registro(@RequestParam String nombreUsuario, @RequestParam String email, @RequestParam String password, String password2, ModelMap modelo, MultipartFile archivo) {
+
         try {
             usuarioServicio.registrarUsuario(archivo, nombreUsuario, password, password2, email);
             modelo.put("exito", "Usuario registrado correctamente");
@@ -41,5 +47,10 @@ public class PortalControlador {
             modelo.put("email", email);
             return "registro.html";
         }
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 }
