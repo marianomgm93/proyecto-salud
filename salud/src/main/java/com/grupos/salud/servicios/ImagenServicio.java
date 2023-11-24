@@ -2,7 +2,6 @@ package com.grupos.salud.servicios;
 
 import com.grupos.salud.entidades.Imagen;
 import com.grupos.salud.excepciones.MiException;
-
 import com.grupos.salud.repositorios.ImagenRepositorio;
 
 import java.util.Optional;
@@ -21,6 +20,7 @@ public class ImagenServicio {
     @Transactional
     public Imagen guardar(MultipartFile archivo) throws MiException {
 
+
         if (archivo != null) {
             try {
                 Imagen imagen = new Imagen();
@@ -30,16 +30,20 @@ public class ImagenServicio {
                 imagen.setContenido(archivo.getBytes());
 
                 return imagenRepositorio.save(imagen);
+
             } catch (Exception e) {
+
                 System.err.println(e.getMessage());
             }
         }
         return null;
 
+
     }
 
     @Transactional
-    public Imagen actualizar(MultipartFile archivo, String idImagen) throws MiException {
+    public Imagen actualizar(MultipartFile archivo, String idImagen) throws MiException{
+
 
         if (archivo != null) {
             try {
@@ -58,15 +62,16 @@ public class ImagenServicio {
                 imagen.setContenido(archivo.getBytes());
 
                 return imagenRepositorio.save(imagen);
-            } catch (Exception e) {
+            } catch (Exception e){
+
                 System.err.println(e.getMessage());
             }
         }
         return null;
     }
-
+    
     @Transactional
-    public void eliminar(String idImagen) throws MiException {
+    public void eliminar(String idImagen) throws MiException{
         try {
             if (idImagen != null) {
                 imagenRepositorio.deleteById(idImagen);
@@ -83,4 +88,5 @@ public Imagen guardarImagen(Imagen imagen){
         return imagenRepositorio.save(imagen);
 
     }
+
 }
