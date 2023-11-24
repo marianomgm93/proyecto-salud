@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.grupos.salud.entidades.Imagen;
 
 @Repository
-public interface ImagenRepositorio extends JpaRepository<Imagen, String>{
-    
+public interface ImagenRepositorio extends JpaRepository<Imagen, String> {
 }
