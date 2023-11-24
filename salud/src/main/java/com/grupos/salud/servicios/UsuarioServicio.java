@@ -29,13 +29,15 @@ public class UsuarioServicio implements UserDetailsService {
   
     //REGISTRO USUARIO
     @Transactional
-    public void registrarUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2) throws MiException {
+    public void registrarUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2,String email) throws MiException {
 
-        validarRegistro(nombreUsuario, password, password2);
+        validarRegistro(nombreUsuario, password, password2,email);
 
         Usuario usuario = new Usuario();
 
         usuario.setNombreUsuario(nombreUsuario);
+        
+        usuario.setEmail(email);
         
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
@@ -62,15 +64,17 @@ public class UsuarioServicio implements UserDetailsService {
     }
     // MODIFICACION USUARIO 
     @Transactional
-    public void modificarUsuario(String nombreUsuario, String nuevoNombre, String nuevaPassword,Rol rol) throws MiException {
+    public void modificarUsuario(String nombreUsuario, String nuevoNombre, String nuevaPassword,Rol rol,String email) throws MiException {
 
-        validarModificacion(nombreUsuario,nuevoNombre,nuevaPassword, rol);// VERIFICA QUE NO ESTE VACIO EL PARAMETRO
+        validarModificacion(nombreUsuario,nuevoNombre,nuevaPassword, rol,email);// VERIFICA QUE NO ESTE VACIO EL PARAMETRO
 
         Usuario usuario = usuarioRepositorio.buscarPorNombreUsuario(nombreUsuario);
 
         if (usuario != null) {
             usuario.setNombreUsuario(nuevoNombre);
             usuario.setPassword(nuevaPassword);
+
+            usuario.setEmail(email);
             usuario.setRol(rol);
             usuarioRepositorio.save(usuario);
         } else {
@@ -111,8 +115,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     
     //VALIDACIONES
-    private void validarRegistro(String nombre, String password, String password2) throws MiException {
-
+    private void validarRegistro(String nombre, String password, String password2,String email) throws MiException {
         if (nombre.isEmpty() || nombre == null) {
             throw new MiException("el nombre no puede ser nulo o estar vacío");
         }
@@ -125,12 +128,21 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiException("Las contraseñas ingresadas deben ser iguales");
         }
 
+        
+        if (email.isEmpty() || email == null ) {
+            throw new MiException("El email no puede estar vacío,o ser nulo");
+        }
+
     }
     
-    private void validarModificacion(String nombre, String password, String password2,Rol rol) throws MiException {
+    private void validarModificacion(String nombre, String password, String password2,Rol rol,String email) throws MiException {
 
         if (nombre.isEmpty() || nombre == null) {
             throw new MiException("el nombre no puede ser nulo o estar vacío");
+        }
+
+        if (email.isEmpty() || email == null ) {
+            throw new MiException("El email no puede estar vacío,o ser nulo");
         }
 
         if (password.isEmpty() || password == null || password.length() <= 5) {
@@ -141,7 +153,9 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiException("Las contraseñas ingresadas deben ser iguales");
         }
          if (rol == null) {
-            throw new MiException("el rol no puede ser nulo o estar vacío");
+
+            throw new MiException("El rol no puede ser nulo o estar vacío");
+
         }
 
     }
@@ -154,8 +168,5 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
 }
-    
-
-    
-    
+   
 
