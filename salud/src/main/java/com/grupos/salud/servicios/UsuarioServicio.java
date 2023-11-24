@@ -106,6 +106,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
+
     //BUSCAR UN USUARIO
     public Usuario getOne(String id) {
         return usuarioRepositorio.getOne(id);
@@ -143,9 +144,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     //GUARDAR PERMISOS DE USUARIO
     @Override
-    public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Usuario usuario = usuarioRepositorio.buscarPorNombreUsuario(nombreUsuario);
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
 
         if (usuario != null) {
 
@@ -161,8 +162,8 @@ public class UsuarioServicio implements UserDetailsService {
 
             session.setAttribute("usuariosession", usuario);
 
-            return new User(usuario.getNombreUsuario(), usuario.getPassword(), permisos);
 
+            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {
             return null;
         }
