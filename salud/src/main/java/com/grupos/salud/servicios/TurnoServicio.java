@@ -54,12 +54,11 @@ public class TurnoServicio {
         } else {
             throw new MiException("El turno con id: "+ id + "no existe.");
         }
-
     }
 
-    private void validar(Date fecha) throws MiException {
-        if (fecha == null) {
-            throw new MiException("La fecha no puede ser nula.");
+    private void validar(Date fechaYHora) throws MiException {
+        if (fechaYHora == null) {
+            throw new MiException("La fecha y hora no pueden ser nulas.");
         }
     }
 }
