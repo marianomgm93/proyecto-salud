@@ -33,11 +33,9 @@ public class UsuarioServicio implements UserDetailsService {
 
         validarRegistro(nombreUsuario, password, password2,email);
 
-
         Usuario usuario = new Usuario();
 
         usuario.setNombreUsuario(nombreUsuario);
-        
 
         usuario.setEmail(email);
         
@@ -120,7 +118,6 @@ public class UsuarioServicio implements UserDetailsService {
     //VALIDACIONES
     private void validarRegistro(String nombre, String password, String password2,String email) throws MiException {
 
-
         if (nombre.isEmpty() || nombre == null) {
             throw new MiException("el nombre no puede ser nulo o estar vacío");
         }
@@ -133,11 +130,13 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiException("Las contraseñas ingresadas deben ser iguales");
         }
 
+        if (email.isEmpty() || email == null ) {
+            throw new MiException("El email no puede estar vacío,o ser nulo");
+        }
 
     }
     
     private void validarModificacion(String nombre, String password, String password2,Rol rol,String email) throws MiException {
-
 
         if (nombre.isEmpty() || nombre == null) {
             throw new MiException("el nombre no puede ser nulo o estar vacío");
@@ -170,6 +169,3 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
 }
-    
-
-
