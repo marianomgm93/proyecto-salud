@@ -18,7 +18,8 @@ public class ImagenServicio {
     private ImagenRepositorio imagenRepositorio;
 
     @Transactional
-    public Imagen guardar(MultipartFile archivo) throws MiException{
+    public Imagen guardar(MultipartFile archivo) throws MiException {
+
 
         if (archivo != null) {
             try {
@@ -29,15 +30,20 @@ public class ImagenServicio {
                 imagen.setContenido(archivo.getBytes());
 
                 return imagenRepositorio.save(imagen);
-            } catch (Exception e){
+
+            } catch (Exception e) {
+
                 System.err.println(e.getMessage());
             }
         }
         return null;
+
+
     }
 
     @Transactional
     public Imagen actualizar(MultipartFile archivo, String idImagen) throws MiException{
+
 
         if (archivo != null) {
             try {
@@ -57,6 +63,7 @@ public class ImagenServicio {
 
                 return imagenRepositorio.save(imagen);
             } catch (Exception e){
+
                 System.err.println(e.getMessage());
             }
         }
@@ -75,4 +82,11 @@ public class ImagenServicio {
             throw new MiException("Error al eliminar la imagen: " + e.getMessage());
         }
     }
+
+
+public Imagen guardarImagen(Imagen imagen){
+        return imagenRepositorio.save(imagen);
+
+    }
+
 }

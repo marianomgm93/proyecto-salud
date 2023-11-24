@@ -16,8 +16,18 @@ public class Paciente {
     private String datosContacto;
     private String obraSocial;
     
-    /*@OneToOne
-    private Imagen imagen;*/
+    @OneToOne
+    private Imagen imagen;
+    
+    private Boolean estado;
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
 
     public Paciente() {
     }
@@ -46,13 +56,13 @@ public class Paciente {
         this.obraSocial = obraSocial;
     }
 
-    /*public Imagen getImagen() {
+    public Imagen getImagen() {
         return imagen;
     }
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
-    }*/
+    }
     
 
 }
