@@ -29,7 +29,7 @@ public class PortalControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombreUsuario,@RequestParam String email, @RequestParam String password, String password2, ModelMap modelo, MultipartFile archivo) {
+    public String registro(@RequestParam String nombreUsuario,@RequestParam String email, @RequestParam String password, String password2, MultipartFile archivo,ModelMap modelo) {
         
         try {
             usuarioServicio.registrarUsuario(archivo, nombreUsuario, password, password2, email);
