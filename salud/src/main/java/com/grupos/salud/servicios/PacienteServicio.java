@@ -1,5 +1,8 @@
 package com.grupos.salud.servicios;
 
+
+import com.grupos.salud.entidades.Imagen;
+
 import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.PacienteRepositorio;
@@ -8,6 +11,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PacienteServicio {
@@ -15,13 +19,21 @@ public class PacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
     
+
+    @Autowired
+    private ImagenServicio imagenServicio;
+    
     
     @Transactional
-    public void registrar(String datosContacto, String obraSocial) throws MiException{
+    public void registrar(MultipartFile archivo, String datosContacto, String obraSocial) throws MiException{
+
         validar(datosContacto, obraSocial);
         Paciente paciente = new Paciente();
         paciente.setDatosContacto(datosContacto);
         paciente.setObraSocial(obraSocial);
+        paciente.setEstado(true);
+        Imagen imagen = imagenServicio.guardar(archivo);
+        paciente.setImagen(imagen);
         pacienteRepositorio.save(paciente);
     }
     
@@ -38,17 +50,38 @@ public class PacienteServicio {
     } 
     
     @Transactional
-    public void actualizar(String id, String nuevosDatosContacto, String nuevaObraSocial) throws MiException{
+    public void actualizar(MultipartFile archivo, String id, String nuevosDatosContacto, String nuevaObraSocial) throws MiException{
+
         validar(nuevosDatosContacto, nuevaObraSocial);
         Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
         if(respuesta.isPresent()){
             Paciente paciente = respuesta.get();
             paciente.setDatosContacto(nuevosDatosContacto);
             paciente.setObraSocial(nuevaObraSocial);
+            
+            String idImagen = null;
+            
+            if (paciente.getImagen() != null) {
+                idImagen = paciente.getImagen().getId();
+            }
+            
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            
+            paciente.setImagen(imagen);
+
             pacienteRepositorio.save(paciente);
         }
     }
     
+    public void darDeBaja(String id){
+         Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
+         if(respuesta.isPresent()){
+             Paciente paciente = respuesta.get();
+             paciente.setEstado(false);
+             pacienteRepositorio.save(paciente);
+         }
+    }
+
     public List<Paciente> buscarPorObraSocial(String obraSocial){
         List<Paciente> pacientes = pacienteRepositorio.BuscarPorObraSocial(obraSocial);
         return pacientes;

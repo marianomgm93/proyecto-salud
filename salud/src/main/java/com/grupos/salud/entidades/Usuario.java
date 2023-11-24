@@ -16,8 +16,8 @@ public class Usuario implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-
     private String nombreUsuario;
+    private String email;
     private String password;
     private boolean estado;
 
@@ -43,8 +43,13 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
-    
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public boolean isEstado() {
         return estado;
     }
@@ -52,7 +57,6 @@ public class Usuario implements Serializable {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
 
     public String getNombreUsuario() {
         return nombreUsuario;

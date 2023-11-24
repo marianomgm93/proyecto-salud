@@ -1,4 +1,3 @@
-
 package com.grupos.salud.entidades;
 
 import javax.persistence.Basic;
@@ -10,8 +9,8 @@ import javax.persistence.Lob;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-class Imagen {
-    
+public class Imagen {
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -57,9 +56,7 @@ class Imagen {
 
     public void setContenido(byte[] contenido) {
         this.contenido = contenido;
-    }
 
-    
-    
+    }     
     
 }
