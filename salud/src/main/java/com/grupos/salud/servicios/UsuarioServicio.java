@@ -75,7 +75,6 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setPassword(nuevaPassword);
 
             usuario.setEmail(email);
-
             usuario.setRol(rol);
             usuarioRepositorio.save(usuario);
         } else {
@@ -155,7 +154,7 @@ public class UsuarioServicio implements UserDetailsService {
         }
          if (rol == null) {
 
-            throw new MiException("el rol no puede ser nulo o estar vacío");
+            throw new MiException("El rol no puede ser nulo o estar vacío");
 
         }
 
