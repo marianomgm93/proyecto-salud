@@ -1,6 +1,8 @@
 package com.grupos.salud.servicios;
 
+
 import com.grupos.salud.entidades.Imagen;
+
 import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.PacienteRepositorio;
@@ -17,19 +19,20 @@ public class PacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
     
+
     @Autowired
     private ImagenServicio imagenServicio;
     
     
     @Transactional
     public void registrar(MultipartFile archivo, String datosContacto, String obraSocial) throws MiException{
+
         validar(datosContacto, obraSocial);
         Paciente paciente = new Paciente();
         paciente.setDatosContacto(datosContacto);
         paciente.setObraSocial(obraSocial);
         paciente.setEstado(true);
         Imagen imagen = imagenServicio.guardar(archivo);
-
         paciente.setImagen(imagen);
         pacienteRepositorio.save(paciente);
     }
@@ -48,6 +51,7 @@ public class PacienteServicio {
     
     @Transactional
     public void actualizar(MultipartFile archivo, String id, String nuevosDatosContacto, String nuevaObraSocial) throws MiException{
+
         validar(nuevosDatosContacto, nuevaObraSocial);
         Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
         if(respuesta.isPresent()){
@@ -64,7 +68,7 @@ public class PacienteServicio {
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
             
             paciente.setImagen(imagen);
-            
+
             pacienteRepositorio.save(paciente);
         }
     }
@@ -77,7 +81,7 @@ public class PacienteServicio {
              pacienteRepositorio.save(paciente);
          }
     }
-    
+
     public List<Paciente> buscarPorObraSocial(String obraSocial){
         List<Paciente> pacientes = pacienteRepositorio.BuscarPorObraSocial(obraSocial);
         return pacientes;
