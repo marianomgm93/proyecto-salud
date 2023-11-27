@@ -4,6 +4,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.*/
     
+
 package com.grupos.salud.servicios;
 
 import com.grupos.salud.entidades.Imagen;
@@ -35,7 +36,8 @@ public class ImagenServicio {
                 imagen.setContenido(archivo.getBytes());
 
                 return imagenRepositorio.save(imagen);
-            } catch (Exception e){
+
+            } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
         }
@@ -81,5 +83,12 @@ public class ImagenServicio {
             throw new MiException("Error al eliminar la imagen: " + e.getMessage());
         }
     }
+
     
+ 
+public Imagen guardarImagen(Imagen imagen){
+        return imagenRepositorio.save(imagen);
+
+    }
+
 }
