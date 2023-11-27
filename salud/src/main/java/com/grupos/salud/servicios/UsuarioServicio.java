@@ -23,7 +23,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Service
 public class UsuarioServicio implements UserDetailsService {
 
@@ -106,6 +105,21 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
+    public boolean autenticar(String email, String password) {
+
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+
+        if (usuario != null && matches(password, usuario.getPassword())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean matches(String rawPassword, String encodedPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
 
     //BUSCAR UN USUARIO
     public Usuario getOne(String id) {
@@ -121,8 +135,7 @@ public class UsuarioServicio implements UserDetailsService {
 
         return usuarios;
     }
-    
-    
+
     //CAMBIAR ROL
     @Transactional
     public void cambiarRol(String id) {
@@ -161,7 +174,6 @@ public class UsuarioServicio implements UserDetailsService {
             HttpSession session = attr.getRequest().getSession(true);
 
             session.setAttribute("usuariosession", usuario);
-
 
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {
