@@ -18,9 +18,6 @@ public class Paciente {
     
     @OneToOne
     private Imagen imagen;
-<<<<<<< HEAD
-=======
-    
     private Boolean estado;
 
     public Boolean getEstado() {
@@ -30,8 +27,6 @@ public class Paciente {
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
-
->>>>>>> f10fc7925474af93a61140d6f6b5c88583917b9a
 
     public Paciente() {
     }
@@ -60,24 +55,17 @@ public class Paciente {
         this.obraSocial = obraSocial;
     }
 
-<<<<<<< HEAD
-    public Imagen getImagen() {
-=======
 
     public Imagen getImagen() {
 
->>>>>>> f10fc7925474af93a61140d6f6b5c88583917b9a
         return imagen;
     }
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
     }
-<<<<<<< HEAD
-}
-=======
 
     
 
 }
->>>>>>> f10fc7925474af93a61140d6f6b5c88583917b9a
+

@@ -58,10 +58,6 @@ public class Imagen {
     public void setContenido(byte[] contenido) {
         this.contenido = contenido;
 
-<<<<<<< HEAD
-
-=======
     }     
     
->>>>>>> f10fc7925474af93a61140d6f6b5c88583917b9a
 }
