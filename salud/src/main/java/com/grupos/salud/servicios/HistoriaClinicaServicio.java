@@ -1,6 +1,8 @@
 package com.grupos.salud.servicios;
 
+import com.grupos.salud.entidades.Ficha;
 import com.grupos.salud.entidades.HistoriaClinica;
+import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.repositorios.HistoriaClinicaRepositorio;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,13 +17,14 @@ public class HistoriaClinicaServicio {
     @Autowired
     private HistoriaClinicaRepositorio historiaClinicaRepositorio;
 
-    public HistoriaClinica crearHistoriaClinica() {
+    public HistoriaClinica crearHistoriaClinica(Paciente paciente) {
 
         HistoriaClinica historiaClinica = new HistoriaClinica();
         Date fecha = new Date();
         historiaClinica.setFecha(fecha);
         List<Ficha> fichas = new ArrayList();
         historiaClinica.setFichas(fichas);
+        historiaClinica.setPaciente(paciente);
         historiaClinicaRepositorio.save(historiaClinica);
         return historiaClinica;
     }

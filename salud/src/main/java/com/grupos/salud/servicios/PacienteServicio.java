@@ -44,7 +44,7 @@ public class PacienteServicio {
         Imagen imagen = imagenServicio.guardar(archivo);
         paciente.setImagen(imagen);*/
         
-        HistoriaClinica historiaClinica = historiaClinicaServicio.crearHistoriaClinica();
+        HistoriaClinica historiaClinica = historiaClinicaServicio.crearHistoriaClinica(paciente);
         paciente.setHistoriaClinica(historiaClinica);
         pacienteRepositorio.save(paciente);
     }

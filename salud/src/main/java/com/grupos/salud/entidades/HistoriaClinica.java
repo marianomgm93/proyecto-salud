@@ -57,4 +57,13 @@ public class HistoriaClinica implements Serializable {
         this.fichas = fichas;
     }
 
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    
 }

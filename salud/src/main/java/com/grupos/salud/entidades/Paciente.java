@@ -84,6 +84,14 @@ public class Paciente implements Serializable {
         this.imagen = imagen;
     }
 
+    public HistoriaClinica getHistoriaClinica() {
+        return historiaClinica;
+    }
+
+    public void setHistoriaClinica(HistoriaClinica historiaClinica) {
+        this.historiaClinica = historiaClinica;
+    }
+
     
 
 }
