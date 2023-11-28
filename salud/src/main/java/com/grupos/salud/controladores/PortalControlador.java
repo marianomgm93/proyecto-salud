@@ -1,6 +1,7 @@
 package com.grupos.salud.controladores;
 
 import com.grupos.salud.excepciones.MiException;
+import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,9 @@ public class PortalControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+    
+    @Autowired
+    private PacienteServicio pacienteServicio;
 
     @GetMapping("/")
     public String index() {
@@ -41,11 +45,10 @@ public class PortalControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombreUsuario,@RequestParam String email, @RequestParam String password, String password2, MultipartFile archivo,ModelMap modelo) {
-
+    public String registro(@RequestParam String nombreUsuario,@RequestParam String email, @RequestParam String password, String password2,@RequestParam String obraSocial,@RequestParam String datosContacto, MultipartFile archivo,ModelMap modelo) {
 
         try {
-            usuarioServicio.registrarUsuario(archivo, nombreUsuario, password, password2, email);
+            pacienteServicio.registrar( datosContacto, obraSocial,usuarioServicio.registrarUsuario(archivo, nombreUsuario, password, password2, email));
             modelo.put("exito", "Usuario registrado correctamente");
             return "index.html";
         } catch (MiException ex) {
