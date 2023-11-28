@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class HistoriaClinicaServicio {
@@ -17,6 +18,7 @@ public class HistoriaClinicaServicio {
     @Autowired
     private HistoriaClinicaRepositorio historiaClinicaRepositorio;
 
+    @Transactional
     public HistoriaClinica crearHistoriaClinica(Paciente paciente) {
 
         HistoriaClinica historiaClinica = new HistoriaClinica();
@@ -29,6 +31,18 @@ public class HistoriaClinicaServicio {
         return historiaClinica;
     }
 
+    @Transactional(readOnly = true)
+    public List<HistoriaClinica> listarHistoriasClinicas() {
+        List<HistoriaClinica> historiasClinicas = historiaClinicaRepositorio.findAll();
+        return historiasClinicas;
+    }
+
+    public HistoriaClinica getOne(String id) {
+        HistoriaClinica historiaClinica = historiaClinicaRepositorio.getOne(id);
+        return historiaClinica;
+    }
+
+    @Transactional
     public void agregarUnaFicha(String id, Ficha ficha) {
 
         Optional<HistoriaClinica> respuesta = historiaClinicaRepositorio.findById(id);
