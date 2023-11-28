@@ -3,105 +3,140 @@
     <head th:replace= "/fragments/head :: head" </head>
     <body>
 
-        <!-- NavBar -->
-        <nav class="navbar bg-primary" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">TuSalud
-                    <!-- Acá va el logotipo -->
-                    <img src="/img/logo.png" alt="Logo" height="30">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                Iniciar sesión
-                            </button>
-
-                        </li>
-                        <li class="nav-item" th:if="${session.usuariosession == null}">
-                            <a class="btn btn-primary" th:href="@{/registrar}">
-                                Registrarse
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Especialidades
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Pediatría</a></li>
-                                <li><a class="dropdown-item" href="#">Ginecología</a></li>
-                                <li><a class="dropdown-item" href="#">Clínica</a></li>
-                                <li><a class="dropdown-item" href="#">Cardiología</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+        <header>
+            <!-- NavBar -->
+            <nav class="navbar navbar-expand-lg navbar-dark p-1 justify-content-between bg-primary" data-bs-theme="dark">
+                <div class="container-fluid align-content-center">
+                    <a class="navbar-brand align-baseline logo" href="#">
+                        <!-- Acá va el logotipo -->
+                        <img src="/img/logo.png" alt="Logo" height="65">
+                        TuSalud
+                    </a>
+                    <div class="justify-content-center w-50">
+                        <form class="d-flex" role="search" style="width: 100%; margin: auto;">
+                            <input class="form-control me-2 bg-light" type="search"
+                                   placeholder="Buscar un profesional por nombre" aria-label="Search">
+                            <button class="btn btn-primary bg-dark" type="submit"><span class="fa fa-search"></span></button>
+                        </form>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end w-100 enlaces" id="navbarSupportedContent">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item" th:if="${session.usuariosession == null}">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#loginModal">
+                                    Iniciar sesión
+                                </button>
+                            </li>
+                            <li th:if="${session.usuariosession == null}" class="nav-item">
+                                <a class="nav-link text-light" aria-current="page" th:href="@{/registrar}">Registrarse</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    Especialidades
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Pediatría</a></li>
+                                    <li><a class="dropdown-item" href="#">Ginecología</a></li>
+                                    <li><a class="dropdown-item" href="#">Clínica</a></li>
+                                    <li><a class="dropdown-item" href="#">Cardiología</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" aria-current="page" href="#">Profesionales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" aria-current="page" href="/paciente/lista">Pacientes</a>
+                            </li>
+                            <li th:if="${session.usuariosession != null}" class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    Perfil
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                                </ul>
+                            </li>
+                    </div>
                 </div>
-        </nav>
+            </nav>
+        </header>
 
-        <div class="mt-3">
-            <form class="d-flex" role="search" style="width: 50%; margin: auto;">
-                <input class="form-control me-2" type="search" placeholder="Buscar un profesional por nombre" aria-label="Search">
-                <button class="btn btn-primary" type="submit">Buscar</button>
-            </form>
-        </div>
+        <main>
+            <section>
+                <div class="container mt-4">
+                    <div class="row justify-content-around">
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="/img/cardiologia.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cardiología</h5>
+                                    <p class="card-text">Cuidá tu corazón</p>
+                                    <a href="#" class="btn btn-primary">Reserva una consulta</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="/img/clinica.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Medicina clínica</h5>
+                                    <p class="card-text">Hacer un chequeo de tu salud nunca está de más</p>
+                                    <a href="#" class="btn btn-primary">Reserva una consulta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-
-        <!-- Filas y columnas para las tarjetas -->
-        <div class="container mt-4">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card mb-4" style="width: 18rem;">
-                        <img src="/img/cardiologia.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Cardiología</h5>
-                            <p class="card-text">Cuidá tu corazón</p>
-                            <a href="#" class="btn btn-primary">Reserva una consulta</a>
+                    <div class="row justify-content-around">
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="/img/ginecologia.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Ginecología</h5>
+                                    <p class="card-text">Contamos con profesionales con mucha experiencia</p>
+                                    <a href="#" class="btn btn-primary">Reserva una consulta</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="/img/pediatria.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Pediatría</h5>
+                                    <p class="card-text">Podés sacar turno para los más chicos de tu casa</p>
+                                    <a href="#" class="btn btn-primary">Reserva una consulta</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card mb-4" style="width: 18rem;">
-                        <img src="/img/clinica.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Medicina clínica</h5>
-                            <p class="card-text">Hacer un chequeo de tu salud nunca está de más</p>
-                            <a href="#" class="btn btn-primary">Reserva una consulta</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </section>
+        </main>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card mb-4" style="width: 18rem;">
-                        <img src="/img/ginecologia.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Ginecología</h5>
-                            <p class="card-text">Contamos con profesionales con mucha experiencia</p>
-                            <a href="#" class="btn btn-primary">Reserva una consulta</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card mb-4" style="width: 18rem;">
-                        <img src="/img/pediatria.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Pediatría</h5>
-                            <p class="card-text">Podés sacar turno para los más chicos de tu casa</p>
-                            <a href="#" class="btn btn-primary">Reserva una consulta</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Footer -->
+        <footer class="container-fluid bg-primary">
+            <ul class="nav justify-content-around">
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Preguntas frecuentes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Contáctanos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Términos y condiciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Privacidad</a>
+                </li>
+            </ul>
+        </footer>
 
         <!-- Modal para el login -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
@@ -152,59 +187,7 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            $(document).ready(function () {
-                $("#email, #password").keydown(function (event) {
-                    // Verificar si la tecla presionada es "Enter"
-                    if (event.keyCode == 13) {
-                        // Prevenir la acción predeterminada del Enter (que sería enviar el formulario)
-                        event.preventDefault();
-
-                        // Llamar a la función que maneja el inicio de sesión
-                        iniciarSesion();
-                    }
-                });
-
-                $("#loginButton").click(function () {
-                    // Llamar a la función que maneja el inicio de sesión
-                    iniciarSesion();
-                });
-
-                // Función que maneja el inicio de sesión
-                function iniciarSesion() {
-                    var formData = {
-                        email: $("#email").val(),
-                        password: $("#password").val()
-                    };
-
-                    $.ajax({
-                        type: "POST",
-                        contentType: "application/x-www-form-urlencoded",
-                        url: "/login",
-                        data: formData,
-                        success: function (response) {
-                            console.log("Inicio de sesion exitoso"); // Verifico que se inicie sesión correctamente.
-                            enviarFormulario();
-                            $("#loginModal").modal("hide");
-                            $("#containerMensaje").addClass("d-none");
-                            // Puedes realizar otras acciones después de una autenticación exitosa
-                        },
-                        error: function (error) {
-                            console.error(error.responseText);
-                            console.log("No se inicio sesion"); // Verifico que no inicie sesión en caso de datos incorrectos.
-                            $("#mensajeError").text("Email o Contraseña inválidos!");
-                            $("#containerMensaje").removeClass("d-none");
-                        }
-                    });
-                }
-            });
-
-            function enviarFormulario() {
-                var formulario = document.getElementById("formLogin");
-                formulario.submit();
-            }
-        </script>
+        <script src="/javascript/script.js"></script>
     </body>
 </html>
 </body>
