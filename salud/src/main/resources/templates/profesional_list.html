@@ -3,7 +3,7 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="/fragments/head :: head"> </head>
     <body>
         <h2 class="text-light text-center">Lista de Profesionales</h2>
@@ -16,7 +16,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <th>Especialidad</th>
                         <th>Reputación</th>
                         <th>Valor Consulta</th>
-                        <th  sec:authorize="hasAuthority('ADMIN')">Estado</th>
+                        <th sec:authorize="hasAuthority('ADMIN')">Estado</th>
                     </tr>
                 </thead>
                 <tbody th:each="profesional : ${profesionales}">
