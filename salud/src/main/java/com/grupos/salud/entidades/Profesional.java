@@ -1,25 +1,44 @@
 package com.grupos.salud.entidades;
 
-import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;
 
+
 @Entity
-public class Profesional implements Serializable{
+public class Profesional {
     @Id
     @GeneratedValue(generator="uuid")
     @GenericGenerator(name="uuid",strategy="uuid2")
-    private String id;
     
+    private String id;
     private String especialidad;
     private Double reputacion;
     private Double valorConsulta;
-
+    private Boolean estado;
+    
     public Profesional() {
     }
 
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+    
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    
     public String getEspecialidad() {
         return especialidad;
     }
