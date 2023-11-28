@@ -15,21 +15,21 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class HistoriaClinica implements Serializable {
+
     @Id
-    @GeneratedValue(generator="uuid")
-    @GenericGenerator(name="uuid", strategy="uuid2")
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    
+
     @OneToMany
     private List<Ficha> fichas;
 
-    
     @OneToOne
     private Paciente paciente;
-    
+
     public HistoriaClinica() {
     }
 
@@ -57,5 +57,4 @@ public class HistoriaClinica implements Serializable {
         this.fichas = fichas;
     }
 
-    
 }
