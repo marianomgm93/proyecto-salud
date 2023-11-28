@@ -68,7 +68,7 @@ public class PortalControlador {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
         if (logueado.getRol().toString().equals("ADMIN")) {
-            return "redirect:/index.html";
+            return "redirect:/dashboard";
         }
 
         return "index.html";

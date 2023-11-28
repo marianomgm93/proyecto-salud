@@ -35,7 +35,7 @@ public class AdminControlador {
     }
     
     @GetMapping("/pacientes")
-    public String listarProfesionales(ModelMap modelo) {
+    public String listarPacientes(ModelMap modelo) {
         List<Paciente> pacientes = pacienteServicio.listarPacientes();
         modelo.addAttribute("pacientes", pacientes);
         return "paciente_list.html";
