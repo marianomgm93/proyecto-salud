@@ -28,13 +28,6 @@ public class Ficha {
     public Ficha() {
     }
 
-    public Ficha(Paciente paciente, Profesional profesional, String diagnostico, Boolean estado) {
-        this.paciente = paciente;
-        this.profesional = profesional;
-        this.diagnostico = diagnostico;
-        this.estado = estado;
-    }
-
     public String getId() {
         return id;
     }
