@@ -1,5 +1,6 @@
 package com.grupos.salud.entidades;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,7 +8,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Paciente {
+public class Paciente implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -17,16 +18,45 @@ public class Paciente {
     private String obraSocial;
     
     @OneToOne
+<<<<<<< HEAD
     private Imagen imagen;
     private Boolean estado;
+=======
+    private Usuario usuario;
+    
+    @OneToOne
+    private Imagen imagen;
+    
+    private Boolean estado;
+    
+    @OneToOne
+    private HistoriaClinica historiaClinica;
+>>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
 
     public Boolean getEstado() {
         return estado;
     }
 
+<<<<<<< HEAD
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
+=======
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    
+    
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+>>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
 
     public Paciente() {
     }
@@ -65,6 +95,17 @@ public class Paciente {
         this.imagen = imagen;
     }
 
+<<<<<<< HEAD
+=======
+    public HistoriaClinica getHistoriaClinica() {
+        return historiaClinica;
+    }
+
+    public void setHistoriaClinica(HistoriaClinica historiaClinica) {
+        this.historiaClinica = historiaClinica;
+    }
+
+>>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
     
 
 }
