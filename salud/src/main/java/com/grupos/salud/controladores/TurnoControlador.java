@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/turno")
+@RequestMapping("/turnos")
 public class TurnoControlador {
 
     @Autowired
@@ -21,12 +21,19 @@ public class TurnoControlador {
     @GetMapping("/registrar")
     public String registrar(){
         
-        return ".html";
+        return "turno_form.html";
     }
     
     @PostMapping("/registro")
     public String registro(){
         
-        return ".html";
+        return "index.html";
     }
+    
+    @GetMapping("/disponibles")
+    public String disponibles(){
+        
+        return "turnos_disponibles.html";
+    }
+    
 }
