@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head th:replace="/fragments/head :: head"> </head>
+    <body>
+        <h2 class="text-light text-center">Lista de Profesionales</h2>
+        <div class="container m-5">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Especialidad</th>
+                        <th>Reputación</th>
+                        <th>Valor Consulta</th>
+                        <th  sec:authorize="hasAuthority('ADMIN')">Estado</th>
+                    </tr>
+                </thead>
+                <tbody th:each="profesional : ${profesionales}">
+                    <tr>
+                        <th scope="row" th:text="${profesional.id}"></th>
+                        <td th:text="${profesional.usuario.nombre}"></td>
+                        <td th:text="${profesional.reputacion}"></td>
+                        <td th:text="${profesiona.valorConsulta}" ></td>
+                        <td  sec:authorize="hasAuthority('ADMIN')" th:text="${profesional.estado}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <section class=" text-center container">
+                <div class="row mt-3">
+                    <div class="divVolver">
+                        <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                    </div>
+                </div>
+            </section>
+
+    </body>
+</html>
