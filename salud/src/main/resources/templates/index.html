@@ -26,7 +26,7 @@
                             </button>
 
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" th:if="${session.usuariosession == null}">
                             <a class="btn btn-primary" th:href="@{/registrar}">
                                 Registrarse
                             </a>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="modal-body">
                         <!-- Contenido del formulario de inicio de sesión -->
-                        <form th:action="@{/logincheck}" method="POST">
+                        <form th:action="@{/logincheck}" method="POST" id="formLogin">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email:</label>
                                 <input type="text" id="email" name="email" class="form-control" required />
@@ -185,6 +185,7 @@
                         data: formData,
                         success: function (response) {
                             console.log("Inicio de sesion exitoso"); // Verifico que se inicie sesión correctamente.
+                            enviarFormulario();
                             $("#loginModal").modal("hide");
                             $("#containerMensaje").addClass("d-none");
                             // Puedes realizar otras acciones después de una autenticación exitosa
@@ -198,6 +199,11 @@
                     });
                 }
             });
+
+            function enviarFormulario() {
+                var formulario = document.getElementById("formLogin");
+                formulario.submit();
+            }
         </script>
     </body>
 </html>
