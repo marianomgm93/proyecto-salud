@@ -85,10 +85,10 @@ public class ImagenServicio {
     }
 
     
- 
-public Imagen guardarImagen(Imagen imagen){
-        return imagenRepositorio.save(imagen);
+    @Transactional
+    public Imagen guardarImagen(Imagen imagen){
+            return imagenRepositorio.save(imagen);
+
+        }
 
     }
-
-}

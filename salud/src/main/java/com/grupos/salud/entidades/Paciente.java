@@ -20,6 +20,9 @@ public class Paciente {
     private Imagen imagen;
     
     private Boolean estado;
+    
+    @OneToOne
+    private HistoriaClinica historiaClinica;
 
     public Boolean getEstado() {
         return estado;

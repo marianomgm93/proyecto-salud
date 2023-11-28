@@ -2,6 +2,7 @@ package com.grupos.salud.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,9 +23,13 @@ public class HistoriaClinica implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fecha;
     
+    @OneToMany
+    private List<Ficha> fichas;
+
     
-
-
+    @OneToOne
+    private Paciente paciente;
+    
     public HistoriaClinica() {
     }
 
@@ -42,6 +47,14 @@ public class HistoriaClinica implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public List<Ficha> getFichas() {
+        return fichas;
+    }
+
+    public void setFichas(List<Ficha> fichas) {
+        this.fichas = fichas;
     }
 
     
