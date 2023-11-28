@@ -40,7 +40,6 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/")
-                        .failureUrl("/?error=true")
                         .permitAll()
                 .and().logout()
                         .logoutUrl("/logout")
