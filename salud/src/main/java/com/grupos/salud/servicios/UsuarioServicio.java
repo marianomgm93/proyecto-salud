@@ -34,7 +34,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     //REGISTRO USUARIO
     @Transactional
-    public void registrarUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2, String email) throws MiException {
+    public Usuario registrarUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2, String email) throws MiException {
 
         validarRegistro(nombreUsuario, password, password2, email);
 
@@ -53,6 +53,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setRol(Rol.USER);
 
         usuarioRepositorio.save(usuario);
+        return usuario;
     }
 
     // DAR DE BAJA USUARIO 
