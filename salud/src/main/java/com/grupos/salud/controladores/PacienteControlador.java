@@ -1,6 +1,6 @@
 package com.grupos.salud.controladores;
 
-import com.grupos.salud.servicios.PacienteServicio;
+
 import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PacienteControlador {
 
     @Autowired
-    PacienteServicio pacienteservicio;
-    
-    
     private PacienteServicio pacienteServicio;
     @Autowired
     private ProfesionalServicio profesionalServicio;

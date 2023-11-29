@@ -1,6 +1,14 @@
 {
     "elements": {},
     "attributes": {
+<<<<<<< HEAD
         "th:text": {}
+=======
+        "th:text": {},
+        "th:src": {},
+        "th:replace": {},
+        "th:href": {},
+        "th:each": {}
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     }
 }

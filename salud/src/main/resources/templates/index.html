@@ -4,6 +4,7 @@
     <body>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         <!-- NavBar -->
         <nav class="navbar bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
@@ -215,6 +216,14 @@
 
         <main>
             <section>
+=======
+        <header>
+            <nav th:replace= "/fragments/navbar :: nav"> </nav>
+        </header>
+
+        <main>
+            <section class="cards">
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
                 <div class="container mt-4">
                     <div class="row justify-content-around">
                         <div class="col-md-4">
@@ -265,6 +274,7 @@
             </section>
         </main>
 
+<<<<<<< HEAD
         <!-- Footer -->
         <footer class="container-fluid bg-primary">
             <ul class="nav justify-content-around">
@@ -282,6 +292,9 @@
                 </li>
             </ul>
         </footer>
+=======
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
 
         <!-- Modal para el login -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
@@ -290,12 +303,20 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="loginModalLabel">Inicio de sesión</h5>
+<<<<<<< HEAD
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <!-- Contenido del formulario de inicio de sesión -->
+=======
+                        <button type="button" class="close border-0 w3-xlarge" data-bs-dismiss="modal" aria-label="Close">
+                            <span class="fa fa-close"></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
                         <form th:action="@{/logincheck}" method="POST" id="formLogin">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email:</label>
@@ -327,12 +348,16 @@
                             <div>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             </div>
+<<<<<<< HEAD
 >>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
+=======
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
     </div>
 
@@ -349,5 +374,10 @@
     </body>
 </html>
 >>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
+=======
+        <script src="/javascript/script.js"></script>
+    </body>
+</html>
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
 </body>
 </html>

@@ -19,6 +19,12 @@ public class Paciente implements Serializable {
     private Usuario usuario;
     
     @OneToOne
+<<<<<<< HEAD
+=======
+    private Usuario usuario;
+    
+    @OneToOne
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     private Imagen imagen;
     
     private Boolean estado;
@@ -26,14 +32,20 @@ public class Paciente implements Serializable {
     @OneToOne
     private HistoriaClinica historiaClinica;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     public Boolean getEstado() {
         return estado;
     }
 
+<<<<<<< HEAD
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
+=======
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     public Usuario getUsuario() {
         return usuario;
     }
@@ -42,6 +54,15 @@ public class Paciente implements Serializable {
         this.usuario = usuario;
     }
 
+<<<<<<< HEAD
+=======
+    
+    
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
 
     public Paciente() {
     }
@@ -88,6 +109,10 @@ public class Paciente implements Serializable {
         this.historiaClinica = historiaClinica;
     }
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
 
 }
 

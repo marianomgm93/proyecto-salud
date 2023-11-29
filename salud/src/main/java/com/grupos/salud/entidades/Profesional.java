@@ -19,7 +19,10 @@ public class Profesional {
     private Double reputacion;
     private Double valorConsulta;
     private Boolean estado;
+<<<<<<< HEAD
     
+=======
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     @OneToOne
     private Usuario usuario;
 

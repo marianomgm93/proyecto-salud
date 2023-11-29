@@ -18,7 +18,7 @@ public class AdminControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
-    
+
     @Autowired
     private PacienteServicio pacienteServicio;
 
@@ -33,7 +33,7 @@ public class AdminControlador {
         modelo.addAttribute("usuarios", usuarios);
         return "usuario_list.html";
     }
-    
+
     @GetMapping("/pacientes")
     public String listarPacientes(ModelMap modelo) {
         List<Paciente> pacientes = pacienteServicio.listarPacientes();
@@ -44,6 +44,12 @@ public class AdminControlador {
     @GetMapping("/modificarRol/{id}")
     public String cambiarRol(@PathVariable String id) {
         usuarioServicio.cambiarRol(id);
+        return "redirect:/admin/usuarios";
+    }
+
+    @GetMapping("/modificarEstado/{id}")
+    public String cambiarEstado(@PathVariable String id) {
+        usuarioServicio.cambiarEstado(id);
         return "redirect:/admin/usuarios";
     }
 }

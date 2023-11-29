@@ -35,9 +35,14 @@ public class UsuarioServicio implements UserDetailsService {
 
     //REGISTRO USUARIO
     @Transactional
+<<<<<<< HEAD
 
     public Usuario registrarUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2, String email) throws MiException {
 
+=======
+    public Usuario registrarUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2, String email) throws MiException {
+
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
         validarRegistro(nombreUsuario, password, password2, email);
 
         Usuario usuario = new Usuario();
@@ -108,7 +113,10 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     public boolean autenticar(String email, String password) {
 
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
@@ -125,7 +133,10 @@ public class UsuarioServicio implements UserDetailsService {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     //BUSCAR UN USUARIO
     public Usuario getOne(String id) {
         return usuarioRepositorio.getOne(id);
@@ -155,6 +166,11 @@ public class UsuarioServicio implements UserDetailsService {
                 usuario.setRol(Rol.ADMIN);
 
             } else if (usuario.getRol().equals(Rol.ADMIN)) {
+<<<<<<< HEAD
+=======
+                usuario.setRol(Rol.PROFESIONAL);
+            } else if (usuario.getRol().equals(Rol.PROFESIONAL)) {
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
                 usuario.setRol(Rol.USER);
             }
         }
@@ -180,7 +196,10 @@ public class UsuarioServicio implements UserDetailsService {
 
             session.setAttribute("usuariosession", usuario);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {
             return null;
@@ -238,6 +257,24 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiException("El nombre a buscar no puede ser nulo o estar vacío");
         }
 
+<<<<<<< HEAD
     }
 
+=======
+    }
+    @Transactional
+    public void cambiarEstado(String id){
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+          if (respuesta.isPresent()) {
+
+            Usuario usuario = respuesta.get();
+            if(usuario.isEstado()){
+               
+                usuario.setEstado(false);
+            }else if(!usuario.isEstado()){
+                usuario.setEstado(true);
+            }
+          }
+    }
+>>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
 }

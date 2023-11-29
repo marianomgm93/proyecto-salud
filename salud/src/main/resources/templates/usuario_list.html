@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="/fragments/head :: head"> </head>
+    <body>
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+        <section class=" text-center container container-list">
+            <h2 class="text-light text-center">Lista de Usuarios</h2>
+            <div class="container m-5">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Cambiar Rol</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Cambiar Estado</th>
+
+                        </tr>
+                    </thead>
+                    <tbody th:each="usuario : ${usuarios}">
+                        <tr>
+                            <th scope="row" th:text="${usuario.id}"></th>
+                            <td th:text="${usuario.nombreUsuario}"></td>
+                            <td><a><img th:if="${usuario.imagen != null}" class="img-thumbnail" th:src="@{/imagen/perfil/__${usuario.id}__}" ></a></td>
+                            <td th:text="${usuario.email}"></td>
+                            <td th:text="${usuario.rol}" ></td>
+                            <td><a th:href= "@{/admin/modificarRol/__${usuario.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
+                            <td th:text="${usuario.estado}"></td>
+                            <td><a th:href= "@{/admin/modificarEstado/__${usuario.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="row mt-3">
+                    <div class="divVolver">
+                        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                    </div>
+                </div>
+        </section>
+    </div>
+    <footer th:replace= "/fragments/footer :: footer"> </footer>
+</body>
+</html>
