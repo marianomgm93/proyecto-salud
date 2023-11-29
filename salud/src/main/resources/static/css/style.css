@@ -36,7 +36,29 @@ body {
 
 footer {
     text-align: center;
-    height: 50%;
     padding: 1.5rem;
     margin-top: auto;
+}
+
+.container-registro {
+    padding: 7rem 0;
+}
+
+.cardForm {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.container-list {
+    padding: 7rem 0;
 }

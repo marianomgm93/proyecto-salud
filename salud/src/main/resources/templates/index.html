@@ -59,7 +59,7 @@
             </section>
         </main>
 
-        <nav th:replace= "/fragments/footer :: footer"> </nav>
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
 
         <!-- Modal para el login -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
@@ -68,12 +68,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="loginModalLabel">Inicio de sesión</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="close border-0 w3-xlarge" data-bs-dismiss="modal" aria-label="Close">
+                            <span class="fa fa-close"></span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <!-- Contenido del formulario de inicio de sesión -->
                         <form th:action="@{/logincheck}" method="POST" id="formLogin">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email:</label>
