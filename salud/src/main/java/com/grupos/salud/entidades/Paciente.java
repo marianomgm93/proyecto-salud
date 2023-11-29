@@ -24,6 +24,9 @@ public class Paciente implements Serializable {
     private Imagen imagen;
     
     private Boolean estado;
+    
+    @OneToOne
+    private HistoriaClinica historiaClinica;
 
     public Boolean getEstado() {
         return estado;
@@ -79,6 +82,14 @@ public class Paciente implements Serializable {
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
+    }
+
+    public HistoriaClinica getHistoriaClinica() {
+        return historiaClinica;
+    }
+
+    public void setHistoriaClinica(HistoriaClinica historiaClinica) {
+        this.historiaClinica = historiaClinica;
     }
 
     

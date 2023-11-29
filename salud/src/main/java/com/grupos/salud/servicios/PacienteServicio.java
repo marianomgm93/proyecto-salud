@@ -1,6 +1,7 @@
 package com.grupos.salud.servicios;
 
 
+import com.grupos.salud.entidades.HistoriaClinica;
 import com.grupos.salud.entidades.Imagen;
 
 import com.grupos.salud.entidades.Paciente;
@@ -24,6 +25,11 @@ public class PacienteServicio {
     @Autowired
     private ImagenServicio imagenServicio;
     
+    
+    @Autowired
+    private HistoriaClinicaServicio historiaClinicaServicio;
+    
+
     // MODIFICAR MULTIPART ARCHIVO, ESTE VIENE DE USUARIO(Propiedad de usuario) // 
     @Transactional
     public void registrar(String datosContacto, String obraSocial,Usuario usuario) throws MiException{
@@ -36,8 +42,10 @@ public class PacienteServicio {
         paciente.setEstado(true);
         /*
         Imagen imagen = imagenServicio.guardar(archivo);
-        paciente.setImagen(imagen);
-        */
+        paciente.setImagen(imagen);*/
+        
+        HistoriaClinica historiaClinica = historiaClinicaServicio.crearHistoriaClinica(paciente);
+        paciente.setHistoriaClinica(historiaClinica);
         pacienteRepositorio.save(paciente);
     }
     
