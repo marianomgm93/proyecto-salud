@@ -1,10 +1,7 @@
 package com.grupos.salud.servicios;
 
 
-<<<<<<< HEAD
-=======
 import com.grupos.salud.entidades.HistoriaClinica;
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
 import com.grupos.salud.entidades.Imagen;
 
 import com.grupos.salud.entidades.Paciente;
@@ -27,10 +24,6 @@ public class PacienteServicio {
 
     @Autowired
     private ImagenServicio imagenServicio;
-<<<<<<< HEAD
-    
-=======
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
     
     
     @Autowired
@@ -39,11 +32,7 @@ public class PacienteServicio {
 
     // MODIFICAR MULTIPART ARCHIVO, ESTE VIENE DE USUARIO(Propiedad de usuario) // 
     @Transactional
-<<<<<<< HEAD
-    public void registrar(MultipartFile archivo, String datosContacto, String obraSocial) throws MiException{
-=======
     public void registrar(String datosContacto, String obraSocial,Usuario usuario) throws MiException{
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
 
         validar(datosContacto, obraSocial);
         Paciente paciente = new Paciente();
@@ -51,17 +40,12 @@ public class PacienteServicio {
         paciente.setUsuario(usuario);
         paciente.setObraSocial(obraSocial);
         paciente.setEstado(true);
-<<<<<<< HEAD
-        Imagen imagen = imagenServicio.guardar(archivo);
-        paciente.setImagen(imagen);
-=======
         /*
         Imagen imagen = imagenServicio.guardar(archivo);
         paciente.setImagen(imagen);*/
         
         HistoriaClinica historiaClinica = historiaClinicaServicio.crearHistoriaClinica(paciente);
         paciente.setHistoriaClinica(historiaClinica);
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
         pacienteRepositorio.save(paciente);
     }
     
@@ -80,11 +64,7 @@ public class PacienteServicio {
     
     // MODIFICAR MULTIPART ARCHIVO, ESTE VIENE DE USUARIO //actualizar(MultipartFile archivo, String id, String nuevosDatosContacto, String nuevaObraSocial) throws MiException
     @Transactional
-<<<<<<< HEAD
-    public void actualizar(MultipartFile archivo, String id, String nuevosDatosContacto, String nuevaObraSocial) throws MiException{
-=======
     public void actualizar(String id, String nuevosDatosContacto, String nuevaObraSocial) throws MiException{
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
 
         validar(nuevosDatosContacto, nuevaObraSocial);
         Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
@@ -92,11 +72,7 @@ public class PacienteServicio {
             Paciente paciente = respuesta.get();
             paciente.setDatosContacto(nuevosDatosContacto);
             paciente.setObraSocial(nuevaObraSocial);
-<<<<<<< HEAD
-            
-=======
             /*
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
             String idImagen = null;
             
             if (paciente.getImagen() != null) {
@@ -111,12 +87,8 @@ public class PacienteServicio {
         }
             */
     }
-<<<<<<< HEAD
-    
-=======
     }
         
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
     public void darDeBaja(String id){
          Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
          if(respuesta.isPresent()){

@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,7 +5,6 @@
  * and open the template in the editor.*/
     
 
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
 package com.grupos.salud.servicios;
 
 import com.grupos.salud.entidades.Imagen;
@@ -28,13 +25,9 @@ public class ImagenServicio {
     private ImagenRepositorio imagenRepositorio;
 
     @Transactional
-<<<<<<< HEAD
 
-    public Imagen guardar(MultipartFile archivo) throws MiException {
 
-=======
     public Imagen guardar(MultipartFile archivo) throws MiException{
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
 
         if (archivo != null) {
             try {
@@ -55,10 +48,7 @@ public class ImagenServicio {
 
     @Transactional
     public Imagen actualizar(MultipartFile archivo, String idImagen) throws MiException{
-<<<<<<< HEAD
-=======
 
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
         if (archivo != null) {
             try {
                 Imagen imagen = new Imagen();
@@ -95,21 +85,12 @@ public class ImagenServicio {
             throw new MiException("Error al eliminar la imagen: " + e.getMessage());
         }
     }
-<<<<<<< HEAD
-public Imagen guardarImagen(Imagen imagen){
-        return imagenRepositorio.save(imagen);
-
-    }
-
-}
-=======
-
     
+
     @Transactional
     public Imagen guardarImagen(Imagen imagen){
             return imagenRepositorio.save(imagen);
 
         }
 
-    }
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
+}

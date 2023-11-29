@@ -35,11 +35,8 @@ public class UsuarioServicio implements UserDetailsService {
 
     //REGISTRO USUARIO
     @Transactional
-<<<<<<< HEAD
-    public void registrarUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2, String email) throws MiException {
-=======
+
     public Usuario registrarUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2, String email) throws MiException {
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
 
         validarRegistro(nombreUsuario, password, password2, email);
 
@@ -111,8 +108,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-<<<<<<< HEAD
-=======
+
     public boolean autenticar(String email, String password) {
 
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
@@ -128,7 +124,7 @@ public class UsuarioServicio implements UserDetailsService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
+
 
     //BUSCAR UN USUARIO
     public Usuario getOne(String id) {
@@ -144,12 +140,7 @@ public class UsuarioServicio implements UserDetailsService {
 
         return usuarios;
     }
-<<<<<<< HEAD
-    
-    
-=======
 
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
     //CAMBIAR ROL
     @Transactional
     public void cambiarRol(String id) {
@@ -189,10 +180,7 @@ public class UsuarioServicio implements UserDetailsService {
 
             session.setAttribute("usuariosession", usuario);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {
             return null;

@@ -60,8 +60,4 @@ public class Imagen {
 
     }     
     
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942

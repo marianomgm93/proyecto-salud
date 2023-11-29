@@ -4,10 +4,7 @@ package com.grupos.salud.entidades;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-<<<<<<< HEAD
-=======
 import javax.persistence.OneToOne;
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
 import org.hibernate.annotations.GenericGenerator;
 
 
@@ -22,8 +19,7 @@ public class Profesional {
     private Double reputacion;
     private Double valorConsulta;
     private Boolean estado;
-<<<<<<< HEAD
-=======
+    
     @OneToOne
     private Usuario usuario;
 
@@ -34,7 +30,6 @@ public class Profesional {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
     
     public Profesional() {
     }
