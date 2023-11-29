@@ -16,7 +16,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <th>Especialidad</th>
                         <th>Reputación</th>
                         <th>Valor Consulta</th>
-                        <th sec:authorize="hasAuthority('ADMIN')">Estado</th>
+                        <th sec:authorize="hasRole('ADMIN')">Estado</th>
                     </tr>
                 </thead>
                 <tbody th:each="profesional : ${profesionales}">
@@ -25,7 +25,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <td th:text="${profesional.usuario.nombre}"></td>
                         <td th:text="${profesional.reputacion}"></td>
                         <td th:text="${profesiona.valorConsulta}" ></td>
-                        <td  sec:authorize="hasAuthority('ADMIN')" th:text="${profesional.estado}"></td>
+                        <td  sec:authorize="hasRole('ADMIN')" th:text="${profesional.estado}"></td>
                     </tr>
                 </tbody>
             </table>

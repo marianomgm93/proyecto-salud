@@ -151,6 +151,8 @@ public class UsuarioServicio implements UserDetailsService {
                 usuario.setRol(Rol.ADMIN);
 
             } else if (usuario.getRol().equals(Rol.ADMIN)) {
+                usuario.setRol(Rol.PROFESIONAL);
+            } else if (usuario.getRol().equals(Rol.PROFESIONAL)) {
                 usuario.setRol(Rol.USER);
             }
         }
@@ -234,5 +236,18 @@ public class UsuarioServicio implements UserDetailsService {
         }
 
     }
+    @Transactional
+    public void cambiarEstado(String id){
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+          if (respuesta.isPresent()) {
 
+            Usuario usuario = respuesta.get();
+            if(usuario.isEstado()){
+               
+                usuario.setEstado(false);
+            }else if(!usuario.isEstado()){
+                usuario.setEstado(true);
+            }
+          }
+    }
 }
