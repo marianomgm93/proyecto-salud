@@ -24,6 +24,10 @@ body {
     padding-right: 5em;
 }
 
+.cards {
+    margin-top: 10rem;
+}
+
 .mensajeError {
     margin-top: 20px;
     border-radius: 8px;
