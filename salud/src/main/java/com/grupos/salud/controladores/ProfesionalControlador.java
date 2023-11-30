@@ -1,5 +1,6 @@
 package com.grupos.salud.controladores;
 
+import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,6 +63,13 @@ public class ProfesionalControlador {
         }
     }
     
-    
+    @GetMapping("/detalle/{id}")
+    public String obtenerProfesional(@PathVariable String id, ModelMap model) {
+        Profesional profesional = profesionalServicio.getOne(id);
+        Usuario usuario = profesional.getUsuario(); // Obtén el Usuario asociado
+        model.addAttribute("profesional", profesional);
+        model.addAttribute("usuario", usuario); // Añade el Usuario al modelo
+        return "detalleProfesional"; // Vista para mostrar el detalle de un profesional (detalleProfesional.html)
+    }
 
 }
