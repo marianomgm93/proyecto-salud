@@ -12,23 +12,35 @@
                     <div class="col-md-8">
                         <div class="card cardForm">
                             <div class="card-header text-center">
-                                <h2>Registrate!</h2>
+                                <h2>Postulate como profesional!</h2>
                             </div>
                             <div class="card-body">
 
-                                <form id="formularioRegistro" th:action="@{/registro}" method="POST"
+                                <form id="formularioRegistro" th:action="@{/profesional/registro}" method="POST"
                                       enctype="multipart/form-data">
 
                                     <div class="form-group">
+                                        <label for="especialidad">Diganos su especialidad:</label>
+                                        <input id="especialidad" type="text" class="form-control" name="especialidad"
+                                               placeholder="Especialidad" th:value="${especialidad}" required />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="valorConsulta">Valor de su consulta:</label>
+                                        <input id="valorConsulta" type="text" class="form-control" name="valorConsulta"
+                                               placeholder="Valor de su consuta:" th:value="${valorConsulta}" required />
+                                    </div>
+
+                                    <!-- <div class="form-group">
                                         <label for="nombreUsuario">Nombre:</label>
                                         <input id="nombreUsuario" type="text" class="form-control" name="nombreUsuario"
                                                placeholder="Ingrese su nombre" th:value="${nombreUsuario}" required />
                                         <div id="nombreValidationFeedback" class="invalid-feedback">
                                             El nombre no debe contener números y debe tener al menos 3 caracteres.
                                         </div>
-                                    </div>
+                                    </div> 
 
-                                    <div class="form-group">
+                                   <<div class="form-group">
                                         <label for="correo">Correo Electrónico:</label>
                                         <input id="correo" type="email" class="form-control email" name="email"
                                                placeholder="Ingrese su correo electrónico" th:value="${email}" required />
@@ -37,7 +49,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                     <div class="form-group">
                                         <label for="telefono">Número de Teléfono:</label>
                                         <input id="telefono" type="tel" class="form-control" name="datosContacto"
                                                placeholder="Ingrese su número de teléfono" th:value="${datosContacto}"
@@ -83,7 +95,7 @@
                                     <div class="form-group">
                                         <label for="archivo">Seleccionar foto de perfil:</label>
                                         <input type="file" class="form-control-file" name="archivo" id="archivo" />
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group text-center">
                                         <button type="submit" class="btn btn-primary mt-3 w-100">Registrarme</button>
