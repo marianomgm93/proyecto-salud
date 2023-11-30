@@ -52,4 +52,9 @@ public class AdminControlador {
         usuarioServicio.cambiarEstado(id);
         return "redirect:/admin/usuarios";
     }
+        @GetMapping("/modificarEstadoPaciente/{id}")
+    public String cambiarEstadoPaciente(@PathVariable String id) {
+        usuarioServicio.cambiarEstado(id);
+        return "redirect:/admin/pacientes";
+    }
 }
