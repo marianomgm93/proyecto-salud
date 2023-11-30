@@ -22,12 +22,12 @@
                     <tr>
                         <td th:text="${paciente.id}"></td>
                         <td th:text="${paciente.usuario.nombreUsuario}"></td>
-                        <td><a><img th:if="${paciente.usuario.imagen != null}" class="img-thumbnail" th:src="@{/imagen/perfil/__${usuario.id}__}" ></a></td>
+                        <td><a><img th:if="${paciente.usuario.imagen != null}" class="img-thumbnail" th:src="@{/imagen/perfil/__${paciente.usuario.id}__}" ></a></td>
                         <td th:text="${paciente.usuario.email}"></td>
                         <td th:text="${paciente.datosContacto}"></td>
                         <td th:text="${paciente.obraSocial}"></td>
                         <td th:text="${paciente.usuario.estado}"></td>
-                        <td><a th:href= "@{/admin/modificarEstado/__${paciente.usuario.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
+                        <td><a th:href= "@{/admin/modificarEstadoPaciente/__${paciente.usuario.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
                     </tr>
                 </tbody>
             </table>
