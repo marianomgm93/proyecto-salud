@@ -17,7 +17,50 @@
                             <div class="card-body">
 
                                 <form id="formularioRegistro" th:action="@{/profesional/registro}" method="POST"
-                                      enctype="multipart/form-data">
+                                      enctype="multipart/form-data">                                  
+
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
+                                        <label for="nombreUsuario">Nombre:</label>
+                                        <input id="nombreUsuario" type="text" class="form-control" name="nombreUsuario"
+                                               placeholder="Ingrese su nombre" th:value="${nombreUsuario}" required />
+                                        <div id="nombreValidationFeedback" class="invalid-feedback">
+                                            El nombre no debe contener números y debe tener al menos 3 caracteres.
+                                        </div>
+                                    </div> 
+
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
+                                        <label for="correo">Correo Electrónico:</label>
+                                        <input id="correo" type="email" class="form-control email" name="email"
+                                               placeholder="Ingrese su correo electrónico" th:value="${email}" required />
+                                        <div id="emailValidationFeedback" class="invalid-feedback">
+                                            Ingresa una dirección de correo electrónico válida.
+                                        </div>
+                                    </div>
+
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
+                                        <label for="telefono">Número de Teléfono:</label>
+                                        <input id="telefono" type="tel" class="form-control" name="datosContacto"
+                                               placeholder="Ingrese su número de teléfono" th:value="${datosContacto}"
+                                               required />
+                                        <div id="telefonoHelp" class="invalid-feedback">
+                                            Ingresa un número de teléfono válido.
+                                        </div>
+                                    </div>
+
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
+                                        <label for="social">Obra Social:</label>
+                                        <select id="social" class="form-control" name="obraSocial">
+                                            <option value="obrasocialA" th:selected="${obraSocial == 'obrasocialA'}">
+                                                Obra social A
+                                            </option>
+                                            <option value="obrasocialB" th:selected="${obraSocial == 'obrasocialB'}">
+                                                Obra social B
+                                            </option>
+                                            <option value="obrasocialC" th:selected="${obraSocial == 'obrasocialC'}">
+                                                Obra social C
+                                            </option>
+                                        </select>
+                                    </div> 
 
                                     <div class="form-group">
                                         <label for="especialidad">Diganos su especialidad:</label>
@@ -31,35 +74,7 @@
                                                placeholder="Valor de su consuta:" th:value="${valorConsulta}" required />
                                     </div>
 
-                                    <!-- <div class="form-group">
-                                        <label for="nombreUsuario">Nombre:</label>
-                                        <input id="nombreUsuario" type="text" class="form-control" name="nombreUsuario"
-                                               placeholder="Ingrese su nombre" th:value="${nombreUsuario}" required />
-                                        <div id="nombreValidationFeedback" class="invalid-feedback">
-                                            El nombre no debe contener números y debe tener al menos 3 caracteres.
-                                        </div>
-                                    </div> 
-
-                                   <<div class="form-group">
-                                        <label for="correo">Correo Electrónico:</label>
-                                        <input id="correo" type="email" class="form-control email" name="email"
-                                               placeholder="Ingrese su correo electrónico" th:value="${email}" required />
-                                        <div id="emailValidationFeedback" class="invalid-feedback">
-                                            Ingresa una dirección de correo electrónico válida.
-                                        </div>
-                                    </div>
-
-                                     <div class="form-group">
-                                        <label for="telefono">Número de Teléfono:</label>
-                                        <input id="telefono" type="tel" class="form-control" name="datosContacto"
-                                               placeholder="Ingrese su número de teléfono" th:value="${datosContacto}"
-                                               required />
-                                        <div id="telefonoHelp" class="invalid-feedback">
-                                            Ingresa un número de teléfono válido.
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
                                         <label for="contr">Contraseña:</label>
                                         <input id="contr" type="password" class="form-control password" name="password"
                                                placeholder="Ingrese su contraseña" th:value="${password}" required />
@@ -68,34 +83,19 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
                                         <label for="confirmPassword">Confirmar Contraseña:</label>
                                         <input id="confirmPassword" type="password" class="form-control password2" name="password2"
                                                placeholder="Confirme su contraseña" th:value="${password2}" required />
                                         <div id="confirmPasswordValidationFeedback" class="invalid-feedback">
                                             Las contraseñas no coinciden.
                                         </div>
-                                    </div>
+                                    </div>                                 
 
-                                    <div class="form-group">
-                                        <label for="social">Obra Social:</label>
-                                        <select id="social" class="form-control" name="obraSocial">
-                                            <option value="obrasocialA" th:selected="${obraSocial == 'obrasocialA'}">
-                                                Obra social A
-                                            </option>
-                                            <option value="obrasocialB" th:selected="${obraSocial == 'obrasocialB'}">
-                                                Obra social B
-                                            </option>
-                                            <option value="obrasocialC" th:selected="${obraSocial == 'obrasocialC'}">
-                                                Obra social C
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
                                         <label for="archivo">Seleccionar foto de perfil:</label>
                                         <input type="file" class="form-control-file" name="archivo" id="archivo" />
-                                    </div> -->
+                                    </div>
 
                                     <div class="form-group text-center">
                                         <button type="submit" class="btn btn-primary mt-3 w-100">Registrarme</button>
