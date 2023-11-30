@@ -60,5 +60,7 @@ public class ProfesionalControlador {
             return "registro_profesional.html";
         }
     }
+    
+    
 
 }
