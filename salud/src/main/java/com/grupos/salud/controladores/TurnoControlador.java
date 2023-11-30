@@ -64,10 +64,7 @@ public class TurnoControlador {
    
     @PostMapping("/baja")
     public String baja(@PathVariable String id, ModelMap modelo) throws MiException{
-        //modelo.put("turno", turnoServicio.getOne(id));
-        
         turnoServicio.darDeBaja(id);
-        
         return "turno_list.html"; 
     }
 }
