@@ -40,6 +40,45 @@ footer {
     margin-top: auto;
 }
 
+
+.fotoProfesional{
+    width: 12rem;
+    height: 12rem;
+}
+
+@media (max-width: 576px) {
+    .card-img-top {
+        width: 6rem;
+        height: 6rem;
+    }
+    .card {
+        width: 100%;
+    }
+}
+
+.cantValoraciones{
+    color:rgb(170, 180, 189);
+}
+
+.badge{
+    background-color: rgb(45, 149, 170);
+    color:rgb(237, 255, 255);
+   
+}
+
+.cardProfesional{
+    border:0px;
+}
+
+
+.formFecha{
+    background-color: aliceblue;
+}
+
+.cardBodyValorConsulta{
+    color: rgb(45, 149, 170);
+    background-color: #D9D9D9;
+}
 .container-registro {
     padding: 7rem 0;
 }
