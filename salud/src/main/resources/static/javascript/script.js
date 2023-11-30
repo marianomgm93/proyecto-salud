@@ -41,9 +41,6 @@ $(document).ready(function () {
 function enviarFormulario() {
     var formulario = document.getElementById("formLogin");
     formulario.submit();
-<<<<<<< HEAD
-}
-=======
 }
 
 function validarNombre() {
@@ -177,4 +174,3 @@ function validarFormulario(event) {
 }
 
 document.getElementById('formularioRegistro').addEventListener('submit', validarFormulario);
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338

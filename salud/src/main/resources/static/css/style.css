@@ -24,13 +24,10 @@ body {
     padding-right: 5em;
 }
 
-<<<<<<< HEAD
-=======
 .cards {
     margin-top: 10rem;
 }
 
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
 .mensajeError {
     margin-top: 20px;
     border-radius: 8px;
@@ -39,11 +36,6 @@ body {
 
 footer {
     text-align: center;
-<<<<<<< HEAD
-    height: 50%;
-    padding: 1.5rem;
-    margin-top: auto;
-=======
     padding: 1.5rem;
     margin-top: auto;
 }
@@ -69,5 +61,4 @@ label {
 
 .container-list {
     padding: 7rem 0;
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
 }

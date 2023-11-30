@@ -23,10 +23,6 @@ public class PortalControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
-<<<<<<< HEAD
-
-=======
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     
     @Autowired
     private PacienteServicio pacienteServicio;
@@ -52,18 +48,10 @@ public class PortalControlador {
     }
 
     @PostMapping("/registro")
-<<<<<<< HEAD
-
-=======
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     public String registro(@RequestParam String nombreUsuario,@RequestParam String email, @RequestParam String password, String password2,@RequestParam String obraSocial,@RequestParam String datosContacto, MultipartFile archivo,ModelMap modelo) {
 
         try {
             pacienteServicio.registrar( datosContacto, obraSocial,usuarioServicio.registrarUsuario(archivo, nombreUsuario, password, password2, email));
-<<<<<<< HEAD
-
-=======
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
             modelo.put("exito", "Usuario registrado correctamente");
             return "index.html";
         } catch (MiException ex) {
@@ -73,10 +61,6 @@ public class PortalControlador {
             return "registro.html";
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {

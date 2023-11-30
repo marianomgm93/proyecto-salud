@@ -25,11 +25,6 @@ public class ImagenServicio {
     private ImagenRepositorio imagenRepositorio;
 
     @Transactional
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     public Imagen guardar(MultipartFile archivo) throws MiException{
 
         if (archivo != null) {
@@ -88,21 +83,12 @@ public class ImagenServicio {
             throw new MiException("Error al eliminar la imagen: " + e.getMessage());
         }
     }
-<<<<<<< HEAD
-    
-
-=======
 
     
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
     @Transactional
     public Imagen guardarImagen(Imagen imagen){
             return imagenRepositorio.save(imagen);
 
         }
 
-<<<<<<< HEAD
-}
-=======
     }
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338

@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import org.hibernate.annotations.GenericGenerator;
- 
 
 @Entity
 public class Imagen {
@@ -60,8 +59,4 @@ public class Imagen {
 
     }     
     
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
