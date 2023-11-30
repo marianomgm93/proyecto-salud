@@ -10,6 +10,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <header>
             <nav th:replace= "/fragments/navbar :: nav"> </nav>
         </header>
+        <div>
         <section class=" text-center container container-list">
             <h2 class="text-light text-center">Lista de Profesionales</h2>
             <div class="container m-5">
@@ -29,7 +30,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <th scope="row" th:text="${profesional.id}"></th>
                             <td th:text="${profesional.usuario.nombre}"></td>
                             <td th:text="${profesional.reputacion}"></td>
-                            <td th:text="${profesiona.valorConsulta}" ></td>
+                            <td th:text="${profesional.valorConsulta}" ></td>
                             <td  sec:authorize="hasRole('ADMIN')" th:text="${profesional.estado}"></td>
                         </tr>
                     </tbody>

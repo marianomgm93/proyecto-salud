@@ -6,6 +6,7 @@ import com.grupos.salud.entidades.Imagen;
 
 import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Usuario;
+import com.grupos.salud.enumeraciones.Rol;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.PacienteRepositorio;
 import java.util.List;
