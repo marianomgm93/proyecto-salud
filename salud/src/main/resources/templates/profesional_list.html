@@ -23,15 +23,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <th>Reputación</th>
                             <th>Valor Consulta</th>
                             <th sec:authorize="hasRole('ADMIN')">Estado</th>
+                            <th scope="col" sec:authorize="hasRole('ADMIN')">Cambiar Estado</th>
                         </tr>
                     </thead>
                     <tbody th:each="profesional : ${profesionales}">
                         <tr>
                             <th scope="row" th:text="${profesional.id}"></th>
-                            <td th:text="${profesional.usuario.nombre}"></td>
+                            <td th:text="${profesional.usuario.nombreUsuario}"></td>
+                            <td th:text="${profesional.especialidad}"></td>
                             <td th:text="${profesional.reputacion}"></td>
                             <td th:text="${profesional.valorConsulta}" ></td>
                             <td  sec:authorize="hasRole('ADMIN')" th:text="${profesional.estado}"></td>
+                            <td><a th:href= "@{/admin/modificarEstadoProfesional/__${profesional.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
                         </tr>
                     </tbody>
                 </table>

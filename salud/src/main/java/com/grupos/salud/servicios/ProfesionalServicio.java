@@ -24,6 +24,7 @@ public class ProfesionalServicio {
         profesional.setEspecialidad(especialidad);
         profesional.setValorConsulta(valorConsulta);
         profesional.setUsuario(usuario);
+        profesional.setEstado(false);
         profesionalRepositorio.save(profesional);
     }
     
@@ -56,12 +57,19 @@ public class ProfesionalServicio {
         }
     }
     
+    @Transactional
     public void darDeBaja(String id){
          Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
          if(respuesta.isPresent()){
              Profesional profesional = respuesta.get();
-             profesional.setEstado(false);
-             profesionalRepositorio.save(profesional);
+             if (profesional.getEstado() == false) {
+                 profesional.setEstado(true);
+                 profesionalRepositorio.save(profesional);
+             } else {
+                 profesional.setEstado(false);
+                 profesionalRepositorio.save(profesional);
+             }                
+             
          }
     }
 
