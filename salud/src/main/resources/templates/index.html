@@ -4,72 +4,11 @@
     <body>
 
         <header>
-            <!-- NavBar -->
-            <nav class="navbar navbar-expand-lg navbar-dark p-1 justify-content-between bg-primary" data-bs-theme="dark">
-                <div class="container-fluid align-content-center">
-                    <a class="navbar-brand align-baseline logo" href="#">
-                        <!-- Acá va el logotipo -->
-                        <img src="/img/logo.png" alt="Logo" height="65">
-                        TuSalud
-                    </a>
-                    <div class="justify-content-center w-50">
-                        <form class="d-flex" role="search" style="width: 100%; margin: auto;">
-                            <input class="form-control me-2 bg-light" type="search"
-                                   placeholder="Buscar un profesional por nombre" aria-label="Search">
-                            <button class="btn btn-primary bg-dark" type="submit"><span class="fa fa-search"></span></button>
-                        </form>
-                    </div>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end w-100 enlaces" id="navbarSupportedContent">
-                        <ul class="navbar-nav mb-2 mb-lg-0">
-                            <li class="nav-item" th:if="${session.usuariosession == null}">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#loginModal">
-                                    Iniciar sesión
-                                </button>
-                            </li>
-                            <li th:if="${session.usuariosession == null}" class="nav-item">
-                                <a class="nav-link text-light" aria-current="page" th:href="@{/registrar}">Registrarse</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    Especialidades
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Pediatría</a></li>
-                                    <li><a class="dropdown-item" href="#">Ginecología</a></li>
-                                    <li><a class="dropdown-item" href="#">Clínica</a></li>
-                                    <li><a class="dropdown-item" href="#">Cardiología</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" aria-current="page" href="#">Profesionales</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" aria-current="page" href="/paciente/lista">Pacientes</a>
-                            </li>
-                            <li th:if="${session.usuariosession != null}" class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    Perfil
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
-                                    <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
-                                </ul>
-                            </li>
-                    </div>
-                </div>
-            </nav>
+            <nav th:replace= "/fragments/navbar :: nav"> </nav>
         </header>
 
         <main>
-            <section>
+            <section class="cards">
                 <div class="container mt-4">
                     <div class="row justify-content-around">
                         <div class="col-md-4">
@@ -120,23 +59,7 @@
             </section>
         </main>
 
-        <!-- Footer -->
-        <footer class="container-fluid bg-primary">
-            <ul class="nav justify-content-around">
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Preguntas frecuentes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Contáctanos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Términos y condiciones</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Privacidad</a>
-                </li>
-            </ul>
-        </footer>
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
 
         <!-- Modal para el login -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
@@ -145,12 +68,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="loginModalLabel">Inicio de sesión</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="close border-0 w3-xlarge" data-bs-dismiss="modal" aria-label="Close">
+                            <span class="fa fa-close"></span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <!-- Contenido del formulario de inicio de sesión -->
                         <form th:action="@{/logincheck}" method="POST" id="formLogin">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email:</label>

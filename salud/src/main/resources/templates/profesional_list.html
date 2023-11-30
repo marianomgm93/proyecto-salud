@@ -6,36 +6,44 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="/fragments/head :: head"> </head>
     <body>
-        <h2 class="text-light text-center">Lista de Profesionales</h2>
-        <div class="container m-5">
-            <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Especialidad</th>
-                        <th>Reputación</th>
-                        <th>Valor Consulta</th>
-                        <th sec:authorize="hasAuthority('ADMIN')">Estado</th>
-                    </tr>
-                </thead>
-                <tbody th:each="profesional : ${profesionales}">
-                    <tr>
-                        <th scope="row" th:text="${profesional.id}"></th>
-                        <td th:text="${profesional.usuario.nombre}"></td>
-                        <td th:text="${profesional.reputacion}"></td>
-                        <td th:text="${profesiona.valorConsulta}" ></td>
-                        <td  sec:authorize="hasAuthority('ADMIN')" th:text="${profesional.estado}"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <section class=" text-center container">
+
+        <header>
+            <nav th:replace= "/fragments/navbar :: nav"> </nav>
+        </header>
+        <section class=" text-center container container-list">
+            <h2 class="text-light text-center">Lista de Profesionales</h2>
+            <div class="container m-5">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Especialidad</th>
+                            <th>Reputación</th>
+                            <th>Valor Consulta</th>
+                            <th sec:authorize="hasRole('ADMIN')">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="profesional : ${profesionales}">
+                        <tr>
+                            <th scope="row" th:text="${profesional.id}"></th>
+                            <td th:text="${profesional.usuario.nombre}"></td>
+                            <td th:text="${profesional.reputacion}"></td>
+                            <td th:text="${profesiona.valorConsulta}" ></td>
+                            <td  sec:authorize="hasRole('ADMIN')" th:text="${profesional.estado}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <div class="row mt-3">
                     <div class="divVolver">
                         <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
+
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
     </body>
 </html>
