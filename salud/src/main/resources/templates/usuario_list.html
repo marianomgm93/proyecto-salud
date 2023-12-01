@@ -24,7 +24,11 @@
                         <tr>
                             <th scope="row" th:text="${usuario.id}"></th>
                             <td th:text="${usuario.nombreUsuario}"></td>
+<<<<<<< HEAD
                             <td><a><img th:if="${usuario.imagen != null}" class="img-thumbnail" th:src="@{/imagen/perfil/__${usuario.id}__}" ></a></td>
+=======
+                            <td><a><img th:if="${usuario.imagen != null}" class="img-usuario" th:src="@{/imagen/perfil/__${usuario.id}__}" ></a></td>
+>>>>>>> 5c20bafcdc21e40fddd22bc74a1d7fc59dc5f250
                             <td th:text="${usuario.email}"></td>
                             <td th:text="${usuario.rol}" ></td>
                             <td><a th:href= "@{/admin/modificarRol/__${usuario.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
@@ -39,8 +43,16 @@
                         <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
                     </div>
                 </div>
+<<<<<<< HEAD
         </section>
     </div>
     <footer th:replace= "/fragments/footer :: footer"> </footer>
 </body>
+=======
+            </div>
+        </section>
+
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
+    </body>
+>>>>>>> 5c20bafcdc21e40fddd22bc74a1d7fc59dc5f250
 </html>

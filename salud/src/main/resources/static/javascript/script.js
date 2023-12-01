@@ -172,5 +172,5 @@ function validarFormulario(event) {
         event.preventDefault();
     }
 }
-
 document.getElementById('formularioRegistro').addEventListener('submit', validarFormulario);
+

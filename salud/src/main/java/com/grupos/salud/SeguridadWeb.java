@@ -41,7 +41,6 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
                         .passwordParameter("password")
                         .defaultSuccessUrl("/")
 
-
                         .failureUrl("/?error=true")
 
                         .permitAll()

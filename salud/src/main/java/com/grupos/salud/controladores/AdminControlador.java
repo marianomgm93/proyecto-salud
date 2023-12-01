@@ -3,6 +3,7 @@ package com.grupos.salud.controladores;
 import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.servicios.PacienteServicio;
+import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class AdminControlador {
 
     @Autowired
     private PacienteServicio pacienteServicio;
+    
+    @Autowired
+    private ProfesionalServicio profesionalServicio;
 
     @GetMapping("/dashboard")
     public String panelAdministrativo() {
@@ -51,5 +55,17 @@ public class AdminControlador {
     public String cambiarEstado(@PathVariable String id) {
         usuarioServicio.cambiarEstado(id);
         return "redirect:/admin/usuarios";
+    }
+
+    @GetMapping("/modificarEstadoPaciente/{id}")
+    public String cambiarEstadoPaciente(@PathVariable String id) {
+        usuarioServicio.cambiarEstado(id);
+        return "redirect:/admin/pacientes";
+    }
+
+    @GetMapping("/modificarEstadoProfesional/{id}")
+    public String cambiarEstadoProfesional(@PathVariable String id) {
+        profesionalServicio.darDeBaja(id);
+        return "redirect:../../paciente/lista";
     }
 }

@@ -1,6 +1,7 @@
 package com.grupos.salud.servicios;
 
 import com.grupos.salud.entidades.Profesional;
+import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.ProfesionalRepositorio;
 import java.util.List;
@@ -16,14 +17,14 @@ public class ProfesionalServicio {
     private ProfesionalRepositorio profesionalRepositorio;
     
     @Transactional
-    public void registrar(String especialidad, Double reputacion, Double valorConsulta) throws MiException{
+    public void registrar(String especialidad, Double valorConsulta, Usuario usuario) throws MiException{
 
-        validar (especialidad, reputacion, valorConsulta);
+        validar (especialidad, valorConsulta);
         Profesional profesional = new Profesional();
         profesional.setEspecialidad(especialidad);
-        profesional.setReputacion(reputacion);
         profesional.setValorConsulta(valorConsulta);
-        
+        profesional.setUsuario(usuario);
+        profesional.setEstado(false);
         profesionalRepositorio.save(profesional);
     }
     
@@ -42,7 +43,7 @@ public class ProfesionalServicio {
     @Transactional
     public void actualizar(String id, String especialidad, Double reputacion, Double valorConsulta) throws MiException{
 
-        validar (especialidad, reputacion, valorConsulta);
+        validar (especialidad, valorConsulta);
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if(respuesta.isPresent()){
             Profesional profesional = respuesta.get();
@@ -56,12 +57,19 @@ public class ProfesionalServicio {
         }
     }
     
+    @Transactional
     public void darDeBaja(String id){
          Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
          if(respuesta.isPresent()){
              Profesional profesional = respuesta.get();
-             profesional.setEstado(false);
-             profesionalRepositorio.save(profesional);
+             if (profesional.getEstado() == false) {
+                 profesional.setEstado(true);
+                 profesionalRepositorio.save(profesional);
+             } else {
+                 profesional.setEstado(false);
+                 profesionalRepositorio.save(profesional);
+             }                
+             
          }
     }
 
@@ -70,12 +78,9 @@ public class ProfesionalServicio {
         return profesionales;
     }
     
-    private void validar(String especialidad, Double reputacion, Double valorConsulta) throws MiException{
+    private void validar(String especialidad, Double valorConsulta) throws MiException{
         if(especialidad.isEmpty()){
             throw new MiException("El dato de especialidad no pueden ser nulo o estar vacío.");
-        }
-        if(reputacion == null){
-            throw new MiException("La reputación no puede estar vacía.");
         }
         if(valorConsulta == null){
             throw new MiException("El valor de la consulta no puede estar vacía.");
