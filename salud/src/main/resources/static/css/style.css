@@ -113,18 +113,26 @@ label {
 .container-imagen{
     position: relative;
     display: inline-block;
-    padding-top: 5rem;
+    margin-top: 5rem;
     max-width: 100%;
+    padding: 0;
+    
+}
+.img-fluid{
+    z-index: 0;
 }
 
 .overlay {
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 5%;
     transform: translate(0%, -50%);
     text-align: left;
     color: #fff;
     max-width: 40%;
+    margin:0;
+    padding:0;
+    
 }
 
 .description {
@@ -132,5 +140,7 @@ label {
 }
 
 .container-description-profesional {
-    margin-top: 8rem;
+    margin-top: 0;
+    padding-top:0;
+    
 }
