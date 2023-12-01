@@ -63,7 +63,7 @@ footer {
 .badge{
     background-color: rgb(45, 149, 170);
     color:rgb(237, 255, 255);
-   
+
 }
 
 .cardProfesional{
@@ -106,4 +106,29 @@ label {
     max-width: 50px;
     max-height: 50px;
     border-radius: 50%;
+}
+
+.container-imagen{
+    position: relative;
+    display: inline-block;
+    padding-top: 5rem;
+    max-width: 100%;
+}
+
+.overlay {
+    position: absolute;
+    top: 60%;
+    left: 5%;
+    transform: translate(0%, -50%);
+    text-align: left;
+    color: #fff;
+    max-width: 40%;
+}
+
+.description {
+    font-size: 1.2em;
+}
+
+.container-description-profesional {
+    margin-top: 8rem;
 }

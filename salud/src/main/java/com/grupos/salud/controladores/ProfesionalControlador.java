@@ -5,9 +5,7 @@ import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -73,12 +71,5 @@ public class ProfesionalControlador {
         model.addAttribute("usuario", usuario); // Añade el Usuario al modelo
         return "detalleProfesional.html"; // Vista para mostrar el detalle de un profesional (detalleProfesional.html)
     }
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN','ROLE_PROFESIONAL')")
-//    @GetMapping("/detalle/{id}")
-//    public String perfilPaciente(ModelMap modelo, HttpSession session) {
-//        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
-//        modelo.put("usuario", usuario);
-//        return "usuario_perfil.html";
-//    }
 
 }
