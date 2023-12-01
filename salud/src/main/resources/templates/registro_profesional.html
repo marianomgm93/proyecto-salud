@@ -68,7 +68,7 @@
                                         <input id="especialidad" type="text" class="form-control" name="especialidad"
                                                placeholder="Especialidad" th:value="${especialidad}" required />
                                     </div> -->    
-                                    <div th:if="${session.usuariosession == null}" class="form-group">
+                                    <div class="form-group">
                                         <label for="especialidad">Especialidad:</label>
                                         <select id="especialidad" class="form-control" name="especialidad">
                                             <option value="medico clinico" th:selected="${especialidad == 'medico clinico'}">
