@@ -72,7 +72,9 @@ footer {
 
 
 .formFecha{
-    background-color: aliceblue;
+    background-color:#6acee1;
+    border-radius: 15px;
+    padding: 15px;
 }
 
 .cardBodyValorConsulta{
