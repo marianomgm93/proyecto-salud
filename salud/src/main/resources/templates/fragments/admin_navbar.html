@@ -25,39 +25,11 @@
                         Iniciar sesión
                     </button>
                 </li>
-                <li th:if="${session.usuariosession == null}"class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Registrarse
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/registrar}"> Como paciente</a></li>
-                        <li><a class="dropdown-item" th:href="@{profesional/registrar}"> Como profesional</a></li>
-                    </ul>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Especialidades
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Pediatría</a></li>
-                        <li><a class="dropdown-item" href="#">Ginecología</a></li>
-                        <li><a class="dropdown-item" href="#">Clínica</a></li>
-                        <li><a class="dropdown-item" href="#">Cardiología</a></li>
-                    </ul>
+                <li class="nav-item" th:if="${session.usuariosession != null}">
+                    <a class="nav-link text-light" aria-current="page" th:href="@{/admin/pacientes}">Ver Pacientes</a>
                 </li>
                 <li class="nav-item" th:if="${session.usuariosession != null}">
-                    <a class="nav-link text-light" aria-current="page" href="#">Profesionales</a>
-                </li>
-                <li th:if="${session.usuariosession != null}"class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Pacientes
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/paciente/lista"> Nuestros Profesionales</a></li>
-                    </ul>
-
+                    <a class="nav-link text-light" aria-current="page" th:href="@{/admin/profesionales}">Ver Profesionales</a>
                 </li>
                 <li th:if="${session.usuariosession != null}" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button"

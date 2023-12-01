@@ -1,6 +1,7 @@
 package com.grupos.salud.controladores;
 
 import com.grupos.salud.entidades.Paciente;
+import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
@@ -43,6 +44,12 @@ public class AdminControlador {
         List<Paciente> pacientes = pacienteServicio.listarPacientes();
         modelo.addAttribute("pacientes", pacientes);
         return "paciente_list.html";
+    }
+       @GetMapping("/profesionales")
+    public String listar(ModelMap modelo) {
+        List<Profesional> profesionales = profesionalServicio.listarProfesionales();
+        modelo.addAttribute("profesionales", profesionales);
+        return "profesional_list.html";
     }
 
     @GetMapping("/modificarRol/{id}")
