@@ -23,7 +23,7 @@ public class PortalControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
-    
+
     @Autowired
     private PacienteServicio pacienteServicio;
 
@@ -34,7 +34,7 @@ public class PortalControlador {
 
     @PostMapping("/login")
     public ResponseEntity<String> autenticar(@RequestParam String email, @RequestParam String password) {
-        
+
         if (usuarioServicio.autenticar(email, password)) {
             return ResponseEntity.ok("Inicio de sesión exitoso");
         } else {
@@ -48,10 +48,10 @@ public class PortalControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombreUsuario,@RequestParam String email, @RequestParam String password, String password2,@RequestParam String obraSocial,@RequestParam String datosContacto, MultipartFile archivo,ModelMap modelo) {
+    public String registro(@RequestParam String nombreUsuario, @RequestParam String email, @RequestParam String password, String password2, @RequestParam String obraSocial, @RequestParam String datosContacto, MultipartFile archivo, ModelMap modelo) {
 
         try {
-            pacienteServicio.registrar( datosContacto, obraSocial,usuarioServicio.registrarUsuario(archivo, nombreUsuario, password, password2, email));
+            pacienteServicio.registrar(datosContacto, obraSocial, usuarioServicio.registrarUsuario(archivo, nombreUsuario, password, password2, email));
             modelo.put("exito", "Usuario registrado correctamente");
             return "index.html";
         } catch (MiException ex) {
@@ -61,6 +61,7 @@ public class PortalControlador {
             return "registro.html";
         }
     }
+
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
@@ -68,10 +69,9 @@ public class PortalControlador {
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
         if (logueado.getRol().toString().equals("ADMIN")) {
-            return "redirect:/dashboard";
+            return "redirect:/admin/dashboard";
         }
 
         return "index.html";
     }
-
 }

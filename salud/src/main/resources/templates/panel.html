@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace= "/fragments/head :: head" </head>
+    <body>
+
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark p-1 justify-content-between bg-primary fixed-top" data-bs-theme="dark">
+    <div class="container-fluid align-content-center">
+        <a class="navbar-brand align-baseline logo" href="/">
+            <!-- Acá va el logotipo -->
+            <img src="/img/logo.png" alt="Logo" height="65">
+            TuSalud
+        </a>
+        <div class="justify-content-center w-100">
+            <form class="d-flex" role="search" style="width: 100%; margin: auto;">
+                <input class="form-control me-2 bg-light" type="search"
+                       placeholder="Buscar un profesional por nombre" aria-label="Search">
+                <button class="btn btn-primary bg-dark" type="submit"><span class="fa fa-search"></span></button>
+            </form>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end w-100 enlaces" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item" th:if="${session.usuariosession == null}">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#loginModal">
+                        Iniciar sesión
+                    </button>
+                </li>
+                <li class="nav-item" th:if="${session.usuariosession != null}">
+                    <a class="nav-link text-light" aria-current="page" th:href="@{pacientes}">Ver Pacientes</a>
+                </li>
+                <li class="nav-item" th:if="${session.usuariosession != null}">
+                    <a class="nav-link text-light" aria-current="page" th:href="@{profesionales}">Ver Profesionales</a>
+                </li>
+                <li th:if="${session.usuariosession != null}" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Perfil
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                        <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+        </div>
+    </div>
+</nav>
+        </header>
+
+        <main>
+            <section class="cards">
+                <div class="container mt-4">
+                    <div class="row justify-content-around">
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="/img/cardiologia.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cardiología</h5>
+                                    <p class="card-text">Cuidá tu corazón</p>
+                                    <a href="#" class="btn btn-primary">Reserva una consulta</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="/img/clinica.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Medicina clínica</h5>
+                                    <p class="card-text">Hacer un chequeo de tu salud nunca está de más</p>
+                                    <a href="#" class="btn btn-primary">Reserva una consulta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-around">
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="/img/ginecologia.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Ginecología</h5>
+                                    <p class="card-text">Contamos con profesionales con mucha experiencia</p>
+                                    <a href="#" class="btn btn-primary">Reserva una consulta</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="/img/pediatria.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Pediatría</h5>
+                                    <p class="card-text">Podés sacar turno para los más chicos de tu casa</p>
+                                    <a href="#" class="btn btn-primary">Reserva una consulta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
+
+        <!-- Modal para el login -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+             aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Inicio de sesión</h5>
+                        <button type="button" class="close border-0 w3-xlarge" data-bs-dismiss="modal" aria-label="Close">
+                            <span class="fa fa-close"></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/logincheck}" method="POST" id="formLogin">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="text" id="email" name="email" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña:</label>
+                                <input type="password" id="password" name="password" class="form-control" required />
+                            </div>
+                            <div class="alert alert-danger mensajeError d-none" id="containerMensaje" role="alert">
+                                <span id="mensajeError"></span>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" id="loginButton" class="btn btn-primary">Iniciar sesión</button>
+                            </div>
+                        </form>
+
+                        <div class="mt-3 text-center">
+                            <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex justify-content-between w-100">
+                            <div>
+                                ¿Aún no tienes cuenta? <a href="/registrar" class="text-decoration-none">Regístrate aquí</a>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/javascript/script.js"></script>
+    </body>
+</html>
