@@ -25,9 +25,15 @@
                         Iniciar sesión
                     </button>
                 </li>
-                <li th:if="${session.usuariosession == null}" class="nav-item">
-                    <a class="nav-link text-light" aria-current="page" th:href="@{/registrar}">Registrarse</a>
-                </li>
+                <li th:if="${session.usuariosession == null}"class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Registrarse
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/registrar}"> Como paciente</a></li>
+                        <li><a class="dropdown-item" th:href="@{profesional/registrar}"> Como profesional</a></li>
+                    </ul>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
