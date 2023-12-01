@@ -8,7 +8,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <body>
 
         <header>
-            <nav th:replace= "/fragments/navbar :: nav"> </nav>
+            <nav  sec:authorize="hasRole('USER')" th:replace= "/fragments/navbar :: nav"> </nav>
+            <nav  sec:authorize="hasRole('ADMIN')" th:replace= "/fragments/admin_navbar :: nav"> </nav>
         </header>
         <section class=" text-center container container-list">
             <h2 class="text-light text-center">Lista de Profesionales</h2>
@@ -33,8 +34,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <td th:text="${profesional.reputacion}"></td>
                             <td th:text="${profesional.valorConsulta}" ></td>
                             <td  sec:authorize="hasRole('ADMIN')" th:text="${profesional.estado}"></td>
-                            <td><a th:href= "@{/admin/modificarEstadoProfesional/__${profesional.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
-                            
+                            <td sec:authorize="hasRole('ADMIN')"><a th:href= "@{/admin/modificarEstadoProfesional/__${profesional.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
                         </tr>
                     </tbody>
                 </table>

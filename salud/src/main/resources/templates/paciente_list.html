@@ -1,7 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="/fragments/head :: head"> </head>
     <body>
-        <nav th:replace="/fragments/navbar :: nav"></nav>
+       <nav  sec:authorize="hasRole('USER')" th:replace= "/fragments/navbar :: nav"> </nav>
+       <nav  sec:authorize="hasRole('ADMIN')" th:replace= "/fragments/admin_navbar :: nav"> </nav>
         <h2 class="text-light text-center">Lista de Pacientes</h2>
         <div class="container m-5">
             <table class="table table-dark">
