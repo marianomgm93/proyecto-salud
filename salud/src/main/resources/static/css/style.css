@@ -17,7 +17,7 @@ body {
 
 .logo {
     width: 80%;
-    padding-left: 5em;
+    padding: 0.5em 0 1em 5em;
 }
 
 .enlaces {
@@ -138,4 +138,17 @@ label {
 
 .modal {
     padding: 0;
+}
+
+.imagen-salud {
+    width: 100%
+}
+
+.container-nav {
+    max-width: 100%;
+}
+
+body.modal-open {
+    overflow: auto !important;
+    padding-right: 0 !important;
 }
