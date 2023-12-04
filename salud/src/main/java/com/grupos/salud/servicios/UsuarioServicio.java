@@ -23,7 +23,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Service
 public class UsuarioServicio implements UserDetailsService {
 
@@ -35,7 +34,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     //REGISTRO USUARIO
     @Transactional
-    public void registrarUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2, String email) throws MiException {
+    public Usuario registrarUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2, String email) throws MiException {
 
         validarRegistro(nombreUsuario, password, password2, email);
 
@@ -54,6 +53,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setRol(Rol.USER);
 
         usuarioRepositorio.save(usuario);
+        return usuario;
     }
 
     // DAR DE BAJA USUARIO 
@@ -105,7 +105,33 @@ public class UsuarioServicio implements UserDetailsService {
         }
 
     }
+    
+    public Usuario buscarPorEmail(String email){
+        
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+        if (usuario != null) {
+            return usuario;
+            
+        }
+        
+        return usuario;
+    }
 
+    public boolean autenticar(String email, String password) {
+
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+
+        if (usuario != null && matches(password, usuario.getPassword())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean matches(String rawPassword, String encodedPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
 
     //BUSCAR UN USUARIO
     public Usuario getOne(String id) {
@@ -121,8 +147,7 @@ public class UsuarioServicio implements UserDetailsService {
 
         return usuarios;
     }
-    
-    
+
     //CAMBIAR ROL
     @Transactional
     public void cambiarRol(String id) {
@@ -137,6 +162,8 @@ public class UsuarioServicio implements UserDetailsService {
                 usuario.setRol(Rol.ADMIN);
 
             } else if (usuario.getRol().equals(Rol.ADMIN)) {
+                usuario.setRol(Rol.PROFESIONAL);
+            } else if (usuario.getRol().equals(Rol.PROFESIONAL)) {
                 usuario.setRol(Rol.USER);
             }
         }
@@ -161,7 +188,6 @@ public class UsuarioServicio implements UserDetailsService {
             HttpSession session = attr.getRequest().getSession(true);
 
             session.setAttribute("usuariosession", usuario);
-
 
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {
@@ -221,5 +247,18 @@ public class UsuarioServicio implements UserDetailsService {
         }
 
     }
+    @Transactional
+    public void cambiarEstado(String id){
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+          if (respuesta.isPresent()) {
 
+            Usuario usuario = respuesta.get();
+            if(usuario.isEstado()){
+               
+                usuario.setEstado(false);
+            }else if(!usuario.isEstado()){
+                usuario.setEstado(true);
+            }
+          }
+    }
 }

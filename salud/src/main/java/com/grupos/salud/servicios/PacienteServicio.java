@@ -1,9 +1,11 @@
 package com.grupos.salud.servicios;
 
 
+import com.grupos.salud.entidades.HistoriaClinica;
 import com.grupos.salud.entidades.Imagen;
 
 import com.grupos.salud.entidades.Paciente;
+import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.PacienteRepositorio;
 import java.util.List;
@@ -24,16 +26,26 @@ public class PacienteServicio {
     private ImagenServicio imagenServicio;
     
     
+    @Autowired
+    private HistoriaClinicaServicio historiaClinicaServicio;
+    
+
+    // MODIFICAR MULTIPART ARCHIVO, ESTE VIENE DE USUARIO(Propiedad de usuario) // 
     @Transactional
-    public void registrar(MultipartFile archivo, String datosContacto, String obraSocial) throws MiException{
+    public void registrar(String datosContacto, String obraSocial,Usuario usuario) throws MiException{
 
         validar(datosContacto, obraSocial);
         Paciente paciente = new Paciente();
         paciente.setDatosContacto(datosContacto);
+        paciente.setUsuario(usuario);
         paciente.setObraSocial(obraSocial);
         paciente.setEstado(true);
+        /*
         Imagen imagen = imagenServicio.guardar(archivo);
-        paciente.setImagen(imagen);
+        paciente.setImagen(imagen);*/
+        
+        HistoriaClinica historiaClinica = historiaClinicaServicio.crearHistoriaClinica(paciente);
+        paciente.setHistoriaClinica(historiaClinica);
         pacienteRepositorio.save(paciente);
     }
     
@@ -49,8 +61,10 @@ public class PacienteServicio {
         return paciente;
     } 
     
+    
+    // MODIFICAR MULTIPART ARCHIVO, ESTE VIENE DE USUARIO //actualizar(MultipartFile archivo, String id, String nuevosDatosContacto, String nuevaObraSocial) throws MiException
     @Transactional
-    public void actualizar(MultipartFile archivo, String id, String nuevosDatosContacto, String nuevaObraSocial) throws MiException{
+    public void actualizar(String id, String nuevosDatosContacto, String nuevaObraSocial) throws MiException{
 
         validar(nuevosDatosContacto, nuevaObraSocial);
         Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
@@ -58,7 +72,7 @@ public class PacienteServicio {
             Paciente paciente = respuesta.get();
             paciente.setDatosContacto(nuevosDatosContacto);
             paciente.setObraSocial(nuevaObraSocial);
-            
+            /*
             String idImagen = null;
             
             if (paciente.getImagen() != null) {
@@ -71,8 +85,10 @@ public class PacienteServicio {
 
             pacienteRepositorio.save(paciente);
         }
+            */
     }
-    
+    }
+        
     public void darDeBaja(String id){
          Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
          if(respuesta.isPresent()){

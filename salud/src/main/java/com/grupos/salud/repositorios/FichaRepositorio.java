@@ -1,14 +1,11 @@
 package com.grupos.salud.repositorios;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.grupos.salud.entidades.Imagen;
-
 import org.springframework.stereotype.Repository;
 
-import com.grupos.salud.entidades.Imagen;
+import com.grupos.salud.entidades.Ficha;
 
 @Repository
-public interface ImagenRepositorio extends JpaRepository<Imagen, String> {
+public interface FichaRepositorio extends JpaRepository<Ficha, String> {
 
 }

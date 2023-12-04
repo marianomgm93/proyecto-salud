@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="/fragments/head :: head"> </head>
+    <body>
+
+        <header>
+            <nav  sec:authorize="hasRole('USER')" th:replace= "/fragments/navbar :: nav"> </nav>
+            <nav  sec:authorize="hasRole('ADMIN')" th:replace= "/fragments/admin_navbar :: nav"> </nav>
+        </header>
+
+        <div class="cards  d-flex justify-content-center align-items-center h-100">
+
+            <div class="card d-flex flex-column align-items-center shadow" style="width: 18rem;">
+                <div class="d-flex justify-content-end w-100 p-2" style="height: auto; font-size: 15px">
+                    <span class="badge fa fa-star container-collapse">  <span class="w-100" th:text="${profesional.reputacion}" aria-hidden="true"></span></span>
+                </div>
+                <img th:src="@{/imagen/perfil/{id}(id=${usuario.id})}" class="card-img-top rounded-circle fotoProfesional" alt="foto del profesional">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title" th:text="${usuario.nombreUsuario}"></h5>
+                    <p class="card-text"><i class="fa fa-user-md" aria-hidden="true"></i> <span th:text="${profesional.especialidad}"></span></p>
+
+                    <div class="card mb-3  d-flex flex-column align-items-center" style="max-width: 18rem;">
+
+                        <div class="card-body d-flex flex-column align-items-center cardBodyValorConsulta">
+                            <p class="card-text" style="font-size:9px;">Valor de la consulta</p>
+                            <h5 class="card-title precio" th:text="${profesional.valorConsulta}">$3500</h5>
+                        </div>
+                    </div>
+
+                    <p class="card-text"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span th:text="${usuario.email}"></span> </p>
+                    <a th:href="@{/turnos/registrar}" class="btn btn-primary botonAgendarTurno shadow">
+                        <i class="fa fa-calendar" aria-hidden="true"></i> AGENDAR UN TURNO
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
+
+
+
+    </body>
+</html>
+

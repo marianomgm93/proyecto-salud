@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    
+    
+     <head th:replace="/fragments/head :: head"> </head>
+    
+<body>
+    
+     <header>
+            <nav  sec:authorize="hasRole('USER')" th:replace= "/fragments/navbar :: nav"> </nav>
+            <nav  sec:authorize="hasRole('ADMIN')" th:replace= "/fragments/admin_navbar :: nav"> </nav>
+     </header>
+    
+    <div class="container formFecha">
+      <form action="/turnos/registro" method="post">
+
+       <h1>Agendá tu turno</h1>
+        
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input type="date" class="form-control" id="fecha" name="fecha">
+        </div>
+    
+        <div class="mb-3">
+            <label for="hora" class="form-label">Hora</label>
+            <select class="form-control" id="hora" name="hora">
+                <option value="10:00">10:00</option>
+                <option value="12:00">12:15</option>
+                <option value="15:00">15:00</option>
+                <option value="15:00">16:45</option>
+                <option value="18:00">18:00</option>
+                <option value="20:00">20:00</option>
+            </select>
+        </div>
+    
+        <button type="submit" class="btn btn-light shadow">Agendar</button>
+      </form>
+    </div>
+    
+
+    <div class="container">
+        <div class="card text-bg-danger mb-3 shadow" style="max-width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Turno no disponible</h5>
+              <p class="card-text">La fecha elegida para su turno ya se encuentra reservada por otro paciente.</p>
+            </div>
+          </div>
+    </div>
+    
+    
+    <footer th:replace= "/fragments/footer :: footer"> </footer>
+    
+</body>
+</html>

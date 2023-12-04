@@ -12,23 +12,23 @@
                     <div class="col-md-8">
                         <div class="card cardForm">
                             <div class="card-header text-center">
-                                <h2>Registrate!</h2>
+                                <h2>Postulate como profesional!</h2>
                             </div>
                             <div class="card-body">
 
-                                <form id="formularioRegistro" th:action="@{/registro}" method="POST"
-                                      enctype="multipart/form-data">
+                                <form id="formularioRegistro" th:action="@{/profesional/registro}" method="POST"
+                                      enctype="multipart/form-data">                                  
 
-                                    <div class="form-group">
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
                                         <label for="nombreUsuario">Nombre:</label>
                                         <input id="nombreUsuario" type="text" class="form-control" name="nombreUsuario"
                                                placeholder="Ingrese su nombre" th:value="${nombreUsuario}" required />
                                         <div id="nombreValidationFeedback" class="invalid-feedback">
                                             El nombre no debe contener números y debe tener al menos 3 caracteres.
                                         </div>
-                                    </div>
+                                    </div> 
 
-                                    <div class="form-group">
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
                                         <label for="correo">Correo Electrónico:</label>
                                         <input id="correo" type="email" class="form-control email" name="email"
                                                placeholder="Ingrese su correo electrónico" th:value="${email}" required />
@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
                                         <label for="telefono">Número de Teléfono:</label>
                                         <input id="telefono" type="tel" class="form-control" name="datosContacto"
                                                placeholder="Ingrese su número de teléfono" th:value="${datosContacto}"
@@ -47,25 +47,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="contr">Contraseña:</label>
-                                        <input id="contr" type="password" class="form-control password" name="password"
-                                               placeholder="Ingrese su contraseña" th:value="${password}" required />
-                                        <div id="passwordValidationFeedback" class="invalid-feedback">
-                                            La contraseña debe tener al menos 6 caracteres.
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="confirmPassword">Confirmar Contraseña:</label>
-                                        <input id="confirmPassword" type="password" class="form-control password2" name="password2"
-                                               placeholder="Confirme su contraseña" th:value="${password2}" required />
-                                        <div id="confirmPasswordValidationFeedback" class="invalid-feedback">
-                                            Las contraseñas no coinciden.
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
                                         <label for="social">Obra Social:</label>
                                         <select id="social" class="form-control" name="obraSocial">
                                             <option value="obrasocialA" th:selected="${obraSocial == 'obrasocialA'}">
@@ -78,9 +60,57 @@
                                                 Obra social C
                                             </option>
                                         </select>
-                                    </div>
+                                    </div> 
+
+                                        <!--
+                                    <div class="form-group">
+                                          <select id="especialidad" class="form-control" name="especialidad">
+                                        <input id="especialidad" type="text" class="form-control" name="especialidad"
+                                               placeholder="Especialidad" th:value="${especialidad}" required />
+                                    </div> -->    
+                                    <div class="form-group">
+                                        <label for="especialidad">Especialidad:</label>
+                                        <select id="especialidad" class="form-control" name="especialidad">
+                                            <option value="medico clinico" th:selected="${especialidad == 'medico clinico'}">
+                                                Clínica
+                                            </option>
+                                            <option value="cardiologia" th:selected="${especialidad == 'cardiologia'}">
+                                                Cardiología
+                                            </option>
+                                            <option value="pediatria" th:selected="${especialidad == 'pediatria'}">
+                                                Pediatría
+                                            </option>
+                                            <option value="ginecologia" th:selected="${especialidad == 'ginecologia'}">
+                                                Ginecología
+                                            </option>
+                                        </select>
+                                    </div> 
 
                                     <div class="form-group">
+                                        <label for="valorConsulta">Valor de su consulta:</label>
+                                        <input id="valorConsulta" type="number" class="form-control" name="valorConsulta"
+                                               placeholder="Valor de su consuta:" th:value="${valorConsulta}" required />
+                                    </div>
+
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
+                                        <label for="contr">Contraseña:</label>
+                                        <input id="contr" type="password" class="form-control password" name="password"
+                                               placeholder="Ingrese su contraseña" th:value="${password}" required />
+                                        <div id="passwordValidationFeedback" class="invalid-feedback">
+                                            La contraseña debe tener al menos 6 caracteres.
+                                        </div>
+                                    </div>
+
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
+                                        <label for="confirmPassword">Confirmar Contraseña:</label>
+                                        <input id="confirmPassword" type="password" class="form-control password2" name="password2"
+                                               placeholder="Confirme su contraseña" th:value="${password2}" required />
+                                        <div id="confirmPasswordValidationFeedback" class="invalid-feedback">
+                                            Las contraseñas no coinciden.
+                                        </div>
+                                    </div>                                 
+
+                                    <div th:if="${session.usuariosession == null}" class="form-group">
                                         <label for="archivo">Seleccionar foto de perfil:</label>
                                         <input type="file" class="form-control-file" name="archivo" id="archivo" />
                                     </div>

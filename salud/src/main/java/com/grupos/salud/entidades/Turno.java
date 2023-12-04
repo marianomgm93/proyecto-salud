@@ -23,6 +23,31 @@ public class Turno implements Serializable {
 
     private String estado;
 
-    
+    public Turno() {
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setFechaYHora(Date fechaYHora) {
+        this.fechaYHora = fechaYHora;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Date getFechaYHora() {
+        return fechaYHora;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
 
 }

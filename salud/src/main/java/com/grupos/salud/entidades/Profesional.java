@@ -1,14 +1,16 @@
 package com.grupos.salud.entidades;
 
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
-public class Profesional {
+public class Profesional implements Serializable{
     @Id
     @GeneratedValue(generator="uuid")
     @GenericGenerator(name="uuid",strategy="uuid2")
@@ -18,6 +20,16 @@ public class Profesional {
     private Double reputacion;
     private Double valorConsulta;
     private Boolean estado;
+    @OneToOne
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     
     public Profesional() {
     }
