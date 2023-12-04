@@ -37,12 +37,13 @@ public class TurnoControlador {
         
         return "turno_list.html";
     }
-    
-   /* @GetMapping("/lista")
-    public String lista(ModelMap modelo){
-        List<turno> turnos = turnoServicio.listarTurnos();
-        modelo.addAttribute("turno", turnos);
-    }*/
+   
+//   @GetMapping("/lista")
+//    public String lista(ModelMap modelo){
+//        List<turno> turnos = turnoServicio.listarTurnos();
+//        modelo.addAttribute("turno", turnos);
+//        return "turno_list.html"; 
+//    }
     
     @GetMapping("/actualizar/{id}")
     public String acutalizar(@PathVariable String id, ModelMap modelo){
@@ -52,7 +53,7 @@ public class TurnoControlador {
     
     @PostMapping("/actualizar/{id}")
     public String actualizar(@PathVariable String id, Date fechaYhora, String estado, ModelMap modelo){
-        String path="turno_actualizar.html";;
+        String path="turno_actualizar.html";
         try {
             turnoServicio.actualizar(id, fechaYhora, estado);
             path = "turno_list.html";
@@ -62,8 +63,8 @@ public class TurnoControlador {
         return path;
     }
    
-    @PostMapping("/baja")
-    public String baja(@PathVariable String id, ModelMap modelo) throws MiException{
+    @GetMapping("/baja/{id}")
+    public String baja(@PathVariable String id) throws MiException{
         turnoServicio.darDeBaja(id);
         return "turno_list.html"; 
     }

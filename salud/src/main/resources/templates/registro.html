@@ -1,163 +1,7 @@
 <!DOCTYPE html>
 
-<<<<<<< HEAD
-<html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace= "/fragments/head :: head" </head>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<body>
-    <div>
-        <nav class="navbar bg-primary" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">TuSalud
-                    <!-- Acá va el logotipo -->
-                    <img src="/img/logo.png" alt="Logo" height="30">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-primary">Iniciar sesión</button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="btn btn-primary" type="button">Registrarse</button>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Especialidades
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Pediatría</a></li>
-                                <li><a class="dropdown-item" href="#">Ginecología</a></li>
-                                <li><a class="dropdown-item" href="#">Clínica</a></li>
-                                <li><a class="dropdown-item" href="#">Cardiología</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-        </nav>
-    </div>
-      <div class="container-fluid m-5 contenedor">
-=======
-    <body>
-        <div>
-            <nav class="navbar bg-primary" data-bs-theme="dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">TuSalud
-                        <!-- Acá va el logotipo -->
-                        <img src="/img/logo.png" alt="Logo" height="30">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" class="btn btn-primary">Iniciar sesión</button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="btn btn-primary" type="button">Registrarse</button>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Especialidades
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Pediatría</a></li>
-                                    <li><a class="dropdown-item" href="#">Ginecología</a></li>
-                                    <li><a class="dropdown-item" href="#">Clínica</a></li>
-                                    <li><a class="dropdown-item" href="#">Cardiología</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-            </nav>
-        </div>
-        <div class="container-fluid m-5 contenedor">
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
-
-            <form class="formulario" th:action="@{/registro}" method="POST" enctype="multipart/form-data" >
-
-
-                <div class="form-group my-3">
-                    <h3 class="card-title">Registrate!</h3>
-                </div>
-                <div class="form-group my-3">
-                    <input type="text" class="form-control" name="nombreUsuario" placeholder="NOMBRE" th:value="${nombreUsuario}">
-                </div>
-                <div class="form-group my-3">
-                    <input type="email" class="form-control" name="email" placeholder="EMAIL" th:value="${email}">
-                </div>
-<<<<<<< HEAD
-              
-=======
-
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
-                <div class="form-group my-3">
-                    <input type="password" class="form-control" name="password" placeholder="CONTRASEÑA" th:value="${password}">
-                </div>
-                <div class="form-group my-3">
-                    <input type="password" class="form-control" name="password2" placeholder="REPETIR CONTRASEÑA" th:value="${password2}">
-                </div>
-<<<<<<< HEAD
-=======
-
-                <div class="form-group my-3">
-                    <select class="form-control" name="obraSocial">
-                        <option value="opcion1" th:selected="${obraSocial == 'obrasocialA'}">Obra social A</option>
-                        <option value="opcion2" th:selected="${obraSocial == 'obrasocialB'}">Obra social B</option>
-                        <option value="opcion3" th:selected="${obraSocial == 'obrasocialC'}">Obra social C</option>
-                    </select>
-                </div>
-                
-                 <div class="form-group my-3">
-                    <input type="text" class="form-control" name="datosContacto" placeholder="Numero telefonico" th:value="${datosContacto}">
-                </div>
-               
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
-                <div class="form-group my-3">
-                    <input type="file" class="form-control" name="archivo" >
-                </div>
-
-
-                <button type="submit" class="btn btn-primary mt-3 botones">Registrarme</button>
-            </form>
-
-
-            <section class=" text-center container">
-                <div class="row mt-3">
-                    <div class="divVolver">
-                        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
-                    </div>
-                </div>
-            </section>
-        </div>      
-<<<<<<< HEAD
-            
-            
-            
-</body>
-=======
-
-
-
-    </body>
->>>>>>> ee9df1e2379d23b44759d6d8e2fbdf3c40763942
-=======
-=======
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace= "/fragments/head :: head" </head>
->>>>>>> 5c20bafcdc21e40fddd22bc74a1d7fc59dc5f250
     <body>
         <header>
             <nav th:replace= "/fragments/navbar :: nav"> </nav>
@@ -168,11 +12,7 @@
                     <div class="col-md-8">
                         <div class="card cardForm">
                             <div class="card-header text-center">
-<<<<<<< HEAD
-                                <h2>Regístrate!</h2>
-=======
                                 <h2>Registrate!</h2>
->>>>>>> 5c20bafcdc21e40fddd22bc74a1d7fc59dc5f250
                             </div>
                             <div class="card-body">
 
@@ -312,8 +152,4 @@
 
         <script src="/javascript/script.js"></script>
     </body>
-<<<<<<< HEAD
->>>>>>> 04958f42a7b230f44c4f524815305a0305d7d338
-=======
->>>>>>> 5c20bafcdc21e40fddd22bc74a1d7fc59dc5f250
 </html>
