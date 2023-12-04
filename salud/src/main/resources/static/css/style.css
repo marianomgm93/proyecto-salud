@@ -16,6 +16,7 @@ body {
 }
 
 .logo {
+    font-size: 1.5em;
     width: 80%;
     padding: 0.5em 0 1em 5em;
 }
@@ -136,8 +137,8 @@ label {
     max-width: 40%;
 }
 
-.modal {
-    padding: 0;
+.description {
+    font-size:1.2em ;
 }
 
 .imagen-salud {
