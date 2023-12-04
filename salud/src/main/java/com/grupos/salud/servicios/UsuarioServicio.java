@@ -105,6 +105,17 @@ public class UsuarioServicio implements UserDetailsService {
         }
 
     }
+    
+    public Usuario buscarPorEmail(String email){
+        
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+        if (usuario != null) {
+            return usuario;
+            
+        }
+        
+        return usuario;
+    }
 
     public boolean autenticar(String email, String password) {
 
