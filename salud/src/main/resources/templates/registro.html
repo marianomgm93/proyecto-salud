@@ -7,7 +7,11 @@
             <nav th:replace= "/fragments/navbar :: nav"> </nav>
         </header>
         <main>
+<<<<<<< HEAD
             <div class="container container-registro mt-5">
+=======
+            <div class="container container-registro mt-5" id="registroPageCheck">
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card cardForm">
@@ -102,6 +106,7 @@
 
 
         <!-- Modal para el login -->
+<<<<<<< HEAD
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
              aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -153,3 +158,10 @@
         <script src="/javascript/script.js"></script>
     </body>
 </html>
+=======
+        <div th:replace="/fragments/modal :: div"></div>
+
+        <script src="/javascript/script.js"></script>
+    </body>
+</html>
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7

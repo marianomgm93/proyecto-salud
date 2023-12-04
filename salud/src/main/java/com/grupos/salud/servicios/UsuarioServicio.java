@@ -246,6 +246,7 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiException("El nombre a buscar no puede ser nulo o estar vacío");
         }
 
+<<<<<<< HEAD
     }
     @Transactional
     public void cambiarEstado(String id){
@@ -262,3 +263,21 @@ public class UsuarioServicio implements UserDetailsService {
           }
     }
 }
+=======
+    }
+    @Transactional
+    public void cambiarEstado(String id){
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+          if (respuesta.isPresent()) {
+
+            Usuario usuario = respuesta.get();
+            if(usuario.isEstado()){
+               
+                usuario.setEstado(false);
+            }else if(!usuario.isEstado()){
+                usuario.setEstado(true);
+            }
+          }
+    }
+}
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7

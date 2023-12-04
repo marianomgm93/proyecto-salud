@@ -7,7 +7,11 @@
             <nav th:replace= "/fragments/navbar :: nav"> </nav>
         </header>
         <main>
+<<<<<<< HEAD
             <div class="container container-registro mt-5">
+=======
+            <div class="container container-registro mt-5" id="registroPageCheck">
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card cardForm">
@@ -62,11 +66,37 @@
                                         </select>
                                     </div> 
 
+<<<<<<< HEAD
                                     <div class="form-group">
                                         <label for="especialidad">Diganos su especialidad:</label>
                                         <input id="especialidad" type="text" class="form-control" name="especialidad"
                                                placeholder="Especialidad" th:value="${especialidad}" required />
                                     </div>
+=======
+                                    <!--
+                                <div class="form-group">
+                                      <select id="especialidad" class="form-control" name="especialidad">
+                                    <input id="especialidad" type="text" class="form-control" name="especialidad"
+                                           placeholder="Especialidad" th:value="${especialidad}" required />
+                                </div> -->    
+                                    <div class="form-group">
+                                        <label for="especialidad">Especialidad:</label>
+                                        <select id="especialidad" class="form-control" name="especialidad">
+                                            <option value="medico clinico" th:selected="${especialidad == 'medico clinico'}">
+                                                Clínica
+                                            </option>
+                                            <option value="cardiologia" th:selected="${especialidad == 'cardiologia'}">
+                                                Cardiología
+                                            </option>
+                                            <option value="pediatria" th:selected="${especialidad == 'pediatria'}">
+                                                Pediatría
+                                            </option>
+                                            <option value="ginecologia" th:selected="${especialidad == 'ginecologia'}">
+                                                Ginecología
+                                            </option>
+                                        </select>
+                                    </div> 
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
 
                                     <div class="form-group">
                                         <label for="valorConsulta">Valor de su consulta:</label>
@@ -114,6 +144,7 @@
 
 
         <!-- Modal para el login -->
+<<<<<<< HEAD
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
              aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -161,6 +192,9 @@
                 </div>
             </div>
         </div>
+=======
+        <div th:replace="/fragments/modal :: div"></div>
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
 
         <script src="/javascript/script.js"></script>
     </body>

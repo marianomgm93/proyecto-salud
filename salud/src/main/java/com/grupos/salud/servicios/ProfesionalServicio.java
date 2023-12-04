@@ -86,4 +86,8 @@ public class ProfesionalServicio {
             throw new MiException("El valor de la consulta no puede estar vacía.");
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7

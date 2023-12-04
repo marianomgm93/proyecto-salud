@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 <nav class="navbar navbar-expand-lg navbar-dark p-1 justify-content-between bg-primary fixed-top" data-bs-theme="dark">
     <div class="container-fluid align-content-center">
         <a class="navbar-brand align-baseline logo" href="/">
+=======
+<nav class="container-fluid navbar navbar-expand-lg navbar-dark justify-content-between bg-primary fixed-top p-0 m-0" data-bs-theme="dark">
+    <div class="container align-content-center p-0 m-0 container-nav">
+        <a class="navbar-brand align-baseline logo" th:href="@{/inicio}">
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
             <!-- Acá va el logotipo -->
             <img src="/img/logo.png" alt="Logo" height="65">
             TuSalud
         </a>
+<<<<<<< HEAD
         <div class="justify-content-center w-100">
             <form class="d-flex" role="search" style="width: 100%; margin: auto;">
                 <input class="form-control me-2 bg-light" type="search"
+=======
+        <div class="justify-content-center w-75">
+            <form class="d-flex" role="search">
+                <input class="form-control bg-light w-100 me-2" type="search"
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
                        placeholder="Buscar un profesional por nombre" aria-label="Search">
                 <button class="btn btn-primary bg-dark" type="submit"><span class="fa fa-search"></span></button>
             </form>
@@ -25,9 +37,21 @@
                         Iniciar sesión
                     </button>
                 </li>
+<<<<<<< HEAD
                 <li th:if="${session.usuariosession == null}" class="nav-item">
                     <a class="nav-link text-light" aria-current="page" th:href="@{/registrar}">Registrarse</a>
                 </li>
+=======
+                <li th:if="${session.usuariosession == null}"class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Registrarse
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/registrar}"> Como paciente</a></li>
+                        <li><a class="dropdown-item" th:href="@{profesional/registrar}"> Como profesional</a></li>
+                    </ul>
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,8 +67,20 @@
                 <li class="nav-item" th:if="${session.usuariosession != null}">
                     <a class="nav-link text-light" aria-current="page" href="#">Profesionales</a>
                 </li>
+<<<<<<< HEAD
                 <li class="nav-item" th:if="${session.usuariosession != null}">
                     <a class="nav-link text-light" aria-current="page" href="/paciente/lista">Pacientes</a>
+=======
+                <li th:if="${session.usuariosession != null}"class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Pacientes
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/paciente/lista"> Nuestros Profesionales</a></li>
+                    </ul>
+
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
                 </li>
                 <li th:if="${session.usuariosession != null}" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button"

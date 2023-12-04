@@ -155,11 +155,25 @@ function validarConfirmacionContrasena() {
  return true;
  }*/
 
+<<<<<<< HEAD
 document.getElementById('nombreUsuario').addEventListener('input', validarNombre);
 document.getElementsByClassName('email')[0].addEventListener('input', validarEmail);
 document.getElementsByClassName('password')[0].addEventListener('input', validarContrasena);
 document.getElementsByClassName('password2')[0].addEventListener('input', validarConfirmacionContrasena);
 /*document.getElementById('telefono').addEventListener('input', validarTelefono)*/
+=======
+document.addEventListener('DOMContentLoaded', function () {
+    var registroPageCheck = document.getElementById('registroPageCheck');
+
+    if (registroPageCheck) {
+        document.getElementById('nombreUsuario').addEventListener('input', validarNombre);
+        document.getElementsByClassName('email')[0].addEventListener('input', validarEmail);
+        document.getElementsByClassName('password')[0].addEventListener('input', validarContrasena);
+        document.getElementsByClassName('password2')[0].addEventListener('input', validarConfirmacionContrasena);
+        /*document.getElementById('telefono').addEventListener('input', validarTelefono)*/
+    }
+});
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
 
 function validarFormulario(event) {
     var nombreValido = validarNombre();
@@ -171,6 +185,11 @@ function validarFormulario(event) {
     if (!(nombreValido && emailValido && contrasenaValida && confirmacionContrasenaValida/* && telefonoValido*/)) {
         event.preventDefault();
     }
+<<<<<<< HEAD
 }
 document.getElementById('formularioRegistro').addEventListener('submit', validarFormulario);
 
+=======
+    document.getElementById('formularioRegistro').addEventListener('submit', validarFormulario);
+}
+>>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
