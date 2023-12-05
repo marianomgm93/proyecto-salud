@@ -1,13 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-dark p-1 justify-content-between bg-primary fixed-top" data-bs-theme="dark">
-    <div class="container-fluid align-content-center">
+<nav class="container-fluid navbar navbar-expand-lg navbar-dark justify-content-between bg-primary fixed-top p-0 m-0" data-bs-theme="dark">
+    <div class="container align-content-center p-0 m-0 container-nav">
         <a class="navbar-brand align-baseline logo" th:href="@{/inicio}">
             <!-- Acá va el logotipo -->
             <img src="/img/logo.png" alt="Logo" height="65">
             TuSalud
         </a>
-        <div class="justify-content-center w-100">
-            <form class="d-flex" role="search" style="width: 100%; margin: auto;">
-                <input class="form-control me-2 bg-light" type="search"
+        <div class="justify-content-center w-75">
+            <form class="d-flex" role="search">
+                <input class="form-control bg-light w-100 me-2" type="search"
                        placeholder="Buscar un profesional por nombre" aria-label="Search">
                 <button class="btn btn-primary bg-dark" type="submit"><span class="fa fa-search"></span></button>
             </form>
@@ -66,6 +66,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                        <li sec:authorize="hasRole('USER')"><a class="dropdown-item" href="">Darme de baja</a></li>
                         <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
                     </ul>
                 </li>

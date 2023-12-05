@@ -3,23 +3,36 @@
     <head th:replace= "/fragments/head :: head"> </head>
     <body>
 
-        <header>
+        <header class="container-fluid">
             <nav th:replace= "/fragments/navbar :: nav"> </nav>
-            <div class="container-imagen">
-                <img class="img-fluid d-block" src="/img/banner.png" alt="Banner salud"/>
-                <div class="overlay">
-                    <div class="container-description-paciente">
-                        <p class="description">
-                            Somos un colectivo de profesionales de la salud comprometidos con tu bienestar.
-                            En nuestra plataforma, podrás encontrar a expertos en diversas especialidades listos para brindarte atención personalizada.
-                        </p>
-                        <a href="#" class="btn btn-primary consulta-btn mb-3">Agenda tu Consulta</a>
+            <div class=" container-banner d-block p-0 m-0">
+                <div class="row">
+                    <div class="col-lg-12 p-0 m-0">
+                        <div class="container-imagen">
+                            <img class="w-100 banner p-0 m-0 imagen-salud" src="/img/banner.png" alt="Banner salud"/>
+                            <div class="overlay">
+                                <div class="container-description-paciente">
+                                    <p class="description">
+                                        Somos un colectivo de profesionales de la salud comprometidos con tu bienestar.
+                                        En nuestra plataforma, podrás encontrar a expertos en diversas especialidades listos para brindarte atención personalizada.
+                                    </p>
+                                    <a href="#" class="btn btn-primary consulta-btn">Agenda tu Consulta</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="container-description-profesional">
-                        <p class="description">
-                            ¿Eres un profesional de la salud? Únete a nosotros y brinda tus servicios a quienes más lo necesitan.
-                        </p>
-                        <a th:href="@{/profesional/registrar}" class="btn btn-primary postulacion-btn">Postúlate como Profesional</a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="overlay">
+                            <div class="container-description-profesional">
+                                <p class="description">
+                                    ¿Eres un profesional de la salud? Únete a nosotros y brinda tus servicios a quienes más lo necesitan.
+                                </p>
+                                <a th:href="@{/profesional/registrar}" class="btn btn-primary postulacion-btn">Postúlate como Profesional</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,53 +93,8 @@
         <footer th:replace= "/fragments/footer :: footer"> </footer>
 
         <!-- Modal para el login -->
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
-             aria-hidden="true" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Inicio de sesión</h5>
-                        <button type="button" class="close border-0 w3-xlarge" data-bs-dismiss="modal" aria-label="Close">
-                            <span class="fa fa-close"></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form th:action="@{/logincheck}" method="POST" id="formLogin">
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email:</label>
-                                <input type="text" id="email" name="email" class="form-control" required />
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Contraseña:</label>
-                                <input type="password" id="password" name="password" class="form-control" required />
-                            </div>
-                            <div class="alert alert-danger mensajeError d-none" id="containerMensaje" role="alert">
-                                <span id="mensajeError"></span>
-                            </div>
-
-                            <div class="d-grid gap-2">
-                                <button type="button" id="loginButton" class="btn btn-primary">Iniciar sesión</button>
-                            </div>
-                        </form>
-
-                        <div class="mt-3 text-center">
-                            <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="d-flex justify-content-between w-100">
-                            <div>
-                                ¿Aún no tienes cuenta? <a href="/registrar" class="text-decoration-none">Regístrate aquí</a>
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div th:replace="/fragments/modal :: div"></div>
+        
         <script src="/javascript/script.js"></script>
     </body>
 </html>
