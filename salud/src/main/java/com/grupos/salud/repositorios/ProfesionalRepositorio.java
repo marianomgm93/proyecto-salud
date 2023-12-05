@@ -7,6 +7,7 @@ import com.grupos.salud.entidades.Profesional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -15,6 +16,8 @@ public interface ProfesionalRepositorio extends JpaRepository<Profesional, Strin
     
     @Query("SELECT p FROM Profesional p WHERE p.especialidad = :especialidad")
     public List<Profesional> findByEspecialidad(@Param("especialidad") String especialidad);
+    @Query("SELECT p FROM Profesional p WHERE p.usuario.email= :email")
+    public Optional<Profesional> buscarPorEmail(@Param("email") String email);
     /*
     
     @Query("SELECT p FROM Profesional p WHERE p.reputacion => :reputacion")

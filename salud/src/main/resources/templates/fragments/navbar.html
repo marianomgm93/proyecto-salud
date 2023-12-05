@@ -66,6 +66,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                        <li sec:authorize="hasRole('USER')"><a class="dropdown-item" href="">Darme de baja</a></li>
                         <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
                     </ul>
                 </li>
