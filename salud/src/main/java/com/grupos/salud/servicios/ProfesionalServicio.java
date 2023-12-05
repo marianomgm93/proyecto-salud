@@ -90,7 +90,16 @@ public class ProfesionalServicio {
             throw new MiException("El valor de la consulta no puede estar vacía.");
         }
     }
-    
-    
-    
+
+    //DEBE SER TESTEADO
+        public Profesional buscarPorEmail(String email) throws MiException{
+        Optional<Profesional> respuesta = profesionalRepositorio.buscarPorEmail(email);
+        if(!respuesta.isPresent()){
+            Profesional profesional=respuesta.get();
+            return profesional;
+         }else{
+            throw new MiException("El email es invalido o se encuentra vacio");
+        }
+    }
+
 }

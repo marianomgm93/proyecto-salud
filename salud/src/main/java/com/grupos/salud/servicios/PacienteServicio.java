@@ -115,8 +115,16 @@ public class PacienteServicio {
             throw new MiException("La obra social no puede ser nula o estar vacía.");
         }
     }
-    
-    
-    
-    
+
+    //DEBE SER TESTEADO
+    public Paciente buscarPorEmail(String email) throws MiException{
+        Optional<Paciente> respuesta = pacienteRepositorio.buscarPorEmail(email);
+        if(!respuesta.isPresent()){
+            Paciente paciente=respuesta.get();
+            return paciente;
+         }else{
+            throw new MiException("El email es invalido o se encuentra vacio");
+        }
+    }
+
 }
