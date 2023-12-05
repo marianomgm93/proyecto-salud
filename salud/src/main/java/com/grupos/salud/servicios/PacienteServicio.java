@@ -9,6 +9,7 @@ import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.enumeraciones.Rol;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.PacienteRepositorio;
+import com.grupos.salud.repositorios.UsuarioRepositorio;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class PacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
     
+    @Autowired
+    private UsuarioRepositorio usuarioRepositorio;
 
     @Autowired
     private ImagenServicio imagenServicio;
@@ -112,4 +115,8 @@ public class PacienteServicio {
             throw new MiException("La obra social no puede ser nula o estar vacía.");
         }
     }
+    
+    
+    
+    
 }

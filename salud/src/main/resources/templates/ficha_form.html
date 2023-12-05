@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace= "/fragments/head :: head"> </head>
+    
+<body>
+    
+     <header>
+            <nav  sec:authorize="hasRole('USER')" th:replace= "/fragments/navbar :: nav"> </nav>
+            <nav  sec:authorize="hasRole('ADMIN')" th:replace= "/fragments/admin_navbar :: nav"> </nav>
+     </header>
+    
+    <main>
+        
+        <h2>Registro de Ficha Médica</h2>
+    <form th:action="@{/ficha/registro}" method="post">
+        <!-- Campo para el email del paciente -->
+        <label for="emailPaciente">Email del Paciente:</label>
+        <input type="email" id="emailPaciente" name="emailPaciente"  required><br>
+
+        <!-- Campo para el email del profesional -->
+        <label for="emailProfesional">Email del Profesional:</label>
+        <input type="email" id="emailProfesional" name="emailProfesional"  required><br>
+
+        <!-- Campo para el diagnóstico en forma de caja de texto -->
+        <label for="diagnostico">Diagnóstico:</label>
+        <textarea id="diagnostico" name="diagnostico"  rows="4" cols="50" required></textarea><br>
+
+        <!-- Campos para el estado en forma de selección (alta/baja) -->
+        <label for="estado">Estado:</label>
+        <select id="estado" name="estado"  required>
+            <option value="alta">Alta</option>
+            <option value="baja">Baja</option>
+        </select><br>
+
+        <!-- Botón de envío del formulario -->
+        <input type="submit" value="Registrar Ficha Médica">
+    </form>
+    </main>
+    
+
+    
+    
+    
+    <footer th:replace= "/fragments/footer :: footer"> </footer>
+    
+</body>
+</html>

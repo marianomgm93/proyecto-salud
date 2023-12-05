@@ -4,6 +4,7 @@ import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.ProfesionalRepositorio;
+import com.grupos.salud.repositorios.UsuarioRepositorio;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class ProfesionalServicio {
 
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
+    
+    @Autowired
+    private UsuarioRepositorio usuariorepositorio;
     
     @Transactional
     public void registrar(String especialidad, Double valorConsulta, Usuario usuario) throws MiException{
@@ -86,4 +90,7 @@ public class ProfesionalServicio {
             throw new MiException("El valor de la consulta no puede estar vacía.");
         }
     }
+    
+    
+    
 }

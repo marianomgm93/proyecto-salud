@@ -12,4 +12,8 @@ public interface PacienteRepositorio extends JpaRepository<Paciente,String>  {
     
     @Query("SELECT p FROM Paciente p WHERE p.obraSocial = :obraSocial")
     public List<Paciente> BuscarPorObraSocial(@Param("obraSocial")String obraSocial);
+    
+   
+    
+  
 }
