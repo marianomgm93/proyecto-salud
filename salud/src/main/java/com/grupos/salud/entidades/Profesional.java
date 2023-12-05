@@ -2,7 +2,6 @@ package com.grupos.salud.entidades;
 
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
