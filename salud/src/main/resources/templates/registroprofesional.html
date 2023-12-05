@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head" </head>
+
+<body>
+    
+    <div class="container-fluid m-5 contenedor">
+
+        <form class="formulario" th:action="@{/registroprofesional}" method="POST" enctype="multipart/form-data">
+
+
+            <div class="form-group my-3">
+                    <input type="text" class="form-control" name="nombreUsuario" placeholder="NOMBRE" th:value="${nombreUsuario}">
+                </div>
+                <div class="form-group my-3">
+                    <input type="email" class="form-control" name="email" placeholder="EMAIL" th:value="${email}">
+                </div>
+
+                <div class="form-group my-3">
+                    <input type="password" class="form-control" name="password" placeholder="CONTRASEÑA" th:value="${password}">
+                </div>
+                <div class="form-group my-3">
+                    <input type="password" class="form-control" name="password2" placeholder="REPETIR CONTRASEÑA" th:value="${password2}">
+                </div>
+
+                <div class="form-group my-3">
+                    <select class="form-control" name="obraSocial">
+                        <option value="opcion1" th:selected="${obraSocial == 'obrasocialA'}">Obra social A</option>
+                        <option value="opcion2" th:selected="${obraSocial == 'obrasocialB'}">Obra social B</option>
+                        <option value="opcion3" th:selected="${obraSocial == 'obrasocialC'}">Obra social C</option>
+                    </select>
+                </div>
+
+                <div class="form-group my-3">
+                    <input type="text" class="form-control" name="datosContacto" placeholder="Numero telefonico" th:value="${datosContacto}">
+                </div>
+
+                <div class="form-group my-3">
+                    <input type="file" class="form-control" name="archivo" >
+                </div>
+            <div class="form-group my-3">
+                <h3 class="card-title">Registro para profesionales</h3>
+            </div>
+            <div class="form-group my-3">
+                <input type="text" class="form-control" name="especialidad" placeholder="Especialidad"
+                    th:value="${especialidad}">
+            </div>
+            <div class="form-group my-3">
+                <input type="number" class="form-control" name="valorConsulta" placeholder="Valor de la consulta"
+                    th:value="${valorConsulta}">
+            </div>
+
+
+            <button type="submit" class="btn btn-primary mt-3 botones">Mandar solicitud</button>
+        </form>
+
+
+        <section class=" text-center container">
+            <div class="row mt-3">
+                <div class="divVolver">
+                    <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
