@@ -10,6 +10,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PacienteRepositorio extends JpaRepository<Paciente,String>  {
     
+    
+    
     @Query("SELECT p FROM Paciente p WHERE p.obraSocial = :obraSocial")
     public List<Paciente> BuscarPorObraSocial(@Param("obraSocial")String obraSocial);
+    
+    @Query("SELECT p FROM Paciente p WHERE p.usuario.email = :email")
+public Paciente findByUsuarioEmail(@Param("email") String email);
+    
+//     @Query("SELECT p FROM Paciente p WHERE p.email = :email")
+//    public List<Paciente> BuscarPorEmail(@Param("email")String email);
 }
