@@ -7,7 +7,7 @@
             <nav th:replace= "/fragments/navbar :: nav"> </nav>
         </header>
         <main>
-            <div class="container container-registro mt-5" id="registroPageCheck">
+            <div class="container container-registro mt-5">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card cardForm">
@@ -16,17 +16,9 @@
                             </div>
                             <div class="card-body">
 
-                                <form id="formularioRegistro" th:action="@{/registro}" method="POST"
+                                <form id="formularioRegistro" th:action="@{/baja}" method="POST"
                                       enctype="multipart/form-data">
 
-                                    <div class="form-group">
-                                        <label for="nombreUsuario">Nombre:</label>
-                                        <input id="nombreUsuario" type="text" class="form-control" name="nombreUsuario"
-                                               placeholder="Ingrese su nombre" th:value="${nombreUsuario}" required />
-                                        <div id="nombreValidationFeedback" class="invalid-feedback">
-                                            El nombre no debe contener números y debe tener al menos 3 caracteres.
-                                        </div>
-                                    </div>
 
                                     <div class="form-group">
                                         <label for="correo">Correo Electrónico:</label>
@@ -34,16 +26,6 @@
                                                placeholder="Ingrese su correo electrónico" th:value="${email}" required />
                                         <div id="emailValidationFeedback" class="invalid-feedback">
                                             Ingresa una dirección de correo electrónico válida.
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="telefono">Número de Teléfono:</label>
-                                        <input id="telefono" type="tel" class="form-control" name="datosContacto"
-                                               placeholder="Ingrese su número de teléfono" th:value="${datosContacto}"
-                                               required />
-                                        <div id="telefonoHelp" class="invalid-feedback">
-                                            Ingresa un número de teléfono válido.
                                         </div>
                                     </div>
 
