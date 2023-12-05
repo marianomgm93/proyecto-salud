@@ -2,6 +2,8 @@ package com.grupos.salud.entidades;
 
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +16,6 @@ public class Profesional implements Serializable{
     @Id
     @GeneratedValue(generator="uuid")
     @GenericGenerator(name="uuid",strategy="uuid2")
-    
     private String id;
     private String especialidad;
     private Double reputacion;
@@ -22,6 +23,10 @@ public class Profesional implements Serializable{
     private Boolean estado;
     @OneToOne
     private Usuario usuario;
+    private String descripcion;
+
+    public Profesional() {
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -31,9 +36,6 @@ public class Profesional implements Serializable{
         this.usuario = usuario;
     }
     
-    public Profesional() {
-    }
-
     public Boolean getEstado() {
         return estado;
     }
@@ -73,6 +75,14 @@ public class Profesional implements Serializable{
 
     public void setValorConsulta(Double valorConsulta) {
         this.valorConsulta = valorConsulta;
+    }
+    
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
 }
