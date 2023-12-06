@@ -5,6 +5,7 @@ import com.grupos.salud.entidades.Imagen;
 
 import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Usuario;
+import com.grupos.salud.enumeraciones.Rol;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.PacienteRepositorio;
 import com.grupos.salud.repositorios.UsuarioRepositorio;
@@ -27,6 +28,8 @@ public class PacienteServicio {
     private UsuarioRepositorio usuariorepositorio;
     
     @Autowired
+    private UsuarioRepositorio usuarioRepositorio;
+
     private UsuarioServicio usuarioServicio;
 
     @Autowired
@@ -115,14 +118,16 @@ public class PacienteServicio {
             throw new MiException("La obra social no puede ser nula o estar vacía.");
         }
     }
+
     //DEBE SER TESTEADO
     public Paciente buscarPorEmail(String email) throws MiException{
         Optional<Paciente> respuesta = pacienteRepositorio.buscarPorEmail(email);
-        if(!respuesta.isPresent()){
+        if(respuesta.isPresent()){
             Paciente paciente=respuesta.get();
             return paciente;
          }else{
             throw new MiException("El email es invalido o se encuentra vacio");
         }
     }
+
 }

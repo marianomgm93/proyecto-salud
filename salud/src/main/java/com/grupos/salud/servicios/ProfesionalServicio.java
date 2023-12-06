@@ -5,10 +5,14 @@ import com.grupos.salud.entidades.Turno;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.ProfesionalRepositorio;
+
+import com.grupos.salud.repositorios.UsuarioRepositorio;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,10 @@ public class ProfesionalServicio {
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
 
+    
+    @Autowired
+    private UsuarioRepositorio usuariorepositorio;
+    
     @Transactional
     public void registrar(String especialidad, Double valorConsulta, Usuario usuario) throws MiException {
 
@@ -90,6 +98,8 @@ public class ProfesionalServicio {
         }
     }
 
+
+    
     @Transactional
     public void crearTurnos(Profesional profesional, Integer horaInicio, Integer horaFin) throws ParseException {
         List<Turno> turnos = new ArrayList<>();
@@ -113,7 +123,7 @@ public class ProfesionalServicio {
     //DEBE SER TESTEADO
     public Profesional buscarPorEmail(String email) throws MiException {
         Optional<Profesional> respuesta = profesionalRepositorio.buscarPorEmail(email);
-        if (!respuesta.isPresent()) {
+        if (respuesta.isPresent()) {
             Profesional profesional = respuesta.get();
             return profesional;
         } else {
@@ -121,4 +131,5 @@ public class ProfesionalServicio {
         }
 
     }
+
 }
