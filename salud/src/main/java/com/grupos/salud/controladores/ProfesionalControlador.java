@@ -5,7 +5,9 @@ import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -78,19 +80,20 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/turnos")
-    public String listaTurnos(@RequestParam Integer horaInicio, @RequestParam Integer horaFin, Authentication authentication) {
+    public String listaTurnos(@RequestParam Integer horaInicio, @RequestParam Integer horaFin,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaDeseada,
+            Authentication authentication) {
         try {
             if (authentication != null && authentication.isAuthenticated()) {
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                 String username = userDetails.getUsername();
                 Usuario usuario = usuarioServicio.buscarPorEmail(username);
                 Profesional profesional = profesionalServicio.buscarPorEmail(username);
-                profesionalServicio.crearTurnos(profesional, horaInicio, horaFin);
+                profesionalServicio.crearTurnos(profesional, horaInicio, horaFin, fechaDeseada);
             }
             return "formulario_horarios.html";
         } catch (Exception e) {
             return "index.html";
         }
-
     }
 }

@@ -103,26 +103,30 @@ public class ProfesionalServicio {
     }
 
     @Transactional
-    public void crearTurnos(Profesional profesional, Integer horaInicio, Integer horaFin) throws ParseException {
+    public void crearTurnos(Profesional profesional, Integer horaInicio, Integer horaFin, Date fechaDeseada) throws ParseException {
         List<Turno> turnos = new ArrayList<>();
 
         TimeZone timeZone = TimeZone.getTimeZone("UTC");
 
         Calendar cal = Calendar.getInstance(timeZone);
+        cal.setTime(fechaDeseada);
 
         cal.set(Calendar.HOUR_OF_DAY, horaInicio);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
 
         Calendar horaFinCal = Calendar.getInstance(timeZone);
+        horaFinCal.setTime(fechaDeseada);
         horaFinCal.set(Calendar.HOUR_OF_DAY, horaFin);
         horaFinCal.set(Calendar.MINUTE, 0);
 
-        while (cal.before(horaFinCal)) {
+        // Ajustar la lógica para incluir el último intervalo
+        while (cal.before(horaFinCal) || cal.equals(horaFinCal)) {
             Calendar proximoTurnoCal = (Calendar) cal.clone();
-            proximoTurnoCal.add(Calendar.MINUTE, 30);
+            proximoTurnoCal.add(Calendar.MINUTE, 20);
 
-            if (proximoTurnoCal.before(horaFinCal)) {
+            // Ajustar la lógica para manejar el último turno
+            if (proximoTurnoCal.before(horaFinCal) || proximoTurnoCal.equals(horaFinCal)) {
                 Turno turno = new Turno();
 
                 turno.setFechaYHora(cal.getTime());
@@ -133,7 +137,7 @@ public class ProfesionalServicio {
                 turnos.add(turno);
             }
 
-            cal.add(Calendar.MINUTE, 30);
+            cal.add(Calendar.MINUTE, 20);
         }
         profesional.setTurnos(turnos);
         profesionalRepositorio.save(profesional);

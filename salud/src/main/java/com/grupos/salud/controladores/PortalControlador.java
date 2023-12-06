@@ -62,7 +62,7 @@ public class PortalControlador {
         }
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_PROFESIONAL')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
 
