@@ -24,6 +24,7 @@ public class Profesional implements Serializable {
     private Usuario usuario;
     @OneToMany
     private List<Turno> turnos;
+    private String descripcion;
 
     public Usuario getUsuario() {
         return usuario;
@@ -31,9 +32,6 @@ public class Profesional implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public Profesional() {
     }
 
     public Boolean getEstado() {
@@ -82,6 +80,14 @@ public class Profesional implements Serializable {
 
     public void setValorConsulta(Double valorConsulta) {
         this.valorConsulta = valorConsulta;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
 }
