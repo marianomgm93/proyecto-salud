@@ -119,7 +119,7 @@ public class PacienteServicio {
     //DEBE SER TESTEADO
     public Paciente buscarPorEmail(String email) throws MiException{
         Optional<Paciente> respuesta = pacienteRepositorio.buscarPorEmail(email);
-        if(!respuesta.isPresent()){
+        if(respuesta.isPresent()){
             Paciente paciente=respuesta.get();
             return paciente;
          }else{

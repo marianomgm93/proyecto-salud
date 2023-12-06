@@ -93,9 +93,11 @@ public class ProfesionalServicio {
 
     //DEBE SER TESTEADO
         public Profesional buscarPorEmail(String email) throws MiException{
-        Optional<Profesional> respuesta = profesionalRepositorio.buscarPorEmail(email);
-        if(!respuesta.isPresent()){
+            
+        Optional<Profesional> respuesta = profesionalRepositorio.buscarPorEmail(email);  
+        if(respuesta.isPresent()){
             Profesional profesional=respuesta.get();
+            System.out.println(profesional.getUsuario());
             return profesional;
          }else{
             throw new MiException("El email es invalido o se encuentra vacio");
