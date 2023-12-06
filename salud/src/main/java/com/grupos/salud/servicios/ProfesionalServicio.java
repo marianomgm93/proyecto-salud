@@ -123,7 +123,7 @@ public class ProfesionalServicio {
     //DEBE SER TESTEADO
     public Profesional buscarPorEmail(String email) throws MiException {
         Optional<Profesional> respuesta = profesionalRepositorio.buscarPorEmail(email);
-        if (!respuesta.isPresent()) {
+        if (respuesta.isPresent()) {
             Profesional profesional = respuesta.get();
             return profesional;
         } else {

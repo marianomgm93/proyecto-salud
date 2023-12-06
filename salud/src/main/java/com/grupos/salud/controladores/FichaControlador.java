@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,38 +42,7 @@ public class FichaControlador {
         return "ficha_form.html";
     }
 
-    /*
-    @PostMapping("/registro")
-    public String creacionFicha(@RequestParam String emailPaciente,
-            @RequestParam String diagnostico,
-            @RequestParam Boolean estado,
-            Authentication authentication,
-            ModelMap modelo) throws MiException {
-
-        try {
-            if (authentication != null && authentication.isAuthenticated()) {
-             
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String username = userDetails.getUsername();
-            Usuario usuario = usuarioServicio.buscarPorEmail(username);
-            System.out.println(usuario);
-            Profesional profesional = profesionalservicio.buscarPorEmail(username);
-            
-            Paciente paciente = pacienteservicio.buscarPorEmail(emailPaciente);
-            fichaservicio.registrar(paciente, profesional, diagnostico, estado);
-            }
-                
-            modelo.put("exito", "¡La ficha fue registrada con exito!");
-        } catch (MiException ex) {
-            modelo.put("error", ex.getMessage());
-            return "ficha_form.html";
-        }
-
-        return "ficha_form.html";
-    }
-
-     */
-    
+   
     @PostMapping("/registro")
     public String creacionFicha(@RequestParam String emailPaciente,
             @RequestParam String diagnostico,
@@ -98,7 +67,7 @@ public class FichaControlador {
             return "ficha_form.html";
         }
 
-        return "ficha_form.html";
+        return "index.html";
     }
 
     @GetMapping("/actualizar/{id}")
