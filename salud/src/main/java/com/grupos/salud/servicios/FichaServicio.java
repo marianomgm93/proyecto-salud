@@ -11,6 +11,8 @@ import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.FichaRepositorio;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FichaServicio {
@@ -68,6 +70,13 @@ public class FichaServicio {
         if(estado == null){
             throw new MiException("Debe ingresar un estado");
         }
+    }
+    
+    
+    public List<Ficha> listarFichas(){
+       List<Ficha> fichas = new ArrayList();
+       fichas = fichaRepositorio.findAll();
+       return fichas;
     }
 
 }
