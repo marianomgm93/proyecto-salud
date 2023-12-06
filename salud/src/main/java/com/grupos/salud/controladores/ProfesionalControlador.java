@@ -72,4 +72,25 @@ public class ProfesionalControlador {
         return "detalleProfesional.html"; // Vista para mostrar el detalle de un profesional (detalleProfesional.html)
     }
 
+    @GetMapping("/turnos1")
+    public String crearListaTurnos() {
+        return "formulario_horarios.html";
+    }
+
+    @PostMapping("/turnos")
+    public String listaTurnos(@RequestParam Integer horaInicio, @RequestParam Integer horaFin, Authentication authentication) {
+        try {
+            if (authentication != null && authentication.isAuthenticated()) {
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                String username = userDetails.getUsername();
+                Usuario usuario = usuarioServicio.buscarPorEmail(username);
+                Profesional profesional = profesionalServicio.buscarPorEmail(username);
+                profesionalServicio.crearTurnos(profesional, horaInicio, horaFin);
+            }
+            return "formulario_horarios.html";
+        } catch (Exception e) {
+            return "index.html";
+        }
+
+    }
 }
