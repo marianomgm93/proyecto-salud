@@ -107,6 +107,7 @@ public class ProfesionalServicio {
             turnos.add(turno);
         }
         profesional.setTurnos(turnos);
+        profesionalRepositorio.save(profesional);
     }
 
     //DEBE SER TESTEADO
