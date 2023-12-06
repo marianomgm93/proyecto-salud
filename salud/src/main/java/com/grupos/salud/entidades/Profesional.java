@@ -22,7 +22,7 @@ public class Profesional implements Serializable {
     private Boolean estado;
     @OneToOne
     private Usuario usuario;
-    @OneToMany
+    @OneToMany(mappedBy = "profesional")
     private List<Turno> turnos;
     private String descripcion;
 

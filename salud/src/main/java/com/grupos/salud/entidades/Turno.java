@@ -23,36 +23,53 @@ public class Turno implements Serializable {
     private Date fechaYHora;
 
     private String estado;
-    
+
     @ManyToOne
     private Profesional profesional;
-    
+    @OneToOne
+    private Paciente paciente;
 
     public Turno() {
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setFechaYHora(Date fechaYHora) {
-        this.fechaYHora = fechaYHora;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public String getId() {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Date getFechaYHora() {
         return fechaYHora;
     }
 
+    public void setFechaYHora(Date fechaYHora) {
+        this.fechaYHora = fechaYHora;
+    }
+
     public String getEstado() {
         return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Profesional getProfesional() {
+        return profesional;
+    }
+
+    public void setProfesional(Profesional profesional) {
+        this.profesional = profesional;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
 }

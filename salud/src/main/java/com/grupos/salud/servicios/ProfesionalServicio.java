@@ -5,16 +5,19 @@ import com.grupos.salud.entidades.Turno;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.ProfesionalRepositorio;
+import com.grupos.salud.repositorios.TurnoRepositorio;
 
 import com.grupos.salud.repositorios.UsuarioRepositorio;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,11 +27,12 @@ public class ProfesionalServicio {
 
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
+    @Autowired
+    private TurnoRepositorio turnoRepositorio;
 
-    
     @Autowired
     private UsuarioRepositorio usuariorepositorio;
-    
+
     @Transactional
     public void registrar(String especialidad, Double valorConsulta, Usuario usuario) throws MiException {
 
@@ -98,23 +102,38 @@ public class ProfesionalServicio {
         }
     }
 
-
-    
     @Transactional
     public void crearTurnos(Profesional profesional, Integer horaInicio, Integer horaFin) throws ParseException {
         List<Turno> turnos = new ArrayList<>();
-        Integer minutosATrabajar = (horaFin - horaInicio) * 60;
 
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        Date horaInicioDate = sdf.parse(String.format("%02d:%02d", horaInicio, 0));
-        Date horaFinDate = sdf.parse(String.format("%02d:%02d", horaFin, 0));
+        TimeZone timeZone = TimeZone.getTimeZone("UTC");
 
-        while (horaInicioDate.before(horaFinDate)) {
-            Turno turno = new Turno();
-            turno.setFechaYHora(horaInicioDate);
-            horaInicioDate = new Date(horaInicioDate.getTime() + (20 * 60 * 1000));
-            turno.setEstado("Disponible");
-            turnos.add(turno);
+        Calendar cal = Calendar.getInstance(timeZone);
+
+        cal.set(Calendar.HOUR_OF_DAY, horaInicio);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+
+        Calendar horaFinCal = Calendar.getInstance(timeZone);
+        horaFinCal.set(Calendar.HOUR_OF_DAY, horaFin);
+        horaFinCal.set(Calendar.MINUTE, 0);
+
+        while (cal.before(horaFinCal)) {
+            Calendar proximoTurnoCal = (Calendar) cal.clone();
+            proximoTurnoCal.add(Calendar.MINUTE, 30);
+
+            if (proximoTurnoCal.before(horaFinCal)) {
+                Turno turno = new Turno();
+
+                turno.setFechaYHora(cal.getTime());
+
+                turno.setEstado("Disponible");
+                turno.setProfesional(profesional);
+                turnoRepositorio.save(turno);
+                turnos.add(turno);
+            }
+
+            cal.add(Calendar.MINUTE, 30);
         }
         profesional.setTurnos(turnos);
         profesionalRepositorio.save(profesional);
