@@ -74,7 +74,7 @@ public class ProfesionalControlador {
 
     @GetMapping("/turnos1")
     public String crearListaTurnos() {
-        return "turnos.html";
+        return "formulario_horarios.html";
     }
 
     @PostMapping("/turnos")
@@ -87,9 +87,9 @@ public class ProfesionalControlador {
                 Profesional profesional = profesionalServicio.buscarPorEmail(username);
                 profesionalServicio.crearTurnos(profesional, horaInicio, horaFin);
             }
-            return "turnos.html";
+            return "formulario_horarios.html";
         } catch (Exception e) {
-            return "turnos.html";
+            return "index.html";
         }
 
     }

@@ -16,31 +16,34 @@
                             </div>
                             <div class="card-body">
 
-                                <form id="formularioRegistro" th:action="@{/turnos}" method="POST">
+                                <form id="formularioRegistro" th:action="@{/profesional/turnos}" method="POST">
                                     <div class="form-group">
                                         <label for="horaInicio">Inicio:</label>
                                         <input type="number" class="form-control" name="horaInicio"
-                                               placeholder="00-24" />
-                                    <label for="horaFin">Fin:</label>
-                                    <input type="number" class="form-control" name="horaFin"
-                                           placeholder="00-24" />
+                                               placeholder="00-24" th:value="${horaInicio}"/>
+                                        <label for="horaFin">Fin:</label>
+                                        <input type="number" class="form-control" name="horaFin"
+                                               placeholder="00-24" th:value="${horaFin}"/>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button type="submit" class="btn btn-primary mt-3 w-100">Cargar horario</button>
                                     </div>
 
-                            </form>
+                                </form>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>      
+        </main>      
 
-    <footer th:replace= "/fragments/footer :: footer"> </footer>
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
 
 
-    <!-- Modal para el login -->
-    <div th:replace="/fragments/modal :: div"></div>
+        <!-- Modal para el login -->
+        <div th:replace="/fragments/modal :: div"></div>
 
-    <script src="/javascript/script.js"></script>
-</body>
+        <script src="/javascript/script.js"></script>
+    </body>
 </html>
