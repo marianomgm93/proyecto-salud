@@ -7,7 +7,9 @@ import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.ReputacionServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -32,7 +34,7 @@ public class ProfesionalControlador {
 
     @Autowired
     private ReputacionServicio reputacionServicio;
-    
+
     @GetMapping("/registrar")
     public String mostrarFormularioPostulacion() {
 
@@ -74,13 +76,36 @@ public class ProfesionalControlador {
         Usuario usuario = profesional.getUsuario();
         model.addAttribute("profesional", profesional);
         model.addAttribute("usuario", usuario);
-        return "detalleProfesional.html"; 
+        return "detalleProfesional.html";
     }
-    
+
     @PostMapping("/calificacion/{id}")
-    public String guardarCalificacion(@RequestParam("reputacion") int reputacion, @PathVariable String id) throws MiException{
+    public String guardarCalificacion(@RequestParam("reputacion") int reputacion, @PathVariable String id) throws MiException {
         reputacionServicio.actualizarReputacion(id, reputacion);
         return "redirect:/profesional/detalle/" + id;
-    }  
-    
+    }
+
+    @GetMapping("/turnos1")
+    public String crearListaTurnos() {
+        return "formulario_horarios.html";
+    }
+
+    @PostMapping("/turnos")
+    public String listaTurnos(@RequestParam Integer horaInicio, @RequestParam Integer horaFin,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaDeseada,
+            Authentication authentication) {
+        try {
+            if (authentication != null && authentication.isAuthenticated()) {
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                String username = userDetails.getUsername();
+                Usuario usuario = usuarioServicio.buscarPorEmail(username);
+                Profesional profesional = profesionalServicio.buscarPorEmail(username);
+                profesionalServicio.crearTurnos(profesional, horaInicio, horaFin, fechaDeseada);
+            }
+            return "formulario_horarios.html";
+        } catch (Exception e) {
+            return "index.html";
+        }
+    }
+
 }

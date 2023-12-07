@@ -39,15 +39,47 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     </tbody>
                 </table>
 
-                <div class="row mt-3">
-                    <div class="divVolver">
-                        <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
-                    </div>
+                <div>
+                    <section class=" text-center container container-list">
+                        <h2 class="text-light text-center">Lista de Profesionales</h2>
+                        <div class="container m-5">
+                            <table class="table table-dark">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Especialidad</th>
+                                        <th>Reputación</th>
+                                        <th>Valor Consulta</th>
+                                        <th sec:authorize="hasRole('ADMIN')">Estado</th>
+                                        <th scope="col" sec:authorize="hasRole('ADMIN')">Cambiar Estado</th>
+                                        <th scope="col" sec:authorize="hasRole('ADMIN')">Cambiar Rol</th>
+                                    </tr>
+                                </thead>
+                                <tbody th:each="profesional : ${profesionales}">
+                                    <tr>
+                                        <th scope="row"><a th:href="@{/profesional/detalle/__${profesional.id}__}">Ver Perfil</a></th>
+                                        <td th:text="${profesional.usuario.nombreUsuario}"></td>
+                                        <td th:text="${profesional.especialidad}"></td>
+                                        <td th:text="${profesional.reputacion}"></td>
+                                        <td th:text="${profesional.valorConsulta}" ></td>
+                                        <td  sec:authorize="hasRole('ADMIN')" th:text="${profesional.estado}"></td>
+                                        <td sec:authorize="hasRole('ADMIN')"><a th:href= "@{/admin/modificarEstadoProfesional/__${profesional.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                            <div class="row mt-3">
+                                <div class="divVolver">
+                                    <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            </div>
-        </section>
 
 
-        <footer th:replace= "/fragments/footer :: footer"> </footer>
+                <footer th:replace= "/fragments/footer :: footer"> </footer>
     </body>
 </html>
