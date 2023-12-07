@@ -17,7 +17,9 @@ public class Profesional implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String especialidad;
-    private Double reputacion;
+    
+    @OneToOne
+    private Reputacion reputacion;
     private Double valorConsulta;
     private Boolean estado;
     @OneToOne
@@ -58,11 +60,11 @@ public class Profesional implements Serializable {
         this.especialidad = especialidad;
     }
 
-    public Double getReputacion() {
+    public Reputacion getReputacion() {
         return reputacion;
     }
 
-    public void setReputacion(Double reputacion) {
+    public void setReputacion(Reputacion reputacion) {
         this.reputacion = reputacion;
     }
 

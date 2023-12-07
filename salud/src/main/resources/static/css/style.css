@@ -147,3 +147,29 @@ body.modal-open {
     overflow: auto !important;
     padding-right: 0 !important;
 }
+
+.estrellas {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+.estrella {
+    display: none;
+}
+.estrella ~ label {
+    color: gray;
+    font-size: 28px;
+    color:rgb(170, 180, 189);
+    transition: color 0.2s, font-size 0.2s;
+    cursor: pointer;
+}
+
+.estrella:checked ~ label {
+    color: gold;
+}
+
+.estrella:hover ~ label{
+    color:gold;
+    font-size: 30px;
+}
