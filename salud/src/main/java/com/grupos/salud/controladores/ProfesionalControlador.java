@@ -1,13 +1,18 @@
 package com.grupos.salud.controladores;
 
 import com.grupos.salud.entidades.Profesional;
+import com.grupos.salud.entidades.Turno;
 import com.grupos.salud.entidades.Usuario;
+import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
 import java.util.Date;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -74,9 +79,17 @@ public class ProfesionalControlador {
         return "detalleProfesional.html"; // Vista para mostrar el detalle de un profesional (detalleProfesional.html)
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_PROFESIONAL')")
     @GetMapping("/turnos1")
-    public String crearListaTurnos() {
-        return "formulario_horarios.html";
+    public String crearListaTurnos(HttpSession session) {
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+
+        if (logueado.getRol().toString().equals("PROFESIONAL")) {
+            return "formulario_horarios.html";
+        } else {
+            return "index.html";
+        }
+
     }
 
     @PostMapping("/turnos")
@@ -95,5 +108,15 @@ public class ProfesionalControlador {
         } catch (Exception e) {
             return "index.html";
         }
+    }
+
+    @GetMapping("/misturnos")
+    public String listaTurnos(Authentication authentication, ModelMap model) throws MiException {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Profesional profesional = profesionalServicio.buscarPorEmail(username);
+        model.addAttribute("turnos", profesional.getTurnos());
+        return "turnos_profesional_list.html";
+
     }
 }
