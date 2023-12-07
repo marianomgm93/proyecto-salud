@@ -2,8 +2,10 @@ package com.grupos.salud.controladores;
 
 import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Usuario;
+import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
+import com.grupos.salud.servicios.ReputacionServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,6 +30,9 @@ public class ProfesionalControlador {
     @Autowired
     private PacienteServicio pacienteServicio;
 
+    @Autowired
+    private ReputacionServicio reputacionServicio;
+    
     @GetMapping("/registrar")
     public String mostrarFormularioPostulacion() {
 
@@ -66,10 +71,16 @@ public class ProfesionalControlador {
     @GetMapping("/detalle/{id}")
     public String obtenerProfesional(@PathVariable String id, ModelMap model) {
         Profesional profesional = profesionalServicio.getOne(id);
-        Usuario usuario = profesional.getUsuario(); // Obtén el Usuario asociado
+        Usuario usuario = profesional.getUsuario();
         model.addAttribute("profesional", profesional);
-        model.addAttribute("usuario", usuario); // Añade el Usuario al modelo
-        return "detalleProfesional.html"; // Vista para mostrar el detalle de un profesional (detalleProfesional.html)
+        model.addAttribute("usuario", usuario);
+        return "detalleProfesional.html"; 
     }
-
+    
+    @PostMapping("/calificacion/{id}")
+    public String guardarCalificacion(@RequestParam("reputacion") int reputacion, @PathVariable String id) throws MiException{
+        reputacionServicio.actualizarReputacion(id, reputacion);
+        return "redirect:/profesional/detalle/" + id;
+    }  
+    
 }

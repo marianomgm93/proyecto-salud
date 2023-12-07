@@ -1,6 +1,7 @@
 package com.grupos.salud.servicios;
 
 import com.grupos.salud.entidades.Profesional;
+import com.grupos.salud.entidades.Reputacion;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.ProfesionalRepositorio;
@@ -16,6 +17,9 @@ public class ProfesionalServicio {
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
     
+    @Autowired
+    private ReputacionServicio reputacionServicio;
+    
     @Transactional
     public void registrar(String especialidad, Double valorConsulta, Usuario usuario) throws MiException{
 
@@ -23,6 +27,8 @@ public class ProfesionalServicio {
         Profesional profesional = new Profesional();
         profesional.setEspecialidad(especialidad);
         profesional.setValorConsulta(valorConsulta);
+        Reputacion reputacion = reputacionServicio.crearReputacion(profesional.getId(), 0, 0);
+        profesional.setReputacion(reputacion);
         profesional.setUsuario(usuario);
         profesional.setEstado(false);
         profesionalRepositorio.save(profesional);
@@ -41,21 +47,21 @@ public class ProfesionalServicio {
     } 
     
     @Transactional
-    public void actualizar(String id, String especialidad, Double reputacion, Double valorConsulta) throws MiException{
+    public void actualizar(String id, String especialidad, int calificacion, Double valorConsulta) throws MiException{
 
         validar (especialidad, valorConsulta);
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if(respuesta.isPresent()){
             Profesional profesional = respuesta.get();
             profesional.setEspecialidad(especialidad);
-            profesional.setReputacion(reputacion);
+            reputacionServicio.actualizarReputacion(id, calificacion);
+            profesional.setReputacion(reputacionServicio.encontrarPorIdProfesional(especialidad));
             profesional.setValorConsulta(valorConsulta);
             profesional.setEstado(true);
-                     
-            
             profesionalRepositorio.save(profesional);
         }
     }
+    
     
     @Transactional
     public void darDeBaja(String id){

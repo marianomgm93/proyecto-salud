@@ -31,7 +31,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <th scope="row"><a th:href="@{/profesional/detalle/__${profesional.id}__}">Ver Perfil</a></th>
                             <td th:text="${profesional.usuario.nombreUsuario}"></td>
                             <td th:text="${profesional.especialidad}"></td>
-                            <td th:text="${profesional.reputacion}"></td>
+                            <td th:text="${profesional.reputacion.calificacion}"></td>
                             <td th:text="${profesional.valorConsulta}" ></td>
                             <td  sec:authorize="hasRole('ADMIN')" th:text="${profesional.estado}"></td>
                             <td sec:authorize="hasRole('ADMIN')"><a th:href= "@{/admin/modificarEstadoProfesional/__${profesional.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
