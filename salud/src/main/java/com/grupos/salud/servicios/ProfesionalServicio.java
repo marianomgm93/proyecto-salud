@@ -57,7 +57,16 @@ public class ProfesionalServicio {
         List<Profesional> profesionales = profesionalRepositorio.findAll();
         return profesionales;
     }
-
+    
+    @Transactional(readOnly = true)
+    public List<Profesional> listarProfesional(String palabraClave) {
+        if(palabraClave != null){
+            return profesionalRepositorio.findAll(palabraClave);
+        }
+        return profesionalRepositorio.findAll();
+    }    
+    
+    
     public Profesional getOne(String id) {
         Profesional profesional = profesionalRepositorio.getOne(id);
         return profesional;
