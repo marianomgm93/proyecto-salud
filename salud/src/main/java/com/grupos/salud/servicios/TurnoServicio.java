@@ -1,5 +1,6 @@
 package com.grupos.salud.servicios;
 
+import com.grupos.salud.entidades.Profesional;
 import java.sql.Date;
 import java.util.Optional;
 
@@ -10,12 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.grupos.salud.entidades.Turno;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.TurnoRepositorio;
+import java.util.List;
 
 @Service
 public class TurnoServicio {
 
     @Autowired
-    TurnoRepositorio turnoRepositorio;
+    private TurnoRepositorio turnoRepositorio;
 
     @Transactional
     public void registrar(Date fechaYHora, String estado) throws MiException {

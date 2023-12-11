@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="/fragments/head :: head"> </head>
+    <body>
+
+        <header>
+            <nav  sec:authorize="hasRole('PROFESIONAL')" th:replace= "/fragments/navbar :: nav"> </nav>
+            <nav  sec:authorize="hasRole('ADMIN')" th:replace= "/fragments/admin_navbar :: nav"> </nav>
+        </header>
+        <div>
+            <section class=" text-center container container-list">
+                <h2 class="text-light text-center">Mis Turnos</h2>
+                <div class="container m-5">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Paciente</th>
+                                <th>Estado</th>
+                                <th>Cambiar Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="turno : ${turnos}">
+                            <tr>
+                                <td th:text="${turno.fechaYHora}"></td>
+                                <td th:text="${turno.paciente}"></td>
+                                <td th:text="${turno.estado}"></td>
+                                <td><a><i class="fas fa-feather-alt"></i>Cancelar Turno</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row mt-3">
+                        <div class="divVolver">
+                            <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
+    </body>
+</html>
