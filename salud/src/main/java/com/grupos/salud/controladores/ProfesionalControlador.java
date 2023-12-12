@@ -132,4 +132,14 @@ public class ProfesionalControlador {
         return "turnos_profesional_list.html";
 
     }
+
+    @GetMapping("/cancelar_turno/{id}")
+    public String cancelarTurno(@PathVariable String id) {
+        try {
+            turnoServicio.darDeBaja(id);
+            return "redirect:/profesional/misturnos";
+        } catch (Exception e) {
+            return "redirect:/profesional/misturnos";
+        }
+    }
 }
