@@ -26,7 +26,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         </thead>
                         <tbody th:each="turno : ${turnos}">
                             <tr>
-                                <td th:text="${turno.fechaYHora}"></td>
+                                <td th:text="${#dates.format(turno.fechaYHora, 'yyyy-MM-dd HH:mm')}"></td>
                                 <td th:text="${turno.paciente}"></td>
                                 <td th:text="${turno.estado}"></td>
                                 <td><a><i class="fas fa-feather-alt"></i>Cancelar Turno</a></td>

@@ -7,6 +7,7 @@ import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.ReputacionServicio;
+import com.grupos.salud.servicios.TurnoServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
 import java.util.Date;
 import java.util.List;
@@ -35,9 +36,10 @@ public class ProfesionalControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private PacienteServicio pacienteServicio;
-
     @Autowired
     private ReputacionServicio reputacionServicio;
+    @Autowired
+    private TurnoServicio turnoServicio;
 
     @GetMapping("/registrar")
     public String mostrarFormularioPostulacion() {
@@ -125,7 +127,8 @@ public class ProfesionalControlador {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
         Profesional profesional = profesionalServicio.buscarPorEmail(username);
-        model.addAttribute("turnos", profesional.getTurnos());
+        List<Turno> turnosOrdenados = turnoServicio.ordenarTurnos(profesional.getId());
+        model.addAttribute("turnos", turnosOrdenados);
         return "turnos_profesional_list.html";
 
     }
