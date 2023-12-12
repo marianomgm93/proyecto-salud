@@ -4,6 +4,7 @@ import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Reputacion;
 import com.grupos.salud.entidades.Turno;
 import com.grupos.salud.entidades.Usuario;
+import static com.grupos.salud.enumeraciones.Rol.PROFESIONAL;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.ProfesionalRepositorio;
 import com.grupos.salud.repositorios.TurnoRepositorio;
@@ -47,6 +48,7 @@ public class ProfesionalServicio {
         Reputacion reputacion = reputacionServicio.crearReputacion(profesional.getId(), 0, 0);
         profesional.setReputacion(reputacion);
         profesional.setUsuario(usuario);
+        profesional.usuario.setRol(PROFESIONAL);
         profesional.setEstado(false);
         profesionalRepositorio.save(profesional);
     }
@@ -56,7 +58,16 @@ public class ProfesionalServicio {
         List<Profesional> profesionales = profesionalRepositorio.findAll();
         return profesionales;
     }
-
+    
+    @Transactional(readOnly = true)
+    public List<Profesional> listarProfesional(String palabraClave) {
+        if(palabraClave != null){
+            return profesionalRepositorio.findAll(palabraClave);
+        }
+        return profesionalRepositorio.findAll();
+    }    
+    
+    
     public Profesional getOne(String id) {
         Profesional profesional = profesionalRepositorio.getOne(id);
         return profesional;

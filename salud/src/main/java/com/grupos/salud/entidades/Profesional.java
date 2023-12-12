@@ -23,7 +23,7 @@ public class Profesional implements Serializable {
     private Double valorConsulta;
     private Boolean estado;
     @OneToOne
-    private Usuario usuario;
+    public Usuario usuario;
     @OneToMany(mappedBy = "profesional")
     private List<Turno> turnos;
     private String descripcion;

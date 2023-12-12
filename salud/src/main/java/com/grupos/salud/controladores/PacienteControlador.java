@@ -9,9 +9,11 @@ import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,6 +57,15 @@ public class PacienteControlador {
         return "profesional_list.html";
     }
 
+    @RequestMapping("/listado")
+    public String listado(Model modelo,@Param("palabraClave")String palabraClave) {
+       List<Profesional> profesionales = profesionalServicio.listarProfesional(palabraClave);
+        modelo.addAttribute("profesionales", profesionales);
+        modelo.addAttribute("palabraClave", palabraClave);
+        return "profesional_list.html";
+    }
+    
+    
     @GetMapping("/perfil/{id}")
     public String perfilPaciente(@PathVariable String id, ModelMap model) {
         Paciente paciente = pacienteServicio.getOne(id);
