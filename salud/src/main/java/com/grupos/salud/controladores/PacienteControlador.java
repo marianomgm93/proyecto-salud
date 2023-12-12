@@ -61,14 +61,13 @@ public class PacienteControlador {
     }
 
     @RequestMapping("/listado")
-    public String listado(Model modelo,@Param("palabraClave")String palabraClave) {
-       List<Profesional> profesionales = profesionalServicio.listarProfesional(palabraClave);
+    public String listado(Model modelo, @Param("palabraClave") String palabraClave) {
+        List<Profesional> profesionales = profesionalServicio.listarProfesional(palabraClave);
         modelo.addAttribute("profesionales", profesionales);
         modelo.addAttribute("palabraClave", palabraClave);
         return "profesional_list.html";
     }
-    
-    
+
     @GetMapping("/perfil/{id}")
     public String perfilPaciente(@PathVariable String id, ModelMap model) {
         Paciente paciente = pacienteServicio.getOne(id);
@@ -102,4 +101,3 @@ public class PacienteControlador {
         return "turno_list.html";
     }
 }
-
