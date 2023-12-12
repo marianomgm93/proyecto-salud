@@ -3,6 +3,7 @@ package com.grupos.salud.controladores;
 import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Usuario;
+import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.UsuarioRepositorio;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -58,14 +61,13 @@ public class PacienteControlador {
     }
 
     @RequestMapping("/listado")
-    public String listado(Model modelo,@Param("palabraClave")String palabraClave) {
-       List<Profesional> profesionales = profesionalServicio.listarProfesional(palabraClave);
+    public String listado(Model modelo, @Param("palabraClave") String palabraClave) {
+        List<Profesional> profesionales = profesionalServicio.listarProfesional(palabraClave);
         modelo.addAttribute("profesionales", profesionales);
         modelo.addAttribute("palabraClave", palabraClave);
         return "profesional_list.html";
     }
-    
-    
+
     @GetMapping("/perfil/{id}")
     public String perfilPaciente(@PathVariable String id, ModelMap model) {
         Paciente paciente = pacienteServicio.getOne(id);
@@ -89,5 +91,17 @@ public class PacienteControlador {
         }
 
     }
+    
+    
+    
+    
 
+    @GetMapping("/turnos")
+    public String listaTurnos(Authentication authentication, ModelMap model) throws MiException {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Paciente paciente = pacienteServicio.buscarPorEmail(username);
+        model.addAttribute("turnos", paciente.getTurnos());
+        return "turno_list.html";
+    }
 }

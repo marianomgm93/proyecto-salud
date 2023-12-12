@@ -21,15 +21,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <th>Fecha</th>
                                 <th>Paciente</th>
                                 <th>Estado</th>
-                                <th>Cambiar Estado</th>
+                                <th>Cancelar Turno</th>
                             </tr>
                         </thead>
                         <tbody th:each="turno : ${turnos}">
                             <tr>
-                                <td th:text="${turno.fechaYHora}"></td>
+                                <td th:text="${#dates.format(turno.fechaYHora, 'yyyy-MM-dd HH:mm')}"></td>
                                 <td th:text="${turno.paciente}"></td>
-                                <td th:text="${turno.estado}"></td>
-                                <td><a><i class="fas fa-feather-alt"></i>Cancelar Turno</a></td>
+                                <td th:class="${turno.estado == 'Disponible'} ? 'text-success' : (${turno.estado == 'Cancelado'} ? 'text-danger' : 'text-warning')">
+                                    <span th:text="${turno.estado}"></span>
+                                </td>
+                                <td><a th:href= "@{/profesional/cancelar_turno/__${turno.id}__}"><i class="fas fa-feather-alt"></i>Cancelar</a></td>
                             </tr>
                         </tbody>
                     </table>

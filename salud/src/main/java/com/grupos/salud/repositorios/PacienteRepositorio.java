@@ -1,6 +1,7 @@
 package com.grupos.salud.repositorios;
 
 import com.grupos.salud.entidades.Paciente;
+import com.grupos.salud.enumeraciones.Rol;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,6 +20,9 @@ public interface PacienteRepositorio extends JpaRepository<Paciente, String> {
 
     @Query("SELECT p FROM Paciente p WHERE p.usuario.email = :email")
     public Paciente findByUsuarioEmail(@Param("email") String email);
+    
+    @Query("SELECT p FROM Paciente p WHERE p.usuario.rol = 'USER'")
+    public List<Paciente> listar();
 
 //     @Query("SELECT p FROM Paciente p WHERE p.email = :email")
 //    public List<Paciente> BuscarPorEmail(@Param("email")String email);

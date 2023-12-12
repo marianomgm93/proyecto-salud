@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="/fragments/head :: head"></head>
+
+    <body>
+        <header>
+            <nav th:replace= "/fragments/navbar :: nav"> </nav>
+        </header>
+
+        <div class="separador-nav-paciente"></div>
+        <div class="container-fluid m-5 contenedor">
+
+            <section class=" text-center container container-list">
+                <h2 class="text-light text-center">Lista de Pacientes</h2>
+                <div class="container m-5">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>>
+                                <th sec:authorize="hasRole('ADMIN')">Estado</th>
+                                <th scope="col" sec:authorize="hasRole('PROFESIONAL')">Ver Historia Medica</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="paciente : ${pacientes}">
+                            <tr>
+                                <th scope="row"><a th:href="@{/paciente/detalle/__${paciente.id}__}">Ver Perfil</a></th>
+                                <td th:text="${paciente.usuario.nombreUsuario}"></td>
+                                <th scope="row"><a th:href="@{/paciente/detalle/__${paciente.id}__}">Ver Historia medica</a></th>         
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row mt-3">
+                        <div class="divVolver">
+                            <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+
+
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
+
+        <div th:replace="/fragments/modal :: div"></div>
+
+        <script src="/javascript/script.js"></script>
+    </body>
+</html>

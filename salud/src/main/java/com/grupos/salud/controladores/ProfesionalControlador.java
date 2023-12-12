@@ -1,12 +1,15 @@
 package com.grupos.salud.controladores;
 
+import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Turno;
 import com.grupos.salud.entidades.Usuario;
+import com.grupos.salud.servicios.FichaServicio;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.ReputacionServicio;
+import com.grupos.salud.servicios.TurnoServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
 import java.util.Date;
 import java.util.List;
@@ -35,9 +38,15 @@ public class ProfesionalControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private PacienteServicio pacienteServicio;
+    
 
     @Autowired
+    private FichaServicio fichaServicio;
+
     private ReputacionServicio reputacionServicio;
+    @Autowired
+    private TurnoServicio turnoServicio;
+
 
     @GetMapping("/registrar")
     public String mostrarFormularioPostulacion() {
@@ -120,17 +129,52 @@ public class ProfesionalControlador {
         }
     }
 
+    @GetMapping("/mostrarPacientes")
+     public String mostrarPaciente(Authentication authentication,ModelMap modelo) {
+         
+         
+         try{
+             if (authentication != null && authentication.isAuthenticated()) {
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                String username = userDetails.getUsername();
+                Usuario usuario = usuarioServicio.buscarPorEmail(username);
+                Profesional profesional = profesionalServicio.buscarPorEmail(username);
+                
+                
+                List<Paciente> pacientes = fichaServicio.listarPacientesPorFichaConProfesional(profesional.getId());
+               modelo.addAttribute("pacientes", pacientes);
+                return "mostrarPacientes.html";
+            } 
+             
+         } catch (Exception e) {
+            return "inicio.html";
+        }
+      
+        
+         return "mostrarPacientes.html";
+       
+     }
+
+
     @GetMapping("/misturnos")
     public String listaTurnos(Authentication authentication, ModelMap model) throws MiException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
         Profesional profesional = profesionalServicio.buscarPorEmail(username);
-        model.addAttribute("turnos", profesional.getTurnos());
-        for (Turno turno : profesional.getTurnos()) {
-            // Imprimir información relevante en los registros
-            System.out.println("Fecha y hora en el servidor: " + turno.getFechaYHora());
-        }
+        List<Turno> turnosOrdenados = turnoServicio.ordenarTurnos(profesional.getId());
+        model.addAttribute("turnos", turnosOrdenados);
         return "turnos_profesional_list.html";
 
     }
+
+    @GetMapping("/cancelar_turno/{id}")
+    public String cancelarTurno(@PathVariable String id) {
+        try {
+            turnoServicio.darDeBaja(id);
+            return "redirect:/profesional/misturnos";
+        } catch (Exception e) {
+            return "redirect:/profesional/misturnos";
+        }
+    }
+
 }

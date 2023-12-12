@@ -20,7 +20,8 @@ public interface ProfesionalRepositorio extends JpaRepository<Profesional, Strin
     @Query("SELECT p FROM Profesional p WHERE p.usuario.email= :email")
     public Optional<Profesional> buscarPorEmail(@Param("email") String email);
     
-    @Query("SELECT p FROM Profesional p WHERE p.usuario.nombreUsuario LIKE %?1%")
+    @Query("SELECT p FROM Profesional p WHERE p.usuario.nombreUsuario LIKE %?1%"
+          + " OR p.especialidad LIKE %?1% ")
     public List<Profesional> findAll(String palabraClave);
     
    

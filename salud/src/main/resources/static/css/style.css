@@ -22,7 +22,16 @@ body {
 }
 
 .cards {
+    padding: 20px;
     margin-top: 10rem;
+}
+
+.card {
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 .container-nav {
@@ -148,6 +157,30 @@ body.modal-open {
     padding-right: 0 !important;
 }
 
+.ficha-main-section {
+    margin-top: 60px;
+}
+
+.ficha-form-container {
+    margin-top: 20px;
+    background-color: #c7e0f0; 
+    padding: 20px;
+    border-radius: 10px; 
+}
+
+.ficha-form-control {
+    width: 50%;
+}
+
+.ficha-textarea {
+    width: 50%;
+}
+
+.separador-nav-paciente {
+    margin-top: 70px
+}
+
+
 .estrellas {
     display: flex;
     justify-content: center;
@@ -173,3 +206,4 @@ body.modal-open {
     color:gold;
     font-size: 30px;
 }
+
