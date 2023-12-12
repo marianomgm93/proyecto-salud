@@ -3,6 +3,7 @@
     "attributes": {
         "th:text": {},
         "th:src": {},
+        "th:action": {},
         "th:replace": {},
         "th:href": {},
         "th:each": {}

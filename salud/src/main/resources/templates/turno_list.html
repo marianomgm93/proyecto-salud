@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="/fragments/head :: head"> </head>
+    <body>
+        <nav  sec:authorize="hasRole('USER')" th:replace= "/fragments/navbar :: nav"> </nav>
+        <nav  sec:authorize="hasRole('ADMIN')" th:replace= "/fragments/admin_navbar :: nav"> </nav>
+        <section class=" text-center container container-list">
+            <h2 class="text-light text-center">Mis Turnos</h2>
+            <div class="container m-5">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Profesional</th>
+                            <th scope="col">Fecha y hora</th>
+                            <th scope="col">Estado</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody th:each="turno : ${turnos}">
+                        <tr>
+                            <th scope="row" th:text="${turno.profesional.usuario.nombreUsuario}"></th>
+                            <td th:text="${turno.fechaYHora}"></td>
+                            <td th:text="${turno.estado}"></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <section class=" text-center container">
+                    <div class="row mt-3">
+                        <div class="divVolver">
+                            <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                        </div>
+                    </div>
+                </section>
+        </section>
+
+        <footer th:replace="/fragments/footer :: footer"></footer>
+    </body>
+</html>
