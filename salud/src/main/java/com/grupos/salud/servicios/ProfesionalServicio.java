@@ -9,16 +9,15 @@ import com.grupos.salud.repositorios.ProfesionalRepositorio;
 import com.grupos.salud.repositorios.TurnoRepositorio;
 
 import com.grupos.salud.repositorios.UsuarioRepositorio;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.TimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -110,47 +109,33 @@ public class ProfesionalServicio {
     }
 
     @Transactional
-    public void crearTurnos(Profesional profesional, Integer horaInicio, Integer horaFin, Date fechaDeseada) throws ParseException {
+    public void crearTurnos(Profesional profesional, Integer horaInicio, Integer horaFin, Date fecha) throws ParseException {
         List<Turno> turnos = new ArrayList<>();
 
-        TimeZone timeZone = TimeZone.getTimeZone("UTC");
+        LocalDateTime horaInicioDate = LocalDateTime.ofInstant(fecha.toInstant(), ZoneId.systemDefault())
+                .withHour(horaInicio)
+                .withMinute(0);
 
-        Calendar cal = Calendar.getInstance(timeZone);
-        cal.setTime(fechaDeseada);
+        LocalDateTime horaFinDate = LocalDateTime.ofInstant(fecha.toInstant(), ZoneId.systemDefault())
+                .withHour(horaFin)
+                .withMinute(0);
 
-        cal.set(Calendar.HOUR_OF_DAY, horaInicio);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
+        while (horaInicioDate.isBefore(horaFinDate)) {
+            Turno turno = new Turno();
+            turno.setFechaYHora(Date.from(horaInicioDate.atZone(ZoneId.systemDefault()).toInstant()));
+            horaInicioDate = horaInicioDate.plusMinutes(20);
 
-        Calendar horaFinCal = Calendar.getInstance(timeZone);
-        horaFinCal.setTime(fechaDeseada);
-        horaFinCal.set(Calendar.HOUR_OF_DAY, horaFin);
-        horaFinCal.set(Calendar.MINUTE, 0);
-
-        // Ajustar la lógica para incluir el último intervalo
-        while (cal.before(horaFinCal) || cal.equals(horaFinCal)) {
-            Calendar proximoTurnoCal = (Calendar) cal.clone();
-            proximoTurnoCal.add(Calendar.MINUTE, 20);
-
-            // Ajustar la lógica para manejar el último turno
-            if (proximoTurnoCal.before(horaFinCal) || proximoTurnoCal.equals(horaFinCal)) {
-                Turno turno = new Turno();
-
-                turno.setFechaYHora(cal.getTime());
-
-                turno.setEstado("Disponible");
-                turno.setProfesional(profesional);
-                turnoRepositorio.save(turno);
-                turnos.add(turno);
-            }
-
-            cal.add(Calendar.MINUTE, 20);
+            turno.setEstado("Disponible");
+            turno.setProfesional(profesional);
+            turnoRepositorio.save(turno);
+            turnos.add(turno);
         }
+
         profesional.setTurnos(turnos);
         profesionalRepositorio.save(profesional);
     }
 
-    //DEBE SER TESTEADO
+//DEBE SER TESTEADO
     public Profesional buscarPorEmail(String email) throws MiException {
         Optional<Profesional> respuesta = profesionalRepositorio.buscarPorEmail(email);
         if (respuesta.isPresent()) {

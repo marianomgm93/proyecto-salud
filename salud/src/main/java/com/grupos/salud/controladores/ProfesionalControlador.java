@@ -126,10 +126,6 @@ public class ProfesionalControlador {
         String username = userDetails.getUsername();
         Profesional profesional = profesionalServicio.buscarPorEmail(username);
         model.addAttribute("turnos", profesional.getTurnos());
-        for (Turno turno : profesional.getTurnos()) {
-            // Imprimir información relevante en los registros
-            System.out.println("Fecha y hora en el servidor: " + turno.getFechaYHora());
-        }
         return "turnos_profesional_list.html";
 
     }
