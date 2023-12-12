@@ -57,12 +57,17 @@ public class PacienteServicio {
         pacienteRepositorio.save(paciente);
     }
 
+//    @Transactional(readOnly = true)
+//    public List<Paciente> listarPacientes() {
+//        List<Paciente> pacientes = pacienteRepositorio.findAll();
+//        return pacientes;
+//    }
+
     @Transactional(readOnly = true)
     public List<Paciente> listarPacientes() {
-        List<Paciente> pacientes = pacienteRepositorio.findAll();
+        List<Paciente> pacientes = pacienteRepositorio.listar();
         return pacientes;
     }
-
     public Paciente getOne(String id) {
         Paciente paciente = pacienteRepositorio.getOne(id);
         return paciente;
