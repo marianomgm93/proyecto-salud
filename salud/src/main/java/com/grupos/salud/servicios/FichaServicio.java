@@ -12,7 +12,9 @@ import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.FichaRepositorio;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FichaServicio {
@@ -79,4 +81,34 @@ public class FichaServicio {
        return fichas;
     }
 
+   /* public List<Paciente> listarPacientesPorFichaConProfesional(String id){
+        List<Paciente> listaPacientes = new ArrayList();
+        List<Ficha> listaFichas = fichaRepositorio.findAll();
+        for (Ficha ficha : listaFichas) {
+            if(ficha.getProfesional().getId().equals(id)){
+                listaPacientes.add(ficha.getPaciente());
+            }
+        }
+        
+        return listaPacientes;
+    }*/
+    
+    public List<Paciente> listarPacientesPorFichaConProfesional(String id) {
+    List<Paciente> listaPacientes = new ArrayList<>();
+    Set<String> idPacientesAgregados = new HashSet<>();
+
+    List<Ficha> listaFichas = fichaRepositorio.findAll();
+    for (Ficha ficha : listaFichas) {
+        if (ficha.getProfesional().getId().equals(id)) {
+            Paciente paciente = ficha.getPaciente();
+            if (idPacientesAgregados.add(paciente.getId())) {
+                listaPacientes.add(paciente);
+            }
+        }
+    }
+
+    return listaPacientes;
+}
+    
+    
 }
