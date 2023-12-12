@@ -4,6 +4,7 @@
  */
 package com.grupos.salud.controladores;
 
+import com.grupos.salud.entidades.Ficha;
 import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Usuario;
@@ -12,6 +13,7 @@ import com.grupos.salud.servicios.FichaServicio;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -94,11 +96,11 @@ public class FichaControlador {
         return "ficha_list.html";
     }
 
-    // MODIFICAR FICHASERVICIO
-    //   @GetMapping("/listar")
-//    public String listar(ModelMap modelo){
-//        List<Ficha> fichas = fichaServicio.listarFichas();
-//        modelo.addAttribute("ficha", ficha);
-//        return "ficha_list.html"; 
-//    }
+  // MODIFICAR FICHASERVICIO
+     @GetMapping("/listar")
+     public String listar(ModelMap modelo){
+        List<Ficha> fichas = fichaservicio.listarFichas();
+        modelo.addAttribute("ficha", fichas);
+        return "ficha_list.html"; 
+    }
 }

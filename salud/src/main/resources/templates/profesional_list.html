@@ -19,6 +19,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
+                            <th scope="col">Imagen</th>
                             <th>Especialidad</th>
                             <th>Reputación</th>
                             <th>Valor Consulta</th>
@@ -30,6 +31,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <tr>
                             <th scope="row"><a th:href="@{/profesional/detalle/__${profesional.id}__}">Ver Perfil</a></th>
                             <td th:text="${profesional.usuario.nombreUsuario}"></td>
+                             <td><a><img th:if="${profesional.usuario.imagen != null}" class="img-usuario" th:src="@{/imagen/perfil/__${profesional.usuario.id}__}" ></a></td>
                             <td th:text="${profesional.especialidad}"></td>
                             <td th:text="${profesional.reputacion.calificacion}"></td>
                             <td th:text="${profesional.valorConsulta}" ></td>
@@ -38,7 +40,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         </tr>
                     </tbody>
                 </table>
-                </div>
-                <footer th:replace= "/fragments/footer :: footer"> </footer>
+            </div>
+        </section>
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
     </body>
 </html>
