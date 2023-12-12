@@ -22,7 +22,16 @@ body {
 }
 
 .cards {
+    padding: 20px;
     margin-top: 10rem;
+}
+
+.card {
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 .container-nav {
@@ -169,5 +178,32 @@ body.modal-open {
 
 .separador-nav-paciente {
     margin-top: 70px
+}
+
+
+.estrellas {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+.estrella {
+    display: none;
+}
+.estrella ~ label {
+    color: gray;
+    font-size: 28px;
+    color:rgb(170, 180, 189);
+    transition: color 0.2s, font-size 0.2s;
+    cursor: pointer;
+}
+
+.estrella:checked ~ label {
+    color: gold;
+}
+
+.estrella:hover ~ label{
+    color:gold;
+    font-size: 30px;
 }
 

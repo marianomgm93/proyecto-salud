@@ -2,15 +2,21 @@ package com.grupos.salud.controladores;
 
 import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Profesional;
+import com.grupos.salud.entidades.Turno;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.servicios.FichaServicio;
+import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
+import com.grupos.salud.servicios.ReputacionServicio;
+import com.grupos.salud.servicios.TurnoServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -32,8 +38,15 @@ public class ProfesionalControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private PacienteServicio pacienteServicio;
+    
+
     @Autowired
     private FichaServicio fichaServicio;
+
+    private ReputacionServicio reputacionServicio;
+    @Autowired
+    private TurnoServicio turnoServicio;
+
 
     @GetMapping("/registrar")
     public String mostrarFormularioPostulacion() {
@@ -73,15 +86,29 @@ public class ProfesionalControlador {
     @GetMapping("/detalle/{id}")
     public String obtenerProfesional(@PathVariable String id, ModelMap model) {
         Profesional profesional = profesionalServicio.getOne(id);
-        Usuario usuario = profesional.getUsuario(); // Obtén el Usuario asociado
+        Usuario usuario = profesional.getUsuario();
         model.addAttribute("profesional", profesional);
-        model.addAttribute("usuario", usuario); // Añade el Usuario al modelo
-        return "detalleProfesional.html"; // Vista para mostrar el detalle de un profesional (detalleProfesional.html)
+        model.addAttribute("usuario", usuario);
+        return "detalleProfesional.html";
     }
 
+    @PostMapping("/calificacion/{id}")
+    public String guardarCalificacion(@RequestParam("reputacion") int reputacion, @PathVariable String id) throws MiException {
+        reputacionServicio.actualizarReputacion(id, reputacion);
+        return "redirect:/profesional/detalle/" + id;
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_PROFESIONAL')")
     @GetMapping("/turnos1")
-    public String crearListaTurnos() {
-        return "formulario_horarios.html";
+    public String crearListaTurnos(HttpSession session) {
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+
+        if (logueado.getRol().toString().equals("PROFESIONAL")) {
+            return "formulario_horarios.html";
+        } else {
+            return "index.html";
+        }
+
     }
 
     @PostMapping("/turnos")
@@ -101,8 +128,7 @@ public class ProfesionalControlador {
             return "index.html";
         }
     }
-    
-   
+
     @GetMapping("/mostrarPacientes")
      public String mostrarPaciente(Authentication authentication,ModelMap modelo) {
          
@@ -128,4 +154,27 @@ public class ProfesionalControlador {
          return "mostrarPacientes.html";
        
      }
+
+
+    @GetMapping("/misturnos")
+    public String listaTurnos(Authentication authentication, ModelMap model) throws MiException {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Profesional profesional = profesionalServicio.buscarPorEmail(username);
+        List<Turno> turnosOrdenados = turnoServicio.ordenarTurnos(profesional.getId());
+        model.addAttribute("turnos", turnosOrdenados);
+        return "turnos_profesional_list.html";
+
+    }
+
+    @GetMapping("/cancelar_turno/{id}")
+    public String cancelarTurno(@PathVariable String id) {
+        try {
+            turnoServicio.darDeBaja(id);
+            return "redirect:/profesional/misturnos";
+        } catch (Exception e) {
+            return "redirect:/profesional/misturnos";
+        }
+    }
+
 }
