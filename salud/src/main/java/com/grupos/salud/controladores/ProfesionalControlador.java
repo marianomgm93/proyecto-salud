@@ -85,7 +85,7 @@ public class ProfesionalControlador {
 
     @PostMapping("/calificacion/{id}")
     public String guardarCalificacion(@RequestParam("reputacion") int reputacion, @PathVariable String id) throws MiException {
-        reputacionServicio.actualizarReputacion(id, reputacion);
+        profesionalServicio.actualizarReputacion(id, reputacion);
         return "redirect:/profesional/detalle/" + id;
     }
 
