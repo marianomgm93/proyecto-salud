@@ -27,7 +27,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <tbody th:each="turno : ${turnos}">
                             <tr>
                                 <td th:text="${#dates.format(turno.fechaYHora, 'yyyy-MM-dd HH:mm')}"></td>
-                                <td th:text="${turno.paciente}"></td>
+                                <td th:if="${turno.paciente != null}" th:text="${turno.paciente.usuario.nombreUsuario}"></td>
+                                <td th:if="${turno.paciente == null}"></td>
                                 <td th:class="${turno.estado == 'Disponible'} ? 'text-success' : (${turno.estado == 'Cancelado'} ? 'text-danger' : 'text-warning')">
                                     <span th:text="${turno.estado}"></span>
                                 </td>

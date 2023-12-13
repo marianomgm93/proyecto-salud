@@ -110,10 +110,9 @@
         <script>
             // Obtiene el ID del profesional desde el modelo Thymeleaf
             var profesionalId = window.location.pathname.split('/').pop();
-            $(document).ready(function () {
-                console.log("Profesional ID desde la URL:", profesionalId);
 
-                $('#calendario').fullCalendar({
+            $(document).ready(function () {
+                var calendar = $('#calendario').fullCalendar({
                     header: {
                         left: 'prev,next today',
                         center: 'title',
@@ -121,13 +120,20 @@
                     },
                     events: '/turnos/eventos/' + profesionalId,
                     eventClick: function (calEvent, jsEvent, view) {
-                        // Agrega código adicional si es necesario para manejar clics en eventos
+                        // Manejo de clic en evento (puedes agregar código adicional si es necesario)
+                    },
+                    dayClick: function (date, jsEvent, view) {
+                        // Cambia a la vista diaria ('day') y muestra el día seleccionado
+                        calendar.fullCalendar('changeView', 'agendaDay', date.format());
+                    },
+                    eventRender: function (event, element) {
+                        // Agrega un botón a cada evento
+                        element.find('.fc-content').append('<a class="btn btn-success btn-agendar" href="/turnos/confirmar-turno/' + event.id + '">Agendar</a>');
                     }
                 });
             });
-
-            console.log("Profesional ID desde Thymeleaf:", /*[[${profesionalId}]]*/ null);
         </script>
+
 
     </body>
 </html>

@@ -38,7 +38,6 @@ public class ProfesionalControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private PacienteServicio pacienteServicio;
-    
 
     @Autowired
     private FichaServicio fichaServicio;

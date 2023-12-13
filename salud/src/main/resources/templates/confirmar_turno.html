@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace= "/fragments/head :: head"> </head>
+    <body>
+        <header class="container-fluid">
+            <nav th:replace= "/fragments/navbar :: nav"> </nav>
+        </header>
+
+        <div class="container cards">
+            <form th:action="@{/turnos/confirmacion/{id}(id=${turno.id})}" method="POST">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Confirmar Turno</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Turno programado con:</h6>
+                        <p class="card-text" th:text="${profesional.usuario.nombreUsuario}"></p>
+
+                        <h6 class="card-subtitle mb-2 text-muted">Paciente:</h6>
+                        <p class="card-text" th:text="${usuario.nombreUsuario}"></p>
+
+                        <h6 class="card-subtitle mb-2 text-muted">Fecha y Hora:</h6>
+                        <p class="card-text" th:text="${turno.fechaYHora}"></p>
+
+                        <h6 class="card-subtitle mb-2 text-muted">Especialidad:</h6>
+                        <p class="card-text" th:text="${profesional.especialidad}"></p>
+
+                        <button type="submit" class="btn btn-success">Confirmar Turno</button>
+                        <a href="#" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
+
+        <!-- Modal para el login -->
+        <div th:replace="/fragments/modal :: div"></div>
+
+        <script src="/javascript/script.js"></script>
+    </body>
+</html>

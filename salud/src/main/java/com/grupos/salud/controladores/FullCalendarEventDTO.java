@@ -10,16 +10,14 @@ import java.util.Date;
  *
  * @author bruno
  */
- public class FullCalendarEventDTO {
+public class FullCalendarEventDTO {
+
     private String title;
     private Date start;
     private Boolean allDay;
+    private String id;
 
     // Getters y Setters
-
-    public FullCalendarEventDTO() {
-    }
-
     public String getTitle() {
         return title;
     }
@@ -43,6 +41,13 @@ import java.util.Date;
     public void setAllDay(Boolean allDay) {
         this.allDay = allDay;
     }
-    
-}
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+}
