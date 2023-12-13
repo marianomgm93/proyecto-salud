@@ -5,7 +5,9 @@
  */
 package com.grupos.salud.servicios;
 
+import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Reputacion;
+import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.ReputacionRepositorio;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,32 +24,31 @@ public class ReputacionServicio {
     
     @Autowired
     private ReputacionRepositorio reputacionRepositorio;
-    
+
     
     @Transactional
     public Reputacion crearReputacion(String idProfesional, int cantValoraciones,double calificacion){
         Reputacion reputacion = new Reputacion();
         reputacion.setCalificacion(calificacion);
         reputacion.setIdProfesional(idProfesional);
-        reputacion.setCantValoraciones(0);
+        reputacion.setCantValoraciones(cantValoraciones);
         reputacionRepositorio.save(reputacion);
         return reputacion;
     }
     
     @Transactional
-    public void actualizarReputacion(String idProfesional, int calificacion){
-       
-        
+    public Reputacion actualizarReputacion(String idProfesional, int calificacion) throws MiException{
+          
         Optional<Reputacion> respuesta = reputacionRepositorio.findByIdProfesional(idProfesional);
         if(respuesta.isPresent()){
             Reputacion reputacion = respuesta.get();
             reputacion.setCantValoraciones(reputacion.getCantValoraciones() + 1);
-            reputacion.setCalificacion(reputacion.getCalificacion() + calificacion / reputacion.getCantValoraciones());
-            
+            reputacion.setCalificacion((reputacion.getCalificacion() * (reputacion.getCantValoraciones() - 1) + calificacion) / reputacion.getCantValoraciones());
             reputacionRepositorio.save(reputacion);
+            return reputacion;
+        }else{
+            return null;
         }
-     
-        
     }
     
     public Reputacion encontrarPorIdProfesional(String idProfesional){
