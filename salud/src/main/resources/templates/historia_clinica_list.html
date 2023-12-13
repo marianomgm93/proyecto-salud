@@ -12,22 +12,24 @@
         <div class="container-fluid m-5 contenedor">
 
             <section class=" text-center container container-list">
-                <h2 class="text-light text-center">Lista de Pacientes</h2>
+                <h2 class="text-light text-center">Historia Clinica</h2>
                 <div class="container m-5">
                     <table class="table table-dark">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>>
+                                <th>Nombre paciente</th>
+                                <th>Paciente ID </th>
+                                <th>Diagnostico</th>
+                                <th>Nombre profesional</th>
                                 <th sec:authorize="hasRole('ADMIN')">Estado</th>
-                                <th scope="col" sec:authorize="hasRole('PROFESIONAL')">Ver Historia Medica</th>
                             </tr>
                         </thead>
-                        <tbody th:each="paciente : ${pacientes}">
+                        <tbody th:each="ficha : ${fichas}">
                             <tr>
-                                <th scope="row"><a th:href="@{/paciente/detalle/__${paciente.id}__}">Ver Perfil</a></th>
-                                <td th:text="${paciente.usuario.nombreUsuario}"></td>
-                                <th scope="row"><a th:href="@{/historia_clinica/mostrarHistoriaClinica/__${paciente.id}__}">Ver Historia medica</a></th>         
+                                <td th:text="${ficha.paciente.usuario.nombreUsuario}"></td> 
+                                <td th:text="${ficha.paciente.id}"></td> 
+                                <td th:text="${ficha.diagnostico}"></td> 
+                                <td th:text="${ficha.profesional.usuario.nombreUsuario}"></td> 
                             </tr>
                         </tbody>
                     </table>
