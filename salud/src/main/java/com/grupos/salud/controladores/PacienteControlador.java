@@ -100,4 +100,7 @@ public class PacienteControlador {
         model.addAttribute("turnos", paciente.getTurnos());
         return "turno_list.html";
     }
+    
+   
+    
 }
