@@ -15,27 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/historia_clinica")
 public class HistoriaClinicaControlador {
-    
+
     @Autowired
     private HistoriaClinicaServicio historiaClinicaServicio;
-    
-    
+
     @GetMapping("/registrar")
-    public String registrar(){
+    public String registrar() {
         return "historia_clinica_form.html";
     }
-    
+
     @PostMapping("/registro")
     public HistoriaClinica crearHistoriaClinica(@RequestBody Paciente paciente) {
         return historiaClinicaServicio.crearHistoriaClinica(paciente);
     }
-    
+
     @GetMapping("/lista")
-    public String listar(ModelMap modelo){
+    public String listar(ModelMap modelo) {
         List<HistoriaClinica> historiasClinicas = historiaClinicaServicio.listarHistoriasClinicas();
-        modelo.addAttribute("historiasClinicas",historiasClinicas);
+        modelo.addAttribute("historiasClinicas", historiasClinicas);
         return "historias_clinicas_list.html";
     }
-    
-    
+
 }

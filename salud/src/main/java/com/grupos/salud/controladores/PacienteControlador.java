@@ -91,10 +91,6 @@ public class PacienteControlador {
         }
 
     }
-    
-    
-    
-    
 
     @GetMapping("/turnos")
     public String listaTurnos(Authentication authentication, ModelMap model) throws MiException {

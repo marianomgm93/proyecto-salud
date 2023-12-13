@@ -103,4 +103,11 @@ public class FichaControlador {
         modelo.addAttribute("ficha", fichas);
         return "ficha_list.html"; 
     }
+     @GetMapping("/detalle/{id}")
+     public String detalle(@PathVariable String id,ModelMap model) throws MiException{
+         Ficha ficha=fichaservicio.getOne(id);
+         model.addAttribute("ficha",ficha);
+         return "ficha.html";
+     }
+
 }
