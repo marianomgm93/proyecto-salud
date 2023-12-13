@@ -25,7 +25,7 @@
                         </thead>
                         <tbody th:each="paciente : ${pacientes}">
                             <tr>
-                                <th scope="row"><a th:href="@{/paciente/detalle/__${paciente.id}__}">Ver Perfil</a></th>
+                                <th scope="row"><a th:href="@{/paciente/perfil/__${paciente.id}__}">Ver Perfil</a></th>
                                 <td th:text="${paciente.usuario.nombreUsuario}"></td>
                                 <th scope="row"><a th:href="@{/historia_clinica/mostrarHistoriaClinica/__${paciente.id}__}">Ver Historia medica</a></th>         
                             </tr>
