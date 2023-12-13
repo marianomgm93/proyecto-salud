@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="/fragments/head :: head"> </head>
+
+    <body>
+
+        <header>
+            <nav th:replace="/fragments/navbar :: nav"> </nav>
+        </header>
+        <main>
+            <h2 class="text-light text-center">Mis Turnos</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h3 th:text="${ficha.fecha}"></h3>
+                    <h5 class="card-title">Profesional:</h5>
+                    <p class="card-text" th:text="${ficha.profesional.usuario.nombreUsuario}"></p>
+                    <h5 class="card-title">Especialidad:</h5>
+                    <p class="card-text" th:text="${ficha.profesional.especialidad}"></p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Diagnostico:</h5>
+                    <p class="card-text" th:text="${ficha.diagnostico}"></p>
+                    <a href="#" class="btn btn-primary">Modificar ficha</a>
+                </div>
+            </div>
+
+        </main>
+
+
+        <footer th:replace="/fragments/footer :: footer"> </footer>
+
+    </body>
+
+</html>
+
