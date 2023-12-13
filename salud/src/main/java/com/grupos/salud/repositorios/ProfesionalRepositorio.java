@@ -1,22 +1,31 @@
 package com.grupos.salud.repositorios;
 /*
     SE DEBEN ARREGLAR LAS CONSULTAS QUERY CON MAYOR Y MENOR
-*/
+ */
 
 import com.grupos.salud.entidades.Profesional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface ProfesionalRepositorio extends JpaRepository<Profesional, String> {
-    
+
     @Query("SELECT p FROM Profesional p WHERE p.especialidad = :especialidad")
     public List<Profesional> findByEspecialidad(@Param("especialidad") String especialidad);
-    /*
+
+    @Query("SELECT p FROM Profesional p WHERE p.usuario.email= :email")
+    public Optional<Profesional> buscarPorEmail(@Param("email") String email);
     
+    @Query("SELECT p FROM Profesional p WHERE p.usuario.nombreUsuario LIKE %?1%"
+          + " OR p.especialidad LIKE %?1% ")
+    public List<Profesional> findAll(String palabraClave);
+    
+   
+    /*
     @Query("SELECT p FROM Profesional p WHERE p.reputacion => :reputacion")
     public List<Profesional> findByReputacionGreaterThanEqual(@Param("reputacion") Double reputacion);
     
@@ -28,7 +37,6 @@ public interface ProfesionalRepositorio extends JpaRepository<Profesional, Strin
     
     @Query("SELECT p FROM Profesional p WHERE p.valorConsulta =< :valorConsulta")
     public List<Profesional> findByValorConsultaLessThanEqual(@Param("valorConsulta") Double valorConsulta);
-*/
+     */
 
 }
-

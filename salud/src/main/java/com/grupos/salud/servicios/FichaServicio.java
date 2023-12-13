@@ -11,6 +11,10 @@ import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.FichaRepositorio;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class FichaServicio {
@@ -19,10 +23,10 @@ public class FichaServicio {
     private FichaRepositorio fichaRepositorio;
 
     @Transactional
-    public void registrar(String id, Paciente paciente, Profesional profesional, String diagnostico, Boolean estado) throws MiException{
-        validar(id, diagnostico, estado);
+    public void registrar( Paciente paciente, Profesional profesional, String diagnostico, Boolean estado) throws MiException{
+        validar(diagnostico, estado);
         Ficha ficha = new Ficha();
-        ficha.setId(id);
+        
         ficha.setPaciente(paciente);
         ficha.setProfesional(profesional);
         ficha.setDiagnostico(diagnostico);
@@ -33,7 +37,7 @@ public class FichaServicio {
 
     @Transactional
     public void actualizar(String id, Paciente paciente, Profesional profesional, String diagnostico, Boolean estado) throws MiException{
-        validar(id, diagnostico, estado);
+        validar(diagnostico, estado);
         Optional<Ficha> respuesta = fichaRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
@@ -60,10 +64,8 @@ public class FichaServicio {
         return ficha;
     }
 
-    public void validar(String id, String diagnostico, Boolean estado) throws MiException{
-        if(id == null || id.isEmpty()){
-            throw new MiException("Debe ingresar un id");
-        }
+    public void validar( String diagnostico, Boolean estado) throws MiException{
+        
         if(diagnostico == null || diagnostico.isEmpty()){
             throw new MiException("Debe ingresar un diagnostico");
         }
@@ -71,5 +73,42 @@ public class FichaServicio {
             throw new MiException("Debe ingresar un estado");
         }
     }
+    
+    
+    public List<Ficha> listarFichas(){
+       List<Ficha> fichas = new ArrayList();
+       fichas = fichaRepositorio.findAll();
+       return fichas;
+    }
 
+   /* public List<Paciente> listarPacientesPorFichaConProfesional(String id){
+        List<Paciente> listaPacientes = new ArrayList();
+        List<Ficha> listaFichas = fichaRepositorio.findAll();
+        for (Ficha ficha : listaFichas) {
+            if(ficha.getProfesional().getId().equals(id)){
+                listaPacientes.add(ficha.getPaciente());
+            }
+        }
+        
+        return listaPacientes;
+    }*/
+    
+    public List<Paciente> listarPacientesPorFichaConProfesional(String id) {
+    List<Paciente> listaPacientes = new ArrayList<>();
+    Set<String> idPacientesAgregados = new HashSet<>();
+
+    List<Ficha> listaFichas = fichaRepositorio.findAll();
+    for (Ficha ficha : listaFichas) {
+        if (ficha.getProfesional().getId().equals(id)) {
+            Paciente paciente = ficha.getPaciente();
+            if (idPacientesAgregados.add(paciente.getId())) {
+                listaPacientes.add(paciente);
+            }
+        }
+    }
+
+    return listaPacientes;
+}
+    
+    
 }

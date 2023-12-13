@@ -18,7 +18,7 @@ and open the template in the editor.
 
             <div class="card d-flex flex-column align-items-center shadow" style="width: 18rem;">
                 <div class="d-flex justify-content-end w-100 p-2" style="height: auto; font-size: 15px">
-                    <span class="badge fa fa-star container-collapse">  <span class="w-100" th:text="${profesional.reputacion}" aria-hidden="true"></span></span>
+                    <span class="badge fa fa-star container-collapse">  <span class="w-100" th:text="${profesional.reputacion.calificacion}" aria-hidden="true"></span></span>
                 </div>
                 <img th:src="@{/imagen/perfil/{id}(id=${usuario.id})}" class="card-img-top rounded-circle fotoProfesional" alt="foto del profesional">
                 <div class="card-body d-flex flex-column align-items-center">
@@ -41,6 +41,38 @@ and open the template in the editor.
 
             </div>
         </div>
+
+        <div class="card d-flex flex-column align-items-center shadow">
+            <div class="card-body d-flex flex-column align-items-center">
+                <h5 class="card-title">Dejar una valoración a <span th:text="${usuario.nombreUsuario}"></span></h5>
+
+                <form th:action="@{/profesional/calificacion/__${profesional.id}__}" method="POST">
+
+                    <div class="estrellas">
+
+                        <input class="estrella" type="radio" name="reputacion" value="5" id="estrella5">
+                        <label for="estrella5"><i class="fa fa-star" aria-hidden="true"></i></label>
+
+                        <input class="estrella" type="radio" name="reputacion" value="4" id="estrella4">
+                        <label for="estrella4"><i class="fa fa-star" aria-hidden="true"></i></label>
+
+                        <input class="estrella" type="radio" name="reputacion" value="3" id="estrella3">
+                        <label for="estrella3"><i class="fa fa-star" aria-hidden="true"></i></label>
+
+                        <input class="estrella" type="radio" name="reputacion" value="2" id="estrella2">
+                        <label for="estrella2"><i class="fa fa-star" aria-hidden="true"></i></label>
+
+                        <input class="estrella" type="radio" name="reputacion" value="1" id="estrella1">
+                        <label for="estrella1"><i class="fa fa-star" aria-hidden="true"></i></label>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar calificación</button>
+                </form>
+
+            </div>
+        </div>
+
 
         <footer th:replace= "/fragments/footer :: footer"> </footer>
 

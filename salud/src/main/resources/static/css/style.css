@@ -1,13 +1,13 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
     background-image: url(../img/fondo.jpg);
     background-size: cover;
     background-position: center center;
-    box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 15px;
     display: flex;
@@ -21,12 +21,26 @@ body {
     padding: 0.5em 0 1em 5em;
 }
 
-.enlaces {
-    padding-right: 5em;
+.cards {
+    padding: 20px;
+    margin-top: 10rem;
 }
 
-.cards {
-    margin-top: 10rem;
+.card {
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.container-nav {
+    max-width: 100%;
+    margin: 0 8rem;
+}
+
+.container-busqueda {
+    margin-right: 3rem;
 }
 
 .mensajeError {
@@ -112,19 +126,17 @@ label {
 }
 
 .container-banner {
-    height: 20rem;
-    min-height: 80vh;
-}
-
-.container-imagen {
+    margin-top: 85px;
     position: relative;
-    display: inline-block;
-
 }
 
-.banner {
+.image-container {
+    position: relative;
+}
+
+.banner-image {
     max-width: 100%;
-    height: 65vh;
+    height: auto;
 }
 
 .overlay {
@@ -136,20 +148,61 @@ label {
     color: #fff;
     max-width: 40%;
 }
-
-.description {
-    font-size:1.2em ;
-}
-
-.imagen-salud {
-    width: 100%
-}
-
-.container-nav {
-    max-width: 100%;
+.text-container {
+    padding: 20px;
 }
 
 body.modal-open {
     overflow: auto !important;
     padding-right: 0 !important;
+}
+
+.ficha-main-section {
+    margin-top: 60px;
+}
+
+.ficha-form-container {
+    margin-top: 20px;
+    background-color: #c7e0f0; 
+    padding: 20px;
+    border-radius: 10px; 
+}
+
+.ficha-form-control {
+    width: 50%;
+}
+
+.ficha-textarea {
+    width: 50%;
+}
+
+.separador-nav-paciente {
+    margin-top: 70px
+}
+
+
+.estrellas {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+.estrella {
+    display: none;
+}
+.estrella ~ label {
+    color: gray;
+    font-size: 28px;
+    color:rgb(170, 180, 189);
+    transition: color 0.2s, font-size 0.2s;
+    cursor: pointer;
+}
+
+.estrella:checked ~ label {
+    color: gold;
+}
+
+.estrella:hover ~ label{
+    color:gold;
+    font-size: 30px;
 }

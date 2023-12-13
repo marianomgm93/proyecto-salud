@@ -1,7 +1,7 @@
 package com.grupos.salud;
 
-
 import com.grupos.salud.servicios.UsuarioServicio;
+import java.util.TimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,33 +25,30 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
-  protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                        .antMatchers("/admin/*").hasRole("ADMIN")
-                        .antMatchers("/css/*", "/js/*", "/img/*","/**")
-                        .permitAll()
-              .antMatchers("/registro","/login","/registrar")
+                .antMatchers("/admin/*").hasRole("ADMIN")
+                .antMatchers("/css/*", "/js/*", "/img/*", "/**")
+                .permitAll()
+                .antMatchers("/registro", "/login", "/registrar")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
-                        .loginPage("/")
-                        .loginProcessingUrl("/logincheck")
-                        .usernameParameter("email")
-                        .passwordParameter("password")
-
-                        .failureUrl("/?error=true")
-
-                        .defaultSuccessUrl("/inicio")
-
-                        .permitAll()
+                .loginPage("/")
+                .loginProcessingUrl("/logincheck")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/inicio")
+                .permitAll()
                 .and().logout()
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .permitAll()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll()
                 .and().csrf()
-                        .disable();
-                
+                .disable();
+
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 
     }
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"> </head>
+
+<body>
+
+    <header>
+        <nav sec:authorize="hasRole('USER')" th:replace="/fragments/navbar :: nav"> </nav>
+        <nav sec:authorize="hasRole('ADMIN')" th:replace="/fragments/admin_navbar :: nav"> </nav>
+    </header>
+
+    <div class="cards d-flex justify-content-center align-items-center h-100">
+
+        <div class="card d-flex flex-column align-items-center shadow" style="width: 18rem;">
+            <img th:src="@{/imagen/perfil/{id}(id=${usuario.id})}" class="card-img-top rounded-circle fotoPaciente"
+                alt="foto del profesional">
+            <div class="card-body d-flex flex-column align-items-center">
+                <h5 class="card-title" th:text="${usuario.nombreUsuario}"></h5>
+
+                <div class="card mb-3 d-flex flex-column align-items-center" style="max-width: 18rem;"></div>
+
+                <p class="card-text"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span
+                        th:text="${usuario.email}"></span> </p>
+                <p class="card-text"><i class="fa fa-mobile" aria-hidden="true"></i> <span
+                        th:text="${paciente.datosContacto}"></span> </p>
+                <p class="card-text"><i class="fa fa-gratipay" aria-hidden="true"></i> <span
+                        th:text="${paciente.obraSocial}"></span> </p>
+                <a th:href="@{/perfil}" class="btn btn-primary botonAgendarTurno shadow">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar perfil
+                </a>
+            </div>
+
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Darme de baja
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Sentimos que quieras dejarnos
+                                :(</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form th:action="@{/paciente/baja/{id}(id=${paciente.id})}" method="post">
+                                <div class="form-group">
+                                    <label for="correo">Correo Electrónico:</label>
+                                    <input id="correo" type="email" class="form-control email" name="email"
+                                        placeholder="Ingrese su correo electrónico" th:value="${email}" required />
+                                    <div id="emailValidationFeedback" class="invalid-feedback">
+                                        Ingresa una dirección de correo electrónico válida.
+                                    </div>
+                                </div>
+                                <label for="confirmPassword">Ingrese su contraseña para confirmar la baja:</label>
+                                <input id="password" type="password" class="form-control password" name="password"
+                                    placeholder="Confirme su contraseña" th:value="${password}" required />
+                                <div id="confirmPasswordValidationFeedback" class="invalid-feedback">
+                                    Contraseña inválida!
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar
+                                    </button>
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i> Confirmar baja
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="/fragments/footer :: footer"> </footer>
+
+</body>
+
+</html>
+

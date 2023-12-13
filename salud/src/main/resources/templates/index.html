@@ -5,38 +5,28 @@
 
         <header class="container-fluid">
             <nav th:replace= "/fragments/navbar :: nav"> </nav>
-            <div class=" container-banner d-block p-0 m-0">
-                <div class="row">
-                    <div class="col-lg-12 p-0 m-0">
-                        <div class="container-imagen">
-                            <img class="w-100 banner p-0 m-0 imagen-salud" src="/img/banner.png" alt="Banner salud"/>
-                            <div class="overlay">
-                                <div class="container-description-paciente">
-                                    <p class="description">
-                                        Somos un colectivo de profesionales de la salud comprometidos con tu bienestar.
-                                        En nuestra plataforma, podrás encontrar a expertos en diversas especialidades listos para brindarte atención personalizada.
-                                    </p>
-                                    <a href="#" class="btn btn-primary consulta-btn">Agenda tu Consulta</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
 
-                        <div class="overlay">
-                            <div class="container-description-profesional">
-                                <p class="description">
-                                    ¿Eres un profesional de la salud? Únete a nosotros y brinda tus servicios a quienes más lo necesitan.
-                                </p>
-                                <a th:href="@{/profesional/registrar}" class="btn btn-primary postulacion-btn">Postúlate como Profesional</a>
-                            </div>
-                        </div>
+        </header>
+        <div class="container-banner">
+            <div class="image-container">
+                <img class="img-fluid banner-image" src="/img/banner.png" alt="Banner salud">
+                <div class="overlay">
+                    <div class="text-container">
+                        <p class="description">
+                            Somos un colectivo de profesionales de la salud comprometidos con tu bienestar.
+                            En nuestra plataforma, podrás encontrar a expertos en diversas especialidades listos para brindarte atención personalizada.
+                        </p>
+                        <a href="#" class="btn btn-primary consulta-btn">Agenda tu Consulta</a>
+                    </div>
+                    <div class="text-container">
+                        <p class="description">
+                            ¿Eres un profesional de la salud? Únete a nosotros y brinda tus servicios a quienes más lo necesitan.
+                        </p>
+                        <a href="/profesional/registrar" class="btn btn-primary consulta-btn">Postúlate como Profesional</a>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
 
         <main>
             <section class="cards">
@@ -94,7 +84,7 @@
 
         <!-- Modal para el login -->
         <div th:replace="/fragments/modal :: div"></div>
-        
+
         <script src="/javascript/script.js"></script>
     </body>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="/fragments/head :: head"></head>
+    <body>
+
+        <header>
+            <nav sec:authorize="hasRole('USER')" th:replace="/fragments/navbar :: nav"></nav>
+            <nav sec:authorize="hasRole('ADMIN')" th:replace="/fragments/admin_navbar :: nav"></nav>
+        </header>
+
+    <main th:if="${#authorization.expression('isAuthenticated()')}" class="ficha-main-section">
+    <form class="row g-3 ficha-form-container mx-auto" th:action="@{/ficha/registro}" method="post">
+        <div class="col-md-6">
+            <label for="emailPaciente" class="ficha-form-label">Email Paciente</label>
+            <input type="email" class="form-control ficha-form-control" id="emailPaciente" name="emailPaciente">
+        </div>
+
+        <div class="col-12">
+            <label for="diagnostico" class="ficha-form-label">Diagnóstico</label>
+            <textarea class="form-control ficha-textarea" id="diagnostico" name="diagnostico" rows="4" placeholder="Ingrese el diagnóstico aquí"></textarea>
+        </div>
+
+        <div class="col-md-6">
+            <label for="estado" class="ficha-form-label">Estado</label>
+            <select class="form-select ficha-form-control" id="estado" name="estado">
+                <option value="true">Alta</option>
+                <option value="false">Baja</option>
+            </select>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Registrar Ficha</button>
+        </div>
+    </form>
+</main>
+
+
+
+
+        <footer th:replace="/fragments/footer :: footer"></footer>
+
+    </body>
+</html>

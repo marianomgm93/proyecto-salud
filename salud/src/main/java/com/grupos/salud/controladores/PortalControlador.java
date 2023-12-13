@@ -1,6 +1,5 @@
 package com.grupos.salud.controladores;
 
-import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.servicios.PacienteServicio;
@@ -13,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,7 +62,7 @@ public class PortalControlador {
         }
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROFESIONAL','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_PROFESIONAL')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
 
@@ -76,7 +74,4 @@ public class PortalControlador {
 
         return "index.html";
     }
-    
-    
-  
 }

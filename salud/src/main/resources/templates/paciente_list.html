@@ -22,7 +22,7 @@
                 </thead>
                 <tbody th:each="paciente : ${pacientes}">
                     <tr>
-                        <td th:text="${paciente.id}"></td>
+                        <th scope="row"><a th:href="@{/paciente/perfil/__${paciente.id}__}">Ver Perfil</a></th>
                         <td th:text="${paciente.usuario.nombreUsuario}"></td>
                         <td><a><img th:if="${paciente.usuario.imagen != null}" class="img-usuario" th:src="@{/imagen/perfil/__${paciente.usuario.id}__}" ></a></td>
                         <td th:text="${paciente.usuario.email}"></td>

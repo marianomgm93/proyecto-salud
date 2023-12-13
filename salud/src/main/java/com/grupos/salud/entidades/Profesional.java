@@ -1,27 +1,32 @@
 package com.grupos.salud.entidades;
 
-
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
-
 @Entity
-public class Profesional implements Serializable{
+public class Profesional implements Serializable {
+
     @Id
-    @GeneratedValue(generator="uuid")
-    @GenericGenerator(name="uuid",strategy="uuid2")
-    
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String especialidad;
-    private Double reputacion;
+    
+    @OneToOne
+    private Reputacion reputacion;
     private Double valorConsulta;
     private Boolean estado;
     @OneToOne
-    private Usuario usuario;
+    public Usuario usuario;
+    @OneToMany(mappedBy = "profesional")
+    private List<Turno> turnos;
+    private String descripcion;
 
     public Usuario getUsuario() {
         return usuario;
@@ -29,9 +34,6 @@ public class Profesional implements Serializable{
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-    
-    public Profesional() {
     }
 
     public Boolean getEstado() {
@@ -41,7 +43,7 @@ public class Profesional implements Serializable{
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
-    
+
     public String getId() {
         return id;
     }
@@ -49,8 +51,7 @@ public class Profesional implements Serializable{
     public void setId(String id) {
         this.id = id;
     }
-    
-    
+
     public String getEspecialidad() {
         return especialidad;
     }
@@ -59,11 +60,11 @@ public class Profesional implements Serializable{
         this.especialidad = especialidad;
     }
 
-    public Double getReputacion() {
+    public Reputacion getReputacion() {
         return reputacion;
     }
 
-    public void setReputacion(Double reputacion) {
+    public void setReputacion(Reputacion reputacion) {
         this.reputacion = reputacion;
     }
 
@@ -71,8 +72,24 @@ public class Profesional implements Serializable{
         return valorConsulta;
     }
 
+    public List<Turno> getTurnos() {
+        return turnos;
+    }
+
+    public void setTurnos(List<Turno> turnos) {
+        this.turnos = turnos;
+    }
+
     public void setValorConsulta(Double valorConsulta) {
         this.valorConsulta = valorConsulta;
     }
-    
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
 }
