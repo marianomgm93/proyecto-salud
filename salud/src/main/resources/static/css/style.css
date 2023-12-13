@@ -163,9 +163,9 @@ body.modal-open {
 
 .ficha-form-container {
     margin-top: 20px;
-    background-color: #c7e0f0; 
+    background-color: #c7e0f0;
     padding: 20px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 .ficha-form-control {
@@ -205,5 +205,14 @@ body.modal-open {
 .estrella:hover ~ label{
     color:gold;
     font-size: 30px;
+}
+
+#calendario {
+    max-width: 90%;
+    margin: 100px auto;
+}
+
+.fc-toolbar h2 {
+    font-size: 18px;
 }
 

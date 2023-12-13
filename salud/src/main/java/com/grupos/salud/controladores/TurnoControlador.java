@@ -1,8 +1,10 @@
 package com.grupos.salud.controladores;
 
+import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Turno;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.repositorios.TurnoRepositorio;
+import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.TurnoServicio;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ public class TurnoControlador {
 
     @Autowired
     private TurnoServicio turnoServicio;
+    @Autowired
+    private ProfesionalServicio profesionalServicio;
 
     @GetMapping("/registrar")
     public String registrar() {
@@ -75,31 +79,31 @@ public class TurnoControlador {
     @Autowired
     private TurnoRepositorio turnoRepositorio; // Asume que tienes un repositorio para los turnos
 
-    @GetMapping("/calendario")
-    public String mostrarCalendario(Model model) {
-        List<Turno> turnos = turnoRepositorio.findAll();
-        model.addAttribute("turnos", turnos);
-        return "calendario";
+    @GetMapping("/agendar/{id}")
+    public String mostrarCalendario(Model model, @PathVariable String id) {
+        Profesional profesional = profesionalServicio.getOne(id);
+        model.addAttribute("profesionalId", profesional.getId());
+        model.addAttribute("turnos", profesional.getTurnos());
+        return "calendario.html";
     }
 
-@GetMapping("/eventos")
-@ResponseBody
-public List<FullCalendarEventDTO> obtenerEventos() {
-    List<Turno> turnos = turnoRepositorio.findAll();
-    List<FullCalendarEventDTO> eventos = new ArrayList<>();
+    @GetMapping("/eventos/{id}")
+    @ResponseBody
+    public List<FullCalendarEventDTO> obtenerEventosProfesional(@PathVariable String id) {
+        Profesional profesional = profesionalServicio.getOne(id);
+        List<Turno> turnos = profesional.getTurnos();
+        List<FullCalendarEventDTO> eventos = new ArrayList<>();
 
-    for (Turno turno : turnos) {
-        FullCalendarEventDTO eventoDTO = new FullCalendarEventDTO();
-        eventoDTO.setTitle("Turno Programado");
-        eventoDTO.setStart(turno.getFechaYHora());
-        eventoDTO.setAllDay(false);
+        for (Turno turno : turnos) {
+            FullCalendarEventDTO eventoDTO = new FullCalendarEventDTO();
+            eventoDTO.setTitle("Turno Programado");
+            eventoDTO.setStart(turno.getFechaYHora());
+            eventoDTO.setAllDay(false);
 
-        eventos.add(eventoDTO);
+            eventos.add(eventoDTO);
+        }
+
+        return eventos;
     }
-
-    return eventos;
-}
-
-
 
 }
