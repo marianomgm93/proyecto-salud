@@ -77,7 +77,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional
     public void modificarUsuario(MultipartFile archivo, String idUsuario, String nombreUsuario, String nuevoNombre, String nuevaPassword, Rol rol, String email) throws MiException {
 
-        validarModificacion(nombreUsuario, nuevoNombre, nuevaPassword, rol, email);// VERIFICA QUE NO ESTE VACIO EL PARAMETRO
+        //validarModificacion(nombreUsuario, nuevoNombre, nuevaPassword, rol, email);// VERIFICA QUE NO ESTE VACIO EL PARAMETRO
 
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 
@@ -86,7 +86,7 @@ public class UsuarioServicio implements UserDetailsService {
             Usuario usuario = respuesta.get();
 
             usuario.setNombreUsuario(nuevoNombre);
-            usuario.setPassword(nuevaPassword);
+            usuario.setPassword(new BCryptPasswordEncoder().encode(nuevaPassword));
             usuario.setEmail(email);
             usuario.setRol(rol);
             String idImagen = null;
@@ -246,7 +246,6 @@ public class UsuarioServicio implements UserDetailsService {
             throw new MiException("El nombre a buscar no puede ser nulo o estar vacío");
         }
 
-<<<<<<< HEAD
     }
     @Transactional
     public void cambiarEstado(String id){
@@ -263,21 +262,3 @@ public class UsuarioServicio implements UserDetailsService {
           }
     }
 }
-=======
-    }
-    @Transactional
-    public void cambiarEstado(String id){
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-          if (respuesta.isPresent()) {
-
-            Usuario usuario = respuesta.get();
-            if(usuario.isEstado()){
-               
-                usuario.setEstado(false);
-            }else if(!usuario.isEstado()){
-                usuario.setEstado(true);
-            }
-          }
-    }
-}
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7

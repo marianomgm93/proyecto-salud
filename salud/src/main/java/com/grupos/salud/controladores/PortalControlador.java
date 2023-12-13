@@ -1,5 +1,6 @@
 package com.grupos.salud.controladores;
 
+import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.servicios.PacienteServicio;
@@ -12,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,11 +25,7 @@ public class PortalControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
     @Autowired
     private PacienteServicio pacienteServicio;
 
@@ -38,11 +36,7 @@ public class PortalControlador {
 
     @PostMapping("/login")
     public ResponseEntity<String> autenticar(@RequestParam String email, @RequestParam String password) {
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
         if (usuarioServicio.autenticar(email, password)) {
             return ResponseEntity.ok("Inicio de sesión exitoso");
         } else {
@@ -56,17 +50,10 @@ public class PortalControlador {
     }
 
     @PostMapping("/registro")
-<<<<<<< HEAD
-    public String registro(@RequestParam String nombreUsuario,@RequestParam String email, @RequestParam String password, String password2,@RequestParam String obraSocial,@RequestParam String datosContacto, MultipartFile archivo,ModelMap modelo) {
-
-        try {
-            pacienteServicio.registrar( datosContacto, obraSocial,usuarioServicio.registrarUsuario(archivo, nombreUsuario, password, password2, email));
-=======
     public String registro(@RequestParam String nombreUsuario, @RequestParam String email, @RequestParam String password, String password2, @RequestParam String obraSocial, @RequestParam String datosContacto, MultipartFile archivo, ModelMap modelo) {
 
         try {
             pacienteServicio.registrar(datosContacto, obraSocial, usuarioServicio.registrarUsuario(archivo, nombreUsuario, password, password2, email));
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
             modelo.put("exito", "Usuario registrado correctamente");
             return "index.html";
         } catch (MiException ex) {
@@ -76,28 +63,20 @@ public class PortalControlador {
             return "registro.html";
         }
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
-    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROFESIONAL','ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
 
         Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
         if (logueado.getRol().toString().equals("ADMIN")) {
-<<<<<<< HEAD
-            return "redirect:/dashboard";
-=======
             return "redirect:/admin/dashboard";
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
         }
 
         return "index.html";
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
+    
+    
+  
 }

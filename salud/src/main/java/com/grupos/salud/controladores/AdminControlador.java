@@ -1,10 +1,7 @@
 package com.grupos.salud.controladores;
 
 import com.grupos.salud.entidades.Paciente;
-<<<<<<< HEAD
-=======
 import com.grupos.salud.entidades.Profesional;
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
@@ -48,15 +45,12 @@ public class AdminControlador {
         modelo.addAttribute("pacientes", pacientes);
         return "paciente_list.html";
     }
-<<<<<<< HEAD
-=======
        @GetMapping("/profesionales")
     public String listar(ModelMap modelo) {
         List<Profesional> profesionales = profesionalServicio.listarProfesionales();
         modelo.addAttribute("profesionales", profesionales);
         return "profesional_list.html";
     }
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
 
     @GetMapping("/modificarRol/{id}")
     public String cambiarRol(@PathVariable String id) {
@@ -81,8 +75,4 @@ public class AdminControlador {
         profesionalServicio.darDeBaja(id);
         return "redirect:../../paciente/lista";
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7

@@ -8,12 +8,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <body>
 
         <header>
-<<<<<<< HEAD
-            <nav th:replace= "/fragments/navbar :: nav"> </nav>
-=======
             <nav  sec:authorize="hasRole('USER')" th:replace= "/fragments/navbar :: nav"> </nav>
             <nav  sec:authorize="hasRole('ADMIN')" th:replace= "/fragments/admin_navbar :: nav"> </nav>
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
         </header>
         <section class=" text-center container container-list">
             <h2 class="text-light text-center">Lista de Profesionales</h2>
@@ -38,23 +34,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <td th:text="${profesional.reputacion}"></td>
                             <td th:text="${profesional.valorConsulta}" ></td>
                             <td  sec:authorize="hasRole('ADMIN')" th:text="${profesional.estado}"></td>
-<<<<<<< HEAD
-                            <td><a th:href= "@{/admin/modificarEstadoProfesional/__${profesional.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
-                            
-=======
                             <td sec:authorize="hasRole('ADMIN')"><a th:href= "@{/admin/modificarEstadoProfesional/__${profesional.id}__}"><i class="fas fa-feather-alt"></i>Cambiar</a></td>
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
                         </tr>
                     </tbody>
                 </table>
 
                 <div class="row mt-3">
                     <div class="divVolver">
-<<<<<<< HEAD
-                        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
-=======
                         <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
                     </div>
                 </div>
             </div>
@@ -63,8 +50,4 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <footer th:replace= "/fragments/footer :: footer"> </footer>
     </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7

@@ -91,8 +91,4 @@ public class ImagenServicio {
 
         }
 
-<<<<<<< HEAD
     }
-=======
-    }
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7

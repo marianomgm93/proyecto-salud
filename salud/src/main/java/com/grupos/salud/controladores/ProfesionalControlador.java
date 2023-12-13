@@ -2,18 +2,16 @@ package com.grupos.salud.controladores;
 
 import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Usuario;
+import com.grupos.salud.enumeraciones.Rol;
+import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
-<<<<<<< HEAD
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-=======
-import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,17 +75,34 @@ public class ProfesionalControlador {
         model.addAttribute("usuario", usuario); // Añade el Usuario al modelo
         return "detalleProfesional.html"; // Vista para mostrar el detalle de un profesional (detalleProfesional.html)
     }
-<<<<<<< HEAD
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN','ROLE_PROFESIONAL')")
-//    @GetMapping("/detalle/{id}")
-//    public String perfilPaciente(ModelMap modelo, HttpSession session) {
-//        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
-//        modelo.put("usuario", usuario);
-//        return "usuario_perfil.html";
-//    }
-
+    
+    
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL','ROLE_ADMIN')")
+    @GetMapping("/modificar-perfil/{id}")
+    public String modificarPerfil(@PathVariable String id, ModelMap modelo){
+        Profesional profesional = profesionalServicio.getOne(id);
+        Usuario usuario = profesional.getUsuario();
+        modelo.put("profesional", profesional);
+        modelo.put("usuario", usuario);
+        
+        return "profesional_editarPerfil.html";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL','ROLE_ADMIN')")
+    @PostMapping("/modificar-perfil/{id}")
+    public String modificarPerfil(@PathVariable String id, @RequestParam Double valorConsulta, @RequestParam String especialidad,
+            Authentication authentication, @RequestParam(required = false) String nombreUsuario, @RequestParam(required = false) String email,
+            @RequestParam(required = false) String password, @RequestParam(required = false) String datosContacto, 
+            @RequestParam(required = false) MultipartFile archivo, ModelMap modelo) throws MiException{
+        
+        Profesional profesional = profesionalServicio.getOne(id);
+        String idUsuario = profesional.getUsuario().getId();
+        String antiguoNombreUsuario = profesional.getUsuario().getNombreUsuario();
+        
+        
+        usuarioServicio.modificarUsuario(archivo, idUsuario, antiguoNombreUsuario, nombreUsuario, password, Rol.PROFESIONAL, email);
+        profesionalServicio.actualizar(id, especialidad, valorConsulta);
+        
+        return "index.html";
+    }
 }
-=======
-
-}
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7

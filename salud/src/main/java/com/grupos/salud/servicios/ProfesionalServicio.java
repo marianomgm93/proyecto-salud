@@ -41,14 +41,14 @@ public class ProfesionalServicio {
     } 
     
     @Transactional
-    public void actualizar(String id, String especialidad, Double reputacion, Double valorConsulta) throws MiException{
+    public void actualizar(String id, String especialidad/*, Double reputacion*/, Double valorConsulta) throws MiException{
 
         validar (especialidad, valorConsulta);
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if(respuesta.isPresent()){
             Profesional profesional = respuesta.get();
             profesional.setEspecialidad(especialidad);
-            profesional.setReputacion(reputacion);
+            //profesional.setReputacion(reputacion);
             profesional.setValorConsulta(valorConsulta);
             profesional.setEstado(true);
                      
@@ -86,8 +86,4 @@ public class ProfesionalServicio {
             throw new MiException("El valor de la consulta no puede estar vacía.");
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 49048bd27db4b6d50ed9040b63acebb44f8090f7
