@@ -91,10 +91,6 @@ public class PacienteControlador {
         }
 
     }
-    
-    
-    
-    
 
     @GetMapping("/turnos")
     public String listaTurnos(Authentication authentication, ModelMap model) throws MiException {
@@ -104,4 +100,7 @@ public class PacienteControlador {
         model.addAttribute("turnos", paciente.getTurnos());
         return "turno_list.html";
     }
+    
+   
+    
 }

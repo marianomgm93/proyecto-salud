@@ -5,6 +5,7 @@
 
         <header>
             <nav sec:authorize="hasRole('USER')" th:replace="/fragments/navbar :: nav"></nav>
+            <nav sec:authorize="hasRole('PROFESIONAL')" th:replace="/fragments/navbar :: nav"></nav>
             <nav sec:authorize="hasRole('ADMIN')" th:replace="/fragments/admin_navbar :: nav"></nav>
         </header>
 

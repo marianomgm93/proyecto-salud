@@ -45,11 +45,12 @@ public class ProfesionalServicio {
         Profesional profesional = new Profesional();
         profesional.setEspecialidad(especialidad);
         profesional.setValorConsulta(valorConsulta);
-        Reputacion reputacion = reputacionServicio.crearReputacion(profesional.getId(), 0, 0);
-        profesional.setReputacion(reputacion);
         profesional.setUsuario(usuario);
         profesional.usuario.setRol(PROFESIONAL);
         profesional.setEstado(false);
+        profesionalRepositorio.save(profesional);
+        Reputacion reputacion = reputacionServicio.crearReputacion(profesional.getId(), 0, 0);
+        profesional.setReputacion(reputacion);
         profesionalRepositorio.save(profesional);
     }
 
@@ -58,34 +59,41 @@ public class ProfesionalServicio {
         List<Profesional> profesionales = profesionalRepositorio.findAll();
         return profesionales;
     }
-    
+
     @Transactional(readOnly = true)
     public List<Profesional> listarProfesional(String palabraClave) {
-        if(palabraClave != null){
+        if (palabraClave != null) {
             return profesionalRepositorio.findAll(palabraClave);
         }
         return profesionalRepositorio.findAll();
-    }    
-    
-    
+    }
+
     public Profesional getOne(String id) {
         Profesional profesional = profesionalRepositorio.getOne(id);
         return profesional;
     }
 
     @Transactional
-    public void actualizar(String id, String especialidad, int calificacion, Double valorConsulta) throws MiException {
+    public void actualizar(String id, String especialidad, Reputacion reputacion, Double valorConsulta) throws MiException {
 
         validar(especialidad, valorConsulta);
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if (respuesta.isPresent()) {
             Profesional profesional = respuesta.get();
             profesional.setEspecialidad(especialidad);
-            reputacionServicio.actualizarReputacion(id, calificacion);
-            profesional.setReputacion(reputacionServicio.encontrarPorIdProfesional(especialidad));
+            profesional.setReputacion(reputacion);
             profesional.setValorConsulta(valorConsulta);
             profesional.setEstado(true);
             profesionalRepositorio.save(profesional);
+        }
+    }
+
+    @Transactional
+    public void actualizarReputacion(String idProfesional, int calificacion) throws MiException {
+        Profesional profesional = getOne(idProfesional);
+        Reputacion reputacion = reputacionServicio.actualizarReputacion(idProfesional, calificacion);
+        if (reputacion != null) {
+            actualizar(idProfesional, profesional.getEspecialidad(), reputacion, profesional.getValorConsulta());
         }
     }
 
