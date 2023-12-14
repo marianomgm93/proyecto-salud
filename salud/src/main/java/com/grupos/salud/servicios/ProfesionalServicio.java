@@ -49,7 +49,7 @@ public class ProfesionalServicio {
         profesional.usuario.setRol(PROFESIONAL);
         profesional.setEstado(false);
         profesionalRepositorio.save(profesional);
-        Reputacion reputacion = reputacionServicio.crearReputacion(profesional.getId(), 0, 0);
+        Reputacion reputacion = reputacionServicio.crearReputacion(profesional, 0, 0);
         profesional.setReputacion(reputacion);
         profesionalRepositorio.save(profesional);
     }
@@ -89,12 +89,17 @@ public class ProfesionalServicio {
     }
 
     @Transactional
-    public void actualizarReputacion(String idProfesional, int calificacion) throws MiException {
+    public void actualizarReputacion(String idProfesional, int calificacion, String idUsuario) throws MiException {
         Profesional profesional = getOne(idProfesional);
-        Reputacion reputacion = reputacionServicio.actualizarReputacion(idProfesional, calificacion);
-        if (reputacion != null) {
-            actualizar(idProfesional, profesional.getEspecialidad(), reputacion, profesional.getValorConsulta());
+        Optional<Usuario> respuestaUs = usuariorepositorio.findById(idUsuario);
+        if(respuestaUs.isPresent()){
+            Usuario usuario = respuestaUs.get();
+            Reputacion reputacion = reputacionServicio.actualizarReputacion(profesional, calificacion, usuario);
+            if (reputacion != null) {
+                actualizar(idProfesional, profesional.getEspecialidad(), reputacion, profesional.getValorConsulta());
+            }
         }
+        
     }
 
     @Transactional

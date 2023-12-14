@@ -5,14 +5,9 @@
  */
 package com.grupos.salud.entidades;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -21,18 +16,15 @@ import org.hibernate.annotations.GenericGenerator;
  */
 
 @Entity
-public class Reputacion implements Serializable{
+public class Calificacion {
     
     @Id
     @GeneratedValue(generator="uuid")
     @GenericGenerator(name="uuid",strategy="uuid2")
     private String id;
+    private Usuario usuario;
     private Profesional profesional;
-    private int cantValoraciones;
-    private Double calificacion;
-    
-    public Reputacion() {
-    }
+    private int calificacion;
 
     public String getId() {
         return id;
@@ -42,20 +34,12 @@ public class Reputacion implements Serializable{
         this.id = id;
     }
 
-    public int getCantValoraciones() {
-        return cantValoraciones;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setCantValoraciones(int cantValoraciones) {
-        this.cantValoraciones = cantValoraciones;
-    }
-
-    public Double getCalificacion() {
-        return calificacion;
-    }
-
-    public void setCalificacion(Double calificacion) {
-        this.calificacion = calificacion;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Profesional getProfesional() {
@@ -65,5 +49,15 @@ public class Reputacion implements Serializable{
     public void setProfesional(Profesional profesional) {
         this.profesional = profesional;
     }
+
+    public int getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(int calificacion) {
+        this.calificacion = calificacion;
+    }
+    
+    
     
 }

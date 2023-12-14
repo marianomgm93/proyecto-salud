@@ -5,6 +5,7 @@
  */
 package com.grupos.salud.repositorios;
 
+import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Reputacion;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReputacionRepositorio extends JpaRepository<Reputacion, String>{
     
-      @Query("SELECT r FROM Reputacion r WHERE r.idProfesional = :idProfesional")
-    public Optional<Reputacion> findByIdProfesional(@Param("idProfesional") String idProfesional);
+      @Query("SELECT r FROM Reputacion r WHERE r.profesional = :profesional")
+    public Optional<Reputacion> findByProfesional(@Param("profesional") Profesional profesional);
     
 }

@@ -93,8 +93,9 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/calificacion/{id}")
-    public String guardarCalificacion(@RequestParam("reputacion") int reputacion, @PathVariable String id) throws MiException {
-        profesionalServicio.actualizarReputacion(id, reputacion);
+    public String guardarCalificacion(@RequestParam("reputacion") int reputacion, @PathVariable String id, HttpSession session) throws MiException {
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        profesionalServicio.actualizarReputacion(id, reputacion, logueado.getId());
         return "redirect:/profesional/detalle/" + id;
     }
 
