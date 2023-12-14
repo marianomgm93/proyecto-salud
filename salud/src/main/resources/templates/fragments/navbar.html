@@ -66,7 +66,7 @@
                         Perfil
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                        <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" th:href="@{/profesional/modificar-perfil}">Editar mi Perfil</a></li>
                         <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" href="/profesional/turnos1">Gestionar turnos</a></li>
                         <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" href= "/profesional/mostrarPacientes/">Ver Pacientes</a></li>
                         <li sec:authorize="hasRole('USER')"><a class="dropdown-item" href="">Darme de baja</a></li>
