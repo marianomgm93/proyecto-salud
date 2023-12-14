@@ -18,18 +18,18 @@
                         <thead>
                             <tr>
                                 <th>Nombre paciente</th>
-                                <th>Paciente ID </th>
-                                <th>Diagnostico</th>
+                                <th>Fecha</th>
                                 <th>Nombre profesional</th>
                                 <th sec:authorize="hasRole('ADMIN')">Estado</th>
+                                <th>Detalles</th>
                             </tr>
                         </thead>
                         <tbody th:each="ficha : ${fichas}">
                             <tr>
                                 <td th:text="${ficha.paciente.usuario.nombreUsuario}"></td> 
-                                <td th:text="${ficha.paciente.id}"></td> 
-                                <td th:text="${ficha.diagnostico}"></td> 
+                                <td th:text="${ficha.fecha}"></td> 
                                 <td th:text="${ficha.profesional.usuario.nombreUsuario}"></td> 
+                                <td><a th:href="@{/ficha/detalle/__${ficha.id}__}">Ver detalles</a></td>
                             </tr>
                         </tbody>
                     </table>

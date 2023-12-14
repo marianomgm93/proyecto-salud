@@ -38,12 +38,14 @@
                        data-bs-toggle="dropdown" aria-expanded="false">
                         Especialidades
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Pediatría</a></li>
-                        <li><a class="dropdown-item" href="#">Ginecología</a></li>
-                        <li><a class="dropdown-item" href="#">Clínica</a></li>
-                        <li><a class="dropdown-item" href="#">Cardiología</a></li>
-                    </ul>
+                    <form th:action="@{/paciente/buscarPorEspecialidad}" method="post">
+                        <ul class="dropdown-menu">
+                            <li><button type="submit" class="dropdown-item" name="especialidad" th:value="'pediatria'">Pediatría</button></li>
+                            <li><button type="submit" class="dropdown-item" name="especialidad" th:value="'ginecologia'">Ginecología</button></li>
+                            <li><button type="submit" class="dropdown-item" name="especialidad" th:value="'medico clinico'">Clínica</button></li>
+                            <li><button type="submit" class="dropdown-item" name="especialidad" th:value="'cardiologia'">Cardiología</button></li>
+                        </ul>
+                    </form>
                 </li>
                 <li class="nav-item" th:if="${session.usuariosession != null}">
                     <a class="nav-link text-light" aria-current="page" href="#">Profesionales</a>
@@ -57,6 +59,7 @@
                         <li><a class="dropdown-item" href="/paciente/lista"> Nuestros Profesionales</a></li>
                     </ul>
 
+
                 </li>
                 <li th:if="${session.usuariosession != null}" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button"
@@ -64,7 +67,7 @@
                         Perfil
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                        <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" th:href="@{/profesional/modificar-perfil}">Editar mi Perfil</a></li>
                         <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" href="/profesional/turnos1">Gestionar turnos</a></li>
                         <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" href="/profesional/misturnos">Mis Turnos</a></li>
                         <li sec:authorize="hasRole('USER')"><a class="dropdown-item" href="/paciente/turnos">Mis Turnos</a></li>
@@ -76,4 +79,5 @@
             </ul>
         </div>
     </div>
+
 </nav>
