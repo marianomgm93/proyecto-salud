@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -101,35 +99,27 @@ public class PacienteControlador {
         model.addAttribute("turnos", paciente.getTurnos());
         return "turno_list.html";
     }
-    
-   
+
     @PostMapping("buscarPorEspecialidad")
     public String buscarProfesionales2(@RequestParam String especialidad, Model model) {
         try {
             if (especialidad == null || especialidad.isEmpty()) {
-            
-            return "redirect:/";
-        }else{
-           List<Profesional> listaProfesionales = profesionalServicio.buscarPorEspecialidad(especialidad);
-           List<Profesional> listaProfesionalesEnAlta = new ArrayList();
+
+                return "redirect:/";
+            } else {
+                List<Profesional> listaProfesionales = profesionalServicio.buscarPorEspecialidad(especialidad);
+                List<Profesional> listaProfesionalesEnAlta = new ArrayList();
                 for (Profesional pro : listaProfesionales) {
-                    if(pro.getEstado()){
+                    if (pro.getEstado()) {
                         listaProfesionalesEnAlta.add(pro);
                     }
                 }
-           model.addAttribute("profesionales", listaProfesionalesEnAlta);
-           return "profesional_list.html";
+                model.addAttribute("profesionales", listaProfesionalesEnAlta);
+                return "profesional_list.html";
             }
         } catch (Exception e) {
             return "index.html";
         }
     }
-        
-       
-   
-       
-    }
 
-    
-    
-
+}
