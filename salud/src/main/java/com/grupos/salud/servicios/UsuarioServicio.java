@@ -91,14 +91,12 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setRol(rol);
             String idImagen = null;
 
-            if (usuario.getImagen() != null) {
+            if (usuario.getImagen() != null && archivo.isEmpty() == false) {
                 idImagen = usuario.getImagen().getId();
-            }
 
-            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
-
-            usuario.setImagen(imagen);
-
+                Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+                usuario.setImagen(imagen);
+             }
             usuarioRepositorio.save(usuario);
         } else {
             throw new MiException("Usuario con nombre " + nombreUsuario + " no encontrado");

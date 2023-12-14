@@ -180,12 +180,18 @@ public class ProfesionalControlador {
     
     
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL','ROLE_ADMIN')")
-    @GetMapping("/modificar-perfil/{id}")
-    public String modificarPerfil(@PathVariable String id, ModelMap modelo){
-        Profesional profesional = profesionalServicio.getOne(id);
-        Usuario usuario = profesional.getUsuario();
+    @GetMapping("/modificar-perfil")
+    public String modificarPerfil(Authentication authentication, ModelMap modelo) throws MiException{
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Usuario usuario = usuarioServicio.buscarPorEmail(username);
+        Profesional profesional = profesionalServicio.buscarPorEmail(username);
+        Paciente paciente = pacienteServicio.buscarPorEmail(username);
+        
         modelo.put("profesional", profesional);
         modelo.put("usuario", usuario);
+        modelo.put("paciente", paciente);
         
         return "profesional_editarPerfil.html";
     }
@@ -197,6 +203,10 @@ public class ProfesionalControlador {
             @RequestParam(required = false) String password, @RequestParam(required = false) String datosContacto, 
             @RequestParam(required = false) MultipartFile archivo, ModelMap modelo) throws MiException{
         
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Paciente paciente = pacienteServicio.buscarPorEmail(username);
+        
         Profesional profesional = profesionalServicio.getOne(id);
         String idUsuario = profesional.getUsuario().getId();
         String antiguoNombreUsuario = profesional.getUsuario().getNombreUsuario();
@@ -204,7 +214,8 @@ public class ProfesionalControlador {
         
         usuarioServicio.modificarUsuario(archivo, idUsuario, antiguoNombreUsuario, nombreUsuario, password, Rol.PROFESIONAL, email);
         profesionalServicio.actualizar(id, especialidad, profesional.getReputacion(),valorConsulta);
+        pacienteServicio.actualizar(paciente.getId(), datosContacto, paciente.getObraSocial());
         
-        return "index.html";
+        return "redirect:/logout";
     }
 }

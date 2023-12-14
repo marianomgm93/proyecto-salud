@@ -16,23 +16,22 @@
                             </div>
                             <div class="card-body">
 
-                                <form id="formularioRegistro" th:action="@{/profesional/modificar-perfil/__${profesional.id}__}" method="POST"
+                               
+                            </div> <form id="formularioRegistro" th:action="@{/profesional/modificar-perfil/__${profesional.id}__}" method="POST"
                                       enctype="multipart/form-data">                                  
                                         
                                     <input hidden th:value="${id}" name="id">
-                                        
-                                    
-                                    <div class="form-group">
-                                        <label>Foto de perfil actual:</label>
-                                        <img th:src="@{/imagen/perfil/{id}(id=${usuario.id})}" class="card-img-top rounded-circle img-responsive  fotoProfesional"/>
-                                    </div>
-                                    
-                                    
+
+                                    <div class="card-body d-flex flex-column align-items-center">
+                                        <div class="form-group">
+                                            <img th:src="@{/imagen/perfil/__${usuario.id}__}" class="card-img-top rounded-circle img-responsive fotoProfesional"/>
+                                        </div>
+                                          
                                       <div  class="form-group">
-                                        <label for="archivo">Seleccionar foto de perfil:</label>
+                                        <label for="archivo">Seleccionar nueva foto de perfil:</label>
                                         <input type="file" class="form-control-file" name="archivo" id="archivo" />
                                     </div>
-                                    
+                                  </div>  
 
                                     <div  class="form-group">
                                         <label for="nombreUsuario">Nombre:</label>
@@ -55,7 +54,7 @@
                                     <div  class="form-group">
                                         <label for="telefono">Número de Teléfono:</label>
                                         <input id="telefono" type="tel" class="form-control" name="datosContacto"
-                                               placeholder="Ingrese su número de teléfono" th:value="${datosContacto}"
+                                               placeholder="Ingrese su número de teléfono" th:value="${paciente.datosContacto}"
                                                 />
                                         <div id="telefonoHelp" class="invalid-feedback">
                                             Ingresa un número de teléfono válido.
@@ -89,29 +88,23 @@
                                     <div  class="form-group">
                                         <label for="contr">Contraseña:</label>
                                         <input id="contr" type="password" class="form-control password" name="password"
-                                               placeholder="Vuelva a introducir su contraseña o coloque una nueva" th:value="${password}"  />
+                                               placeholder="Vuelva a introducir su contraseña o coloque una nueva" th:value="${password}" required />
                                         <div id="passwordValidationFeedback" class="invalid-feedback">
                                             La contraseña debe tener al menos 6 caracteres.
                                         </div>
                                     </div>
 
-                                                                   
-
-                                  
-
+                                    <div class="form-group text-center">
+                                        <span><br>¡Aviso: una vez hecho los cambios se cerrara la sesión!</span>
+                                    </div>
+                                      
                                     <div class="form-group text-center">
                                         <button type="submit" class="btn btn-primary mt-3 w-100">Editar</button>
-                                    </div>
-                                    
-                                    <div class="form-group text-center">
-                                        <button th:href="@{/}" class="btn btn-secondary my-2 w-100">Cancelar</button>
                                     </div>
                                     
                                     
 
                                 </form>
-
-                            </div>
                         </div>
                     </div>
                 </div>
