@@ -31,8 +31,12 @@ public class TurnoServicio {
 
     @Transactional(readOnly = true)
     public Turno getOne(String id) {
-        Optional<Turno> turno = turnoRepositorio.findById(id);
-        return turno.orElse(null);
+        Optional<Turno> respuesta = turnoRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Turno turno = respuesta.get();
+            return turno;
+        }
+        return null;
     }
 
     @Transactional
@@ -64,8 +68,7 @@ public class TurnoServicio {
             throw new MiException("La fecha y hora no pueden ser nulas.");
         }
     }
-    
-    
+
     public List<Turno> ordenarTurnos(String id) {
         try {
             List<Turno> turnos = turnoRepositorio.ordenarListaTurnos(id);

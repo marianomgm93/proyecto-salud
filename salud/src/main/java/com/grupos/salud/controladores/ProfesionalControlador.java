@@ -39,7 +39,6 @@ public class ProfesionalControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private PacienteServicio pacienteServicio;
-    
 
     @Autowired
     private FichaServicio fichaServicio;
@@ -182,7 +181,7 @@ public class ProfesionalControlador {
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL','ROLE_ADMIN')")
     @GetMapping("/modificar-perfil")
     public String modificarPerfil(Authentication authentication, ModelMap modelo) throws MiException{
-
+        
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
         Usuario usuario = usuarioServicio.buscarPorEmail(username);
@@ -218,4 +217,6 @@ public class ProfesionalControlador {
         
         return "redirect:/logout";
     }
+
 }
+

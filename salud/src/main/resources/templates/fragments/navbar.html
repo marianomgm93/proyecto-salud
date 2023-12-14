@@ -10,13 +10,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            
+
             <form class="d-flex ms-lg-auto mb-2 mb-lg-0 w-50 container-busqueda" th:action="@{/paciente/listado}" >
                 <input class="form-control me-2" type="text" placeholder="Buscar un profesional por nombre"
                        aria-label="Search" id="palabraClave" th:value="${palabraClave}" name="palabraClave">
                 <button class="btn btn-dark" type="submit"><span class="fa fa-search"></span></button>
             </form>
-            
+
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item" th:if="${session.usuariosession == null}">
                     <button type="button" class="btn text-light" data-bs-toggle="modal"
@@ -38,12 +38,16 @@
                        data-bs-toggle="dropdown" aria-expanded="false">
                         Especialidades
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Pediatría</a></li>
-                        <li><a class="dropdown-item" href="#">Ginecología</a></li>
-                        <li><a class="dropdown-item" href="#">Clínica</a></li>
-                        <li><a class="dropdown-item" href="#">Cardiología</a></li>
-                    </ul>
+
+                    <form th:action="@{/paciente/buscarPorEspecialidad}" method="post">
+                        <ul class="dropdown-menu">
+                            <li><button type="submit" class="dropdown-item" name="especialidad" th:value="'pediatria'">Pediatría</button></li>
+                            <li><button type="submit" class="dropdown-item" name="especialidad" th:value="'ginecologia'">Ginecología</button></li>
+                            <li><button type="submit" class="dropdown-item" name="especialidad" th:value="'medico clinico'">Clínica</button></li>
+                            <li><button type="submit" class="dropdown-item" name="especialidad" th:value="'cardiologia'">Cardiología</button></li>
+                        </ul>
+                    </form>
+
                 </li>
                 <li class="nav-item" th:if="${session.usuariosession != null}">
                     <a class="nav-link text-light" aria-current="page" href="#">Profesionales</a>
@@ -66,6 +70,7 @@
                     <ul class="dropdown-menu">
                         <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" th:href="@{/profesional/modificar-perfil}">Editar mi Perfil</a></li>
                         <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" href="/profesional/turnos1">Gestionar turnos</a></li>
+                        <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" href= "/profesional/mostrarPacientes/">Ver Pacientes</a></li>
                         <li sec:authorize="hasRole('USER')"><a class="dropdown-item" href="">Darme de baja</a></li>
                         <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
                     </ul>
@@ -73,3 +78,5 @@
             </ul>
         </div>
     </div>
+</nav>
+

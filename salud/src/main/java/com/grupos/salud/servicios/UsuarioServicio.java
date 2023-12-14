@@ -73,7 +73,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-    // MODIFICACION USUARIO 
+// MODIFICACION USUARIO 
     @Transactional
     public void modificarUsuario(MultipartFile archivo, String idUsuario, String nombreUsuario, String nuevoNombre, String nuevaPassword, Rol rol, String email) throws MiException {
 
@@ -101,6 +101,7 @@ public class UsuarioServicio implements UserDetailsService {
         } else {
             throw new MiException("Usuario con nombre " + nombreUsuario + " no encontrado");
         }
+
 
     }
     

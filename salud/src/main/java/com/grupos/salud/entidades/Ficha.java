@@ -1,6 +1,7 @@
 package com.grupos.salud.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,12 +22,22 @@ public class Ficha implements Serializable{
 
     @OneToOne
     private Profesional profesional;
-
+    
+    private Date fecha;
+    
     private String diagnostico;
 
     private Boolean estado;
 
     public Ficha() {
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public String getId() {

@@ -40,11 +40,15 @@ public class FichaControlador {
     private UsuarioServicio usuarioServicio;
 
     @GetMapping("/registrar")
-    public String crearFicha() {
-        return "ficha_form.html";
+    public String crearFicha(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return "ficha_form.html";
+        } else {
+            return "redirect:/";
+        }
+
     }
 
-   
     @PostMapping("/registro")
     public String creacionFicha(@RequestParam String emailPaciente,
             @RequestParam String diagnostico,
@@ -57,7 +61,7 @@ public class FichaControlador {
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                 String username = userDetails.getUsername();
                 Usuario usuario = usuarioServicio.buscarPorEmail(username);
-               
+
                 Profesional profesional = profesionalservicio.buscarPorEmail(usuario.getEmail());
                 Paciente paciente = pacienteservicio.buscarPorEmail(emailPaciente);
                 fichaservicio.registrar(paciente, profesional, diagnostico, estado);
@@ -96,11 +100,19 @@ public class FichaControlador {
         return "ficha_list.html";
     }
 
-  // MODIFICAR FICHASERVICIO
-     @GetMapping("/listar")
-     public String listar(ModelMap modelo){
+    // MODIFICAR FICHASERVICIO
+    @GetMapping("/listar")
+    public String listar(ModelMap modelo) {
         List<Ficha> fichas = fichaservicio.listarFichas();
         modelo.addAttribute("ficha", fichas);
-        return "ficha_list.html"; 
+        return "ficha_list.html";
     }
+    
+     @GetMapping("/detalle/{id}")
+     public String detalle(@PathVariable String id,ModelMap model) throws MiException{
+         Ficha ficha=fichaservicio.getOne(id);
+         model.addAttribute("ficha",ficha);
+         return "ficha.html";
+     }
 }
+
