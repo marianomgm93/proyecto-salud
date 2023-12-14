@@ -73,11 +73,11 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-    // MODIFICACION USUARIO 
+// MODIFICACION USUARIO 
     @Transactional
     public void modificarUsuario(MultipartFile archivo, String idUsuario, String nombreUsuario, String nuevoNombre, String nuevaPassword, Rol rol, String email) throws MiException {
 
-        validarModificacion(nombreUsuario, nuevoNombre, nuevaPassword, rol, email);// VERIFICA QUE NO ESTE VACIO EL PARAMETRO
+        //validarModificacion(nombreUsuario, nuevoNombre, nuevaPassword, rol, email);// VERIFICA QUE NO ESTE VACIO EL PARAMETRO
 
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 
@@ -86,23 +86,22 @@ public class UsuarioServicio implements UserDetailsService {
             Usuario usuario = respuesta.get();
 
             usuario.setNombreUsuario(nuevoNombre);
-            usuario.setPassword(nuevaPassword);
+            usuario.setPassword(new BCryptPasswordEncoder().encode(nuevaPassword));
             usuario.setEmail(email);
             usuario.setRol(rol);
             String idImagen = null;
 
-            if (usuario.getImagen() != null) {
+            if (usuario.getImagen() != null && archivo.isEmpty() == false) {
                 idImagen = usuario.getImagen().getId();
-            }
 
-            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
-
-            usuario.setImagen(imagen);
-
+                Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+                usuario.setImagen(imagen);
+             }
             usuarioRepositorio.save(usuario);
         } else {
             throw new MiException("Usuario con nombre " + nombreUsuario + " no encontrado");
         }
+
 
     }
     
