@@ -11,7 +11,6 @@ import com.grupos.salud.repositorios.TurnoRepositorio;
 
 import com.grupos.salud.repositorios.UsuarioRepositorio;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

@@ -1,6 +1,5 @@
 package com.grupos.salud.servicios;
 
-import com.grupos.salud.entidades.Profesional;
 import java.sql.Date;
 import java.util.Optional;
 

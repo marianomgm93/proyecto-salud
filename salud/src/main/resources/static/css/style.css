@@ -26,14 +26,6 @@ body {
     margin-top: 10rem;
 }
 
-.card {
-    transition: transform 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
 .container-nav {
     max-width: 100%;
     margin: 0 8rem;
