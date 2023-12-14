@@ -4,6 +4,7 @@ import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Turno;
 import com.grupos.salud.entidades.Usuario;
+import com.grupos.salud.enumeraciones.Rol;
 import com.grupos.salud.servicios.FichaServicio;
 import com.grupos.salud.excepciones.MiException;
 import com.grupos.salud.servicios.PacienteServicio;
@@ -174,6 +175,46 @@ public class ProfesionalControlador {
         } catch (Exception e) {
             return "redirect:/profesional/misturnos";
         }
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL','ROLE_ADMIN')")
+    @GetMapping("/modificar-perfil")
+    public String modificarPerfil(Authentication authentication, ModelMap modelo) throws MiException{
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Usuario usuario = usuarioServicio.buscarPorEmail(username);
+        Profesional profesional = profesionalServicio.buscarPorEmail(username);
+        Paciente paciente = pacienteServicio.buscarPorEmail(username);
+        
+        modelo.put("profesional", profesional);
+        modelo.put("usuario", usuario);
+        modelo.put("paciente", paciente);
+        
+        return "profesional_editarPerfil.html";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL','ROLE_ADMIN')")
+    @PostMapping("/modificar-perfil/{id}")
+    public String modificarPerfil(@PathVariable String id, @RequestParam Double valorConsulta, @RequestParam String especialidad,
+            Authentication authentication, @RequestParam(required = false) String nombreUsuario, @RequestParam(required = false) String email,
+            @RequestParam(required = false) String password, @RequestParam(required = false) String datosContacto, 
+            @RequestParam(required = false) MultipartFile archivo, ModelMap modelo) throws MiException{
+        
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Paciente paciente = pacienteServicio.buscarPorEmail(username);
+        
+        Profesional profesional = profesionalServicio.getOne(id);
+        String idUsuario = profesional.getUsuario().getId();
+        String antiguoNombreUsuario = profesional.getUsuario().getNombreUsuario();
+        
+        
+        usuarioServicio.modificarUsuario(archivo, idUsuario, antiguoNombreUsuario, nombreUsuario, password, Rol.PROFESIONAL, email);
+        profesionalServicio.actualizar(id, especialidad, profesional.getReputacion(),valorConsulta);
+        pacienteServicio.actualizar(paciente.getId(), datosContacto, paciente.getObraSocial());
+        
+        return "redirect:/logout";
     }
 
 }
