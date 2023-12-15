@@ -48,18 +48,7 @@
                     </form>
                 </li>
                 <li class="nav-item" th:if="${session.usuariosession != null}">
-                    <a class="nav-link text-light" aria-current="page" href="#">Profesionales</a>
-                </li>
-                <li th:if="${session.usuariosession != null}"class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-light" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Pacientes
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/paciente/lista"> Nuestros Profesionales</a></li>
-                    </ul>
-
-
+                    <a class="nav-link text-light" aria-current="page" href="/paciente/lista">Profesionales</a>
                 </li>
                 <li th:if="${session.usuariosession != null}" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-light" href="#" role="button"
@@ -69,6 +58,8 @@
                     <ul class="dropdown-menu">
                         <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" th:href="@{/profesional/modificar-perfil}">Editar mi Perfil</a></li>
                         <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" href="/profesional/turnos1">Gestionar turnos</a></li>
+                        <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" href="/profesional/misturnos">Mis Turnos</a></li>
+                        <li sec:authorize="hasRole('USER')"><a class="dropdown-item" href="/paciente/turnos">Mis Turnos</a></li>
                         <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" href= "/profesional/mostrarPacientes/">Ver Pacientes</a></li>
                         <li sec:authorize="hasRole('USER')"><a class="dropdown-item" href="">Darme de baja</a></li>
                         <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>

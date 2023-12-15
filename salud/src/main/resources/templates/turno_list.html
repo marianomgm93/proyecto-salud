@@ -10,6 +10,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Profesional</th>
+                            <th scope="col">Especialidad</th>
                             <th scope="col">Fecha y hora</th>
                             <th scope="col">Estado</th>
 
@@ -19,6 +20,7 @@
                     <tbody th:each="turno : ${turnos}">
                         <tr>
                             <th scope="row" th:text="${turno.profesional.usuario.nombreUsuario}"></th>
+                            <th scope="row" th:text="${turno.profesional.especialidad}"></th>
                             <td th:text="${turno.fechaYHora}"></td>
                             <td th:text="${turno.estado}"></td>
 
