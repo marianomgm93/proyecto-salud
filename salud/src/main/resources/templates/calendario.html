@@ -1,32 +1,139 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Calendario de Turnos</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Calendario de Turnos</title>
 
-    <h2>Calendario de Turnos</h2>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calendario de Turnos</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="icon" type="image/ico" href="/img/favicon.ico">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <div id="calendario"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <body>
+        <header class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+                <div class="container container-nav">
+                    <a class="navbar-brand" th:href="@{/inicio}">
+                        <!-- Acá va el logotipo -->
+                        <img src="/img/logo.png" alt="Logo" height="65" class="me-2">
+                        TuSalud
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 
-    <script>
-        $(document).ready(function () {
-            $('#calendario').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                events: '/turnos/eventos'
-                
+                        <form class="d-flex ms-lg-auto mb-2 mb-lg-0 w-50 container-busqueda" th:action="@{/paciente/listado}" >
+                            <input class="form-control me-2" type="text" placeholder="Buscar un profesional por nombre"
+                                   aria-label="Search" id="palabraClave" th:value="${palabraClave}" name="palabraClave">
+                            <button class="btn btn-dark" type="submit"><span class="fa fa-search"></span></button>
+                        </form>
+
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item" th:if="${session.usuariosession == null}">
+                                <button type="button" class="btn text-light" data-bs-toggle="modal"
+                                        data-bs-target="#loginModal">
+                                    Iniciar sesión
+                                </button>
+                            </li>
+                            <li th:if="${session.usuariosession == null}" class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    Registrarse
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/registrar}">Como paciente</a></li>
+                                    <li><a class="dropdown-item" th:href="@{profesional/registrar}">Como profesional</a></li>
+                                </ul>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    Especialidades
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Pediatría</a></li>
+                                    <li><a class="dropdown-item" href="#">Ginecología</a></li>
+                                    <li><a class="dropdown-item" href="#">Clínica</a></li>
+                                    <li><a class="dropdown-item" href="#">Cardiología</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item" th:if="${session.usuariosession != null}">
+                                <a class="nav-link text-light" aria-current="page" href="#">Profesionales</a>
+                            </li>
+                            <li th:if="${session.usuariosession != null}"class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    Pacientes
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/paciente/lista"> Nuestros Profesionales</a></li>
+                                </ul>
+
+                            </li>
+                            <li th:if="${session.usuariosession != null}" class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    Perfil
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+                                    <li sec:authorize="hasRole('PROFESIONAL')"><a class="dropdown-item" href="/profesional/turnos1">Gestionar turnos</a></li>
+                                    <li sec:authorize="hasRole('USER')"><a class="dropdown-item" href="">Darme de baja</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <h2>Calendario de Turnos</h2>
+
+        <div id="calendario" class="bg-light" data-profesional-id="${profesionalId}"></div>
+        <footer class="container-fluid bg-primary text-light text-center py-3">
+            <p class="mb-0">© 2023 TuSalud. Todos los derechos reservados.</p>
+            <p class="mb-0"><a href="#" class="text-light">Términos y Condiciones</a> | <a href="#" class="text-light">Privacidad</a></p>
+        </footer>
+
+
+        <script>
+            // Obtiene el ID del profesional desde el modelo Thymeleaf
+            var profesionalId = window.location.pathname.split('/').pop();
+
+            $(document).ready(function () {
+                var calendar = $('#calendario').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    events: '/turnos/eventos/' + profesionalId,
+                    eventClick: function (calEvent, jsEvent, view) {
+                        // Manejo de clic en evento (puedes agregar código adicional si es necesario)
+                    },
+                    dayClick: function (date, jsEvent, view) {
+                        // Cambia a la vista diaria ('day') y muestra el día seleccionado
+                        calendar.fullCalendar('changeView', 'agendaDay', date.format());
+                    },
+                    eventRender: function (event, element) {
+                        // Agrega un botón a cada evento
+                        element.find('.fc-content').append('<a class="btn btn-success btn-agendar" href="/turnos/confirmar-turno/' + event.id + '">Agendar</a>');
+                    }
+                });
             });
-        });
-    </script>
+        </script>
 
-</body>
+
+    </body>
 </html>
-

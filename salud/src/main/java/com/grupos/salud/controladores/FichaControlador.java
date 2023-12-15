@@ -4,18 +4,24 @@
  */
 package com.grupos.salud.controladores;
 
+import com.grupos.salud.entidades.Ficha;
 import com.grupos.salud.entidades.Paciente;
 import com.grupos.salud.entidades.Profesional;
 import com.grupos.salud.entidades.Usuario;
 import com.grupos.salud.excepciones.MiException;
+import com.grupos.salud.repositorios.FichaRepositorio;
 import com.grupos.salud.servicios.FichaServicio;
 import com.grupos.salud.servicios.PacienteServicio;
 import com.grupos.salud.servicios.ProfesionalServicio;
 import com.grupos.salud.servicios.UsuarioServicio;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,12 +43,19 @@ public class FichaControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @Autowired
+    private FichaRepositorio fichaRepositorio;
+
     @GetMapping("/registrar")
-    public String crearFicha() {
-        return "ficha_form.html";
+    public String crearFicha(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return "ficha_form.html";
+        } else {
+            return "redirect:/";
+        }
+
     }
 
-   
     @PostMapping("/registro")
     public String creacionFicha(@RequestParam String emailPaciente,
             @RequestParam String diagnostico,
@@ -55,7 +68,7 @@ public class FichaControlador {
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                 String username = userDetails.getUsername();
                 Usuario usuario = usuarioServicio.buscarPorEmail(username);
-               
+
                 Profesional profesional = profesionalservicio.buscarPorEmail(usuario.getEmail());
                 Paciente paciente = pacienteservicio.buscarPorEmail(emailPaciente);
                 fichaservicio.registrar(paciente, profesional, diagnostico, estado);
@@ -95,10 +108,32 @@ public class FichaControlador {
     }
 
     // MODIFICAR FICHASERVICIO
-    //   @GetMapping("/listar")
-//    public String listar(ModelMap modelo){
-//        List<Ficha> fichas = fichaServicio.listarFichas();
-//        modelo.addAttribute("ficha", ficha);
-//        return "ficha_list.html"; 
-//    }
+    @GetMapping("/listar")
+    public String listar(ModelMap modelo) {
+        List<Ficha> fichas = fichaservicio.listarFichas();
+        modelo.addAttribute("ficha", fichas);
+        return "ficha_list.html";
+    }
+
+    @GetMapping("/detalle/{id}")
+    public String detalle(@PathVariable String id, ModelMap model) throws MiException {
+        Ficha ficha = fichaservicio.getOne(id);
+        model.addAttribute("ficha", ficha);
+        return "ficha.html";
+    }
+
+    @GetMapping("/modificarFicha/{id}")
+    public String modificarFicha(@PathVariable String id, Model model) {
+        try {
+            Optional<Ficha> ficha = fichaRepositorio.findById(id);
+            if (ficha.isPresent()) {
+                model.addAttribute("ficha", ficha);
+                return "modificar_ficha";
+            }
+        } catch (Exception e) {
+            return "index";
+        }
+        return "index";
+    }
+
 }

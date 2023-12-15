@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="/fragments/head :: head"></head>
+
+    <body>
+        <header>
+            <nav th:replace= "/fragments/navbar :: nav"> </nav>
+        </header>
+
+        <div class="separador-nav-paciente"></div>
+        <header>
+            <nav sec:authorize="hasRole('USER')" th:replace="/fragments/navbar :: nav"></nav>
+            <nav sec:authorize="hasRole('PROFESIONAL')" th:replace="/fragments/navbar :: nav"></nav>
+            <nav sec:authorize="hasRole('ADMIN')" th:replace="/fragments/admin_navbar :: nav"></nav>
+        </header>
+
+        <main th:if="${#authorization.expression('isAuthenticated()')}" class="ficha-main-section">
+
+
+            <div class="container-fluid m-5 contenedor">
+
+                <section class=" text-center container container-list">
+                    <h2 class="text-light text-center">Modificar Ficha</h2>
+                    <div class="container m-5">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Diagnostico</th>>
+                                    <th sec:authorize="hasRole('ADMIN')">Estado</th>
+                                    <th scope="col" sec:authorize="hasRole('PROFESIONAL')">Ver Historia Medica</th>
+                                </tr>
+                            </thead>
+                            <tbody th:each="ficha : ${ficha}">
+                                <tr>
+                                    <td th:text="${ficha.diagnostico}"></td>     
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row mt-3">
+                            <div class="divVolver">
+                                <a th:href="@{/inicio}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+
+
+
+        <footer th:replace= "/fragments/footer :: footer"> </footer>
+
+        <div th:replace="/fragments/modal :: div"></div>
+
+        <script src="/javascript/script.js"></script>
+    </body>
+</html>
