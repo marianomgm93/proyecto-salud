@@ -18,7 +18,7 @@ and open the template in the editor.
 
             <div class="card d-flex flex-column align-items-center shadow" style="width: 18rem;">
                 <div class="d-flex justify-content-end w-100 p-2" style="height: auto; font-size: 15px">
-                    <span class="badge fa fa-star container-collapse">  <span class="w-100" th:text="${profesional.reputacion.calificacion}" aria-hidden="true"></span></span>
+                    <span class="badge fa fa-star container-collapse">  <span class="w-100" th:text="${#numbers.formatDecimal(profesional.reputacion.calificacion, 1, 'COMMA', 1, 'POINT')}" aria-hidden="true"></span></span>
                 </div>
                 <img th:src="@{/imagen/perfil/{id}(id=${usuario.id})}" class="card-img-top rounded-circle fotoProfesional" alt="foto del profesional">
                 <div class="card-body d-flex flex-column align-items-center">
